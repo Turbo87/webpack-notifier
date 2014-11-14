@@ -52,8 +52,6 @@ WebpackErrorNotificationPlugin.prototype.compileMessage = function(stats) {
 
 
 WebpackErrorNotificationPlugin.prototype.compilationDone = function(stats) {
-    if (process.platform !== 'darwin') return;
-
     var msg = this.compileMessage(stats);
     if (msg) {
         msg = '"' + msg.replace('"', '\\"') + '"';
