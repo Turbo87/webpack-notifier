@@ -1,0 +1,15 @@
+{
+  "name": "webpack-error-notification",
+  "version": "0.1.0",
+  "description": "Use system notification to inform developer about compilation error",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "webpack",
+    "build"
+  ],
+  "author": "Vsevolod Solovyov",
+  "license": "ISC"
+}
