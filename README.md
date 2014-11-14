@@ -16,6 +16,9 @@ You can easily install this plugin to your project:
 npm install --save-dev webpack-error-notification
 ```
 
+If you're using any Linux that has `notify-send` tool you're done and don't have
+install anything.
+
 For Mac OS (10.8+) you need to install
 [terminal-notifier](https://github.com/alloy/terminal-notifier), the easy way is
 to use brew:
@@ -44,8 +47,11 @@ var WebpackErrorNotificationPlugin = require('webpack-error-notification');
 ```
 
 You can supply some strategy for the plugin to display notification. If you
-don't supply anything, it will use `process.platform` as a strategy name (only
-`'darwin'` is supported out of the box now).
+don't supply anything, it will use `process.platform` as a strategy
+name. `'darwin'` and `'linux'` are supported out of the box now.
 
 You can also supply `function(msg) {}` as a strategy that will use your
 notification CLI tool of choice.
+
+Main idea here is that, preferrably, people on your team shouldn't have to
+customize webpack config to be able to see notifications.

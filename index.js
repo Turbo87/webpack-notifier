@@ -4,6 +4,9 @@ var exec = require('child_process').exec;
 var STRATEGIES = {
     'darwin': function(msg) {
         exec('terminal-notifier -title Webpack -message ' + msg);
+    },
+    'linux': function(msg) {
+        exec('notify-send Webpack ' + msg);
     }
 };
 
