@@ -16,12 +16,13 @@ You can easily install this plugin to your project:
 npm install --save-dev webpack-error-notification
 ```
 
-If you're using any Linux that has `notify-send` tool you're done and don't have
-install anything.
+On Linux you can have multiple notification tools, it seems the most popular is
+`notify-send`. Check if it's installed, and if you don't have it, on Ubuntu
+you can install it with `apt-get install libnotify-bin`.
 
 For Mac OS (10.8+) you need to install
 [terminal-notifier](https://github.com/alloy/terminal-notifier), the easy way is
-to use brew:
+to use [Homebrew](http://brew.sh/):
 
 ```
 brew install terminal-notifier

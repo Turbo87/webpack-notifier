@@ -40,8 +40,12 @@ WebpackErrorNotificationPlugin.prototype.compileMessage = function(stats) {
     }
 
     if (error) {
-        this.lastBuildSucceeded = false;
-        return error.module.rawRequest + '\n' + error.error.toString();
+        try {
+            this.lastBuildSucceeded = false;
+            return error.module.rawRequest + '\n' + error.error.toString();
+        } catch (e) {
+            return "Unknown error or warning";
+        }
     }
 
     if (!this.lastBuildSucceeded) {
