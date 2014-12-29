@@ -1,6 +1,6 @@
 {
   "name": "webpack-error-notification",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Use system notification to inform developer about compilation error",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,10 @@
     "webpack",
     "build"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vsolovyov/webpack-error-notification.git"
+  },
   "author": "Vsevolod Solovyov",
   "license": "ISC"
 }
