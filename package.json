@@ -15,5 +15,8 @@
     "url": "https://github.com/vsolovyov/webpack-error-notification.git"
   },
   "author": "Vsevolod Solovyov",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "node-notifier": "^4.1.0"
+  }
 }
