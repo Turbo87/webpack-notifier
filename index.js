@@ -50,7 +50,7 @@ WebpackErrorNotificationPlugin.prototype.compileMessage = function(stats) {
 
     if (!this.lastBuildSucceeded) {
         this.lastBuildSucceeded = true;
-        return 'Successful build';
+        return 'Build successful';
     }
 };
 
