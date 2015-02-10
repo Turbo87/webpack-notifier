@@ -60,7 +60,8 @@ WebpackErrorNotificationPlugin.prototype.compilationDone = function(stats) {
     if (msg) {
         this.notifier.notify({
             title: 'Webpack',
-            message: msg
+            message: msg,
+            contentImage: path.join(__dirname, 'logo.png')
         });
     }
 };
