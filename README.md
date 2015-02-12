@@ -16,7 +16,7 @@ the `terminal-notifier` package on OS X anymore.
 
 The plugin will notify you about the first run (success/fail),
 all failed runs and the first successful run after recovering from
-a build failure. In other words: it will not by annoying if everything
+a build failure. In other words: it will stay silent if everything
 is fine with your build.
 
 
