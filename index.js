@@ -1,36 +1,11 @@
 var path = require('path');
 var notifier = require('node-notifier');
 
-var STRATEGIES = {
-    'darwin': function() {
-        return new notifier.NotificationCenter()
-    },
-    'linux': function() {
-        return new notifier.NotifySend()
-    }
-};
-
-
-function WebpackErrorNotificationPlugin(strategy) {
+var WebpackNotifierPlugin = module.exports = function() {
     this.lastBuildSucceeded = false;
-    this.notifier = null;
-
-    if (typeof strategy === 'function') {
-        this.notifier = strategy;
-        return;
-    }
-
-    if (typeof strategy === 'undefined') {
-        this.notifier = notifier;
-    }
-
-    if (STRATEGIES.hasOwnProperty(strategy)) {
-        this.notifier = STRATEGIES[strategy]();
-    }
 };
 
-
-WebpackErrorNotificationPlugin.prototype.compileMessage = function(stats) {
+WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
     var error;
     if (stats.hasWarnings()) {
         error = stats.compilation.warnings[0];
@@ -54,11 +29,10 @@ WebpackErrorNotificationPlugin.prototype.compileMessage = function(stats) {
     }
 };
 
-
-WebpackErrorNotificationPlugin.prototype.compilationDone = function(stats) {
+WebpackNotifierPlugin.prototype.compilationDone = function(stats) {
     var msg = this.compileMessage(stats);
     if (msg) {
-        this.notifier.notify({
+        notifier.notify({
             title: 'Webpack',
             message: msg,
             contentImage: path.join(__dirname, 'logo.png')
@@ -66,14 +40,6 @@ WebpackErrorNotificationPlugin.prototype.compilationDone = function(stats) {
     }
 };
 
-
-WebpackErrorNotificationPlugin.prototype.apply = function(compiler) {
-    if (this.notifier === null) {
-        console.log('Failed to set error notification.');
-    } else {
-        compiler.plugin('done', this.compilationDone.bind(this));
-    }
+WebpackNotifierPlugin.prototype.apply = function(compiler) {
+    compiler.plugin('done', this.compilationDone.bind(this));
 };
-
-
-module.exports = WebpackErrorNotificationPlugin;
