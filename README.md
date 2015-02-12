@@ -21,8 +21,8 @@ Use `npm` to install this package:
 
     npm install --save-dev webpack-error-notification
 
-Check the 
-[node-notifier Requirements](https://github.com/mikaelbr/node-notifier#requirements)
+Check the `node-notifier`
+[Requirements](https://github.com/mikaelbr/node-notifier#requirements)
 whether you need to install any additional tools for your OS.
 
 
