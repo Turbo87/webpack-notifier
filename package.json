@@ -1,20 +1,24 @@
 {
-  "name": "webpack-error-notification",
-  "version": "0.1.4",
-  "description": "Use system notification to inform developer about compilation error",
+  "name": "webpack-notifier",
+  "version": "1.0.0",
+  "description": "webpack + node-notifier = build status system notifications",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "webpack",
+    "notify",
+    "notification",
+    "node-notifier",
+    "notifier",
     "build"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/vsolovyov/webpack-error-notification.git"
+    "url": "https://github.com/Turbo87/webpack-notifier.git"
   },
-  "author": "Vsevolod Solovyov",
+  "author": "Tobias Bieniek <tobias.bieniek@gmx.de>",
   "license": "ISC",
   "dependencies": {
     "node-notifier": "^4.1.0"
