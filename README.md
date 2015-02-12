@@ -1,5 +1,7 @@
 # webpack-notifier
 
+[![Build Status](https://travis-ci.org/Turbo87/webpack-notifier.svg?branch=master)](https://travis-ci.org/Turbo87/webpack-notifier)
+
 This is a [webpack](http://webpack.github.io/) plugin that uses the
 [node-notifier](https://github.com/mikaelbr/node-notifier) package to
 display build status system notifications to the user.
@@ -28,7 +30,7 @@ whether you need to install any additional tools for your OS.
 
 ## Usage
 
-In config file:
+In the `webpack.config.js` file:
 
 ```js
 var WebpackNotifierPlugin = require('webpack-notifier');
