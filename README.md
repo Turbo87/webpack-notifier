@@ -1,6 +1,7 @@
 # webpack-notifier
 
-[![Build Status](https://travis-ci.org/Turbo87/webpack-notifier.svg?branch=master)](https://travis-ci.org/Turbo87/webpack-notifier)
+[![Build Status](https://img.shields.io/travis/Turbo87/webpack-notifier.svg)](https://travis-ci.org/Turbo87/webpack-notifier)
+[![npm Version](https://img.shields.io/npm/v/webpack-notifier.svg)](https://www.npmjs.com/package/webpack-notifier)
 
 This is a [webpack](http://webpack.github.io/) plugin that uses the
 [node-notifier](https://github.com/mikaelbr/node-notifier) package to
