@@ -4,7 +4,7 @@
   "description": "webpack + node-notifier = build status system notifications",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jshint index.js"
   },
   "keywords": [
     "webpack",
@@ -22,5 +22,8 @@
   "license": "ISC",
   "dependencies": {
     "node-notifier": "^4.1.0"
+  },
+  "devDependencies": {
+    "jshint": "^2.6.0"
   }
 }
