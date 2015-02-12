@@ -1,1 +1,10 @@
 language: node_js
+
+deploy:
+  provider: npm
+  email: tobias.bieniek@gmx.de
+  api_key:
+    secure: Ac9r8S3XId/gzoB9oSNgBwA4fwUEdCt1vzM9IYWbobqaUK0Gr2Frts/yjPGYQDlZ1bj0eBg4OrM1REvU3pss8sYui3ouFcgA7KDBp+Uz/SSLRVNVS5SF/FIeYbjcuHxgv/GrAs0hp/+86dDWqamPmvnxMohsWtl6zAXNOavP520=
+  on:
+    tags: true
+    repo: Turbo87/webpack-notifier
