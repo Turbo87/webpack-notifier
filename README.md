@@ -11,7 +11,7 @@ display build status system notifications to the user.
 
 > This is a fork of the
 [webpack-error-notification](https://github.com/vsolovyov/webpack-error-notification)
-plugin. It add support for Windows and there is no need to manually install
+plugin. It adds support for Windows and there is no need to manually install
 the `terminal-notifier` package on OS X anymore.
 
 The plugin will notify you about the first run (success/fail),
