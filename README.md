@@ -7,7 +7,9 @@ This is a [webpack](http://webpack.github.io/) plugin that uses the
 [node-notifier](https://github.com/mikaelbr/node-notifier) package to
 display build status system notifications to the user.
 
-> This is a fork of the 
+![webpack-notifier screenshot](screenshot.png)
+
+> This is a fork of the
 [webpack-error-notification](https://github.com/vsolovyov/webpack-error-notification)
 plugin. It supports Windows and there is no need to manually install
 the `terminal-notifier` package.
