@@ -1,17 +1,18 @@
 var path = require('path');
 var notifier = require('node-notifier');
 
-var WebpackNotifierPlugin = module.exports = function() {
+var WebpackNotifierPlugin = module.exports = function(options) {
     this.lastBuildSucceeded = false;
+    this.options = options || {};
 };
 
 WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
     var error;
-    if (stats.hasWarnings()) {
-        error = stats.compilation.warnings[0];
-    }
     if (stats.hasErrors()) {
         error = stats.compilation.errors[0];
+    }
+    if (!error && stats.hasWarnings() && !this.options.excludeWarnings) {
+        error = stats.compilation.warnings[0];
     }
 
     if (error) {
