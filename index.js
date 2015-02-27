@@ -12,23 +12,20 @@ WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
     var error;
     if (stats.hasErrors()) {
         error = stats.compilation.errors[0];
-    }
-    if (!error && stats.hasWarnings() && !this.options.excludeWarnings) {
+
+    } else if (stats.hasWarnings() && !this.options.excludeWarnings) {
         error = stats.compilation.warnings[0];
-    }
 
-    if (error) {
-        try {
-            this.lastBuildSucceeded = false;
-            return error.module.rawRequest + '\n' + error.error.toString();
-        } catch (e) {
-            return "Unknown error or warning";
-        }
-    }
-
-    if (!this.lastBuildSucceeded) {
+    } else if (!this.lastBuildSucceeded) {
         this.lastBuildSucceeded = true;
         return 'Build successful';
+    }
+
+    try {
+        this.lastBuildSucceeded = false;
+        return error.module.rawRequest + '\n' + error.error.toString();
+    } catch (e) {
+        return "Unknown error or warning";
     }
 };
 
