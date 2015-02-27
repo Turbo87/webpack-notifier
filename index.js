@@ -1,6 +1,8 @@
 var path = require('path');
 var notifier = require('node-notifier');
 
+var DEFAULT_LOGO = path.join(__dirname, 'logo.png');
+
 var WebpackNotifierPlugin = module.exports = function(options) {
     this.options = options || {};
     this.lastBuildSucceeded = false;
@@ -33,10 +35,13 @@ WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
 WebpackNotifierPlugin.prototype.compilationDone = function(stats) {
     var msg = this.compileMessage(stats);
     if (msg) {
+        var contentImage = ('contentImage' in this.options) ?
+            this.options.contentImage : DEFAULT_LOGO;
+
         notifier.notify({
             title: this.options.title || 'Webpack',
             message: msg,
-            contentImage: this.options.contentImage || path.join(__dirname, 'logo.png')
+            contentImage: contentImage,
         });
     }
 };
