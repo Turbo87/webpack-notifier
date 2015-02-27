@@ -21,12 +21,15 @@ WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
         return 'Build successful';
     }
 
-    try {
-        this.lastBuildSucceeded = false;
-        return error.module.rawRequest + '\n' + error.error.toString();
-    } catch (e) {
-        return "Unknown error or warning";
-    }
+    this.lastBuildSucceeded = false;
+
+    var message = error.module.rawRequest;
+    if (error.error)
+        message += '\n' + error.error.toString();
+    else if (error.warning)
+        message += '\n' + error.warning.toString();
+
+    return message;
 };
 
 WebpackNotifierPlugin.prototype.compilationDone = function(stats) {
