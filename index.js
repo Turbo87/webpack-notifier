@@ -10,11 +10,11 @@ var WebpackNotifierPlugin = module.exports = function(options) {
 
 WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
     var error;
-    if (stats.hasWarnings()) {
-        error = stats.compilation.warnings[0];
-    }
     if (stats.hasErrors()) {
         error = stats.compilation.errors[0];
+    }
+    if (!error && stats.hasWarnings() && !this.options.excludeWarnings) {
+        error = stats.compilation.warnings[0];
     }
 
     if (error) {
