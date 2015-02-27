@@ -38,15 +38,13 @@ In the `webpack.config.js` file:
 ```js
 var WebpackNotifierPlugin = require('webpack-notifier');
 
-// ...
+var config = module.exports = {
+  // ...
 
-module: {
   plugins: [
     new WebpackNotifierPlugin(),
   ]
 },
-
-// ...
 ```
 
 
