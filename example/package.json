@@ -1,0 +1,12 @@
+{
+  "name": "webpack-notifier-example",
+  "author": "Tobias Bieniek <tobias.bieniek@gmx.de>",
+  "license": "ISC",
+  "scripts": {
+    "watch": "webpack -w"
+  },
+  "devDependencies": {
+    "webpack": "^1.5.3"
+  },
+  "private": true
+}
