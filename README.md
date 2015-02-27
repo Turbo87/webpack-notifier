@@ -24,7 +24,7 @@ is fine with your build.
 
 Use `npm` to install this package:
 
-    npm install --save-dev webpack-error-notification
+    npm install --save-dev webpack-notifier
 
 Check the `node-notifier`
 [Requirements](https://github.com/mikaelbr/node-notifier#requirements)
@@ -47,4 +47,25 @@ module: {
 },
 
 // ...
+```
+
+
+## Configuration
+
+### Title
+
+Title shown in the notification.
+
+```js
+new WebpackNotifierPlugin({title: 'Webpack'});
+```
+
+### Content Image
+
+Image shown in the notification.
+
+```js
+var path = require('path');
+
+new WebpackNotifierPlugin({contentImage: path.join(__dirname, 'logo.png')});
 ```

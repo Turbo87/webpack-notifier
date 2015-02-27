@@ -1,7 +1,8 @@
 var path = require('path');
 var notifier = require('node-notifier');
 
-var WebpackNotifierPlugin = module.exports = function() {
+var WebpackNotifierPlugin = module.exports = function(options) {
+    this.options = options || {};
     this.lastBuildSucceeded = false;
 };
 
@@ -33,9 +34,9 @@ WebpackNotifierPlugin.prototype.compilationDone = function(stats) {
     var msg = this.compileMessage(stats);
     if (msg) {
         notifier.notify({
-            title: 'Webpack',
+            title: this.options.title || 'Webpack',
             message: msg,
-            contentImage: path.join(__dirname, 'logo.png')
+            contentImage: this.options.contentImage || path.join(__dirname, 'logo.png')
         });
     }
 };
