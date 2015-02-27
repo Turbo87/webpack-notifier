@@ -19,6 +19,9 @@ WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
     } else if (!this.lastBuildSucceeded) {
         this.lastBuildSucceeded = true;
         return 'Build successful';
+
+    } else {
+        return;
     }
 
     this.lastBuildSucceeded = false;
