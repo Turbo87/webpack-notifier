@@ -16,7 +16,7 @@ WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
     } else if (stats.hasWarnings() && !this.options.excludeWarnings) {
         error = stats.compilation.warnings[0];
 
-    } else if (!this.lastBuildSucceeded) {
+    } else if (!this.lastBuildSucceeded || this.options.alwaysNotify) {
         this.lastBuildSucceeded = true;
         return 'Build successful';
 
