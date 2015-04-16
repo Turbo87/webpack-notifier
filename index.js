@@ -26,11 +26,14 @@ WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
 
     this.lastBuildSucceeded = false;
 
-    var message = error.module.rawRequest;
+    var message;
+    if (error.module && error.module.rawRequest)
+        message = error.module.rawRequest + '\n';
+
     if (error.error)
-        message += '\n' + error.error.toString();
+        message += error.error.toString();
     else if (error.warning)
-        message += '\n' + error.warning.toString();
+        message += error.warning.toString();
 
     return message;
 };
