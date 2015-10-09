@@ -67,3 +67,19 @@ var path = require('path');
 
 new WebpackNotifierPlugin({contentImage: path.join(__dirname, 'logo.png')});
 ```
+
+### Exclude Warnings
+
+If set to `true`, warnings will not cause a notification.
+
+```js
+new WebpackNotifierPlugin({excludeWarnings: true});
+```
+
+### Always Notify
+
+Trigger a notification every time.  Call it "noisy-mode".
+
+```js
+new WebpackNotifierPlugin({alwaysNotify: true});
+```
