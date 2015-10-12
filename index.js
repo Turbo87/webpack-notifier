@@ -48,6 +48,7 @@ WebpackNotifierPlugin.prototype.compilationDone = function(stats) {
             title: this.options.title || 'Webpack',
             message: msg,
             contentImage: contentImage,
+            icon: (os.platform() === 'win32') ? contentImage : undefined
         });
     }
 };
