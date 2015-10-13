@@ -1,4 +1,5 @@
 var path = require('path');
+var os = require('os');
 var notifier = require('node-notifier');
 
 var DEFAULT_LOGO = path.join(__dirname, 'logo.png');
