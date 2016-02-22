@@ -32,9 +32,9 @@ WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
         message = error.module.rawRequest + '\n';
 
     if (error.error)
-        message += error.error.toString();
+        message = 'Error: ' + message + error.error.toString();
     else if (error.warning)
-        message += error.warning.toString();
+        message = 'Warning: ' + message + error.warning.toString();
 
     return message;
 };
