@@ -12,10 +12,10 @@ var WebpackNotifierPlugin = module.exports = function(options) {
 WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
     var error;
     if (stats.hasErrors()) {
-        error = 'Error: ' + stats.compilation.errors[0];
+        error = stats.compilation.errors[0];
 
     } else if (stats.hasWarnings() && !this.options.excludeWarnings) {
-        error = 'Warning: ' + stats.compilation.warnings[0];
+        error = stats.compilation.warnings[0];
 
     } else if (!this.lastBuildSucceeded || this.options.alwaysNotify) {
         this.lastBuildSucceeded = true;
@@ -32,9 +32,9 @@ WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
         message = error.module.rawRequest + '\n';
 
     if (error.error)
-        message += error.error.toString();
+        message = 'Error: ' + message + error.error.toString();
     else if (error.warning)
-        message += error.warning.toString();
+        message = 'Warning: ' + message + error.warning.toString();
 
     return message;
 };
