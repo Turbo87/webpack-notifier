@@ -1,7 +1,9 @@
 var stripANSI = require('strip-ansi');
 var path = require('path');
 var os = require('os');
+var spawn = require('child_process').spawn;
 var notifier = require('node-notifier');
+var template = require('es6-template-strings');
 
 var DEFAULT_LOGO = path.join(__dirname, 'logo.png');
 
@@ -9,6 +11,26 @@ function WebpackNotifierPlugin(options) {
   this.options = options || {};
   this.lastBuildSucceeded = false;
   this.isFirstBuild = true;
+
+  if (this.options.editor) {
+    var editor = this.options.editor;
+    editor.args = editor.args || [];
+
+    notifier.on('click', function (notifierObject, notifierOptions) {
+      if (!notifierOptions.location) {
+        return;
+      }
+
+      var command = template(editor.command, notifierOptions.location);
+      var args = editor.args.map(function (arg) {
+        return template(arg, notifierOptions.location);
+      });
+
+      if (command) {
+        spawn(command, args);
+      }
+    });
+  }
 }
 module.exports = WebpackNotifierPlugin;
 
@@ -120,7 +142,7 @@ WebpackNotifierPlugin.prototype.hasWarnings = function (stats) {
 };
 
 WebpackNotifierPlugin.prototype.compilationDone = function (stats) {
-  var { message, contentImage, status } = this.compileEndOptions(stats);
+  var { message, contentImage, status, location } = this.compileEndOptions(stats);
   if (message) {
     var title = this.options.title ? this.options.title : 'Webpack';
     if (typeof title === 'function') {
@@ -142,7 +164,9 @@ WebpackNotifierPlugin.prototype.compilationDone = function (stats) {
         title,
         message,
         contentImage,
-        icon
+        icon,
+        wait: !!this.options.editor,
+        location: location
       }
     ));
   }
