@@ -1,12 +1,34 @@
 var path = require('path');
 var os = require('os');
+var spawn = require('child_process').spawn;
 var notifier = require('node-notifier');
+var template = require('es6-template-strings');
 
 var DEFAULT_LOGO = path.join(__dirname, 'logo.png');
 
 var WebpackNotifierPlugin = module.exports = function(options) {
     this.options = options || {};
     this.lastBuildSucceeded = false;
+
+    if (this.options.editor) {
+        var editor = this.options.editor;
+        editor.args = editor.args || [];
+
+        notifier.on('click', function(notifierObject, notifierOptions) {
+            if (!notifierOptions.location) {
+              return;
+            }
+
+            var command = template(editor.command, notifierOptions.location);
+            var args = editor.args.map(function(arg) {
+                return template(arg, notifierOptions.location);
+            });
+
+            if (command) {
+                spawn(command, args);
+            }
+        });
+    }
 };
 
 WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
@@ -64,7 +86,9 @@ WebpackNotifierPlugin.prototype.compilationDone = function(stats) {
             title: this.options.title || 'Webpack',
             message: msg.body,
             contentImage: contentImage,
-            icon: (os.platform() === 'win32') ? contentImage : undefined
+            icon: (os.platform() === 'win32') ? contentImage : undefined,
+            wait: !!this.options.editor,
+            location: msg.location
         });
     }
 };

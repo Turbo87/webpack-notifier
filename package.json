@@ -21,6 +21,7 @@
   "author": "Tobias Bieniek <tobias.bieniek@gmx.de>",
   "license": "ISC",
   "dependencies": {
+    "es6-template-strings": "^2.0.0",
     "node-notifier": "^4.1.0"
   },
   "devDependencies": {
