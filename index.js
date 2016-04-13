@@ -19,7 +19,7 @@ WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
 
     } else if (!this.lastBuildSucceeded || this.options.alwaysNotify) {
         this.lastBuildSucceeded = true;
-        return 'Build successful';
+        return { body: 'Build successful' };
 
     } else {
         return;
@@ -27,16 +27,31 @@ WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
 
     this.lastBuildSucceeded = false;
 
-    var message;
-    if (error.module && error.module.rawRequest)
-        message = error.module.rawRequest + '\n';
+    var rawRequest, resource, line, column;
 
-    if (error.error)
-        message = 'Error: ' + message + error.error.toString();
-    else if (error.warning)
-        message = 'Warning: ' + message + error.warning.toString();
+    if (error.module) {
+        rawRequest = error.module.rawRequest;
+        resource = error.module.resource;
+    }
 
-    return message;
+    var errorOrWarning = error.error || error.warning;
+    if (errorOrWarning && errorOrWarning.loc) {
+        line = errorOrWarning.loc.line;
+        column = errorOrWarning.loc.column;
+    }
+
+    var body = (error.error ? 'Error: ' : error.warning ? 'Warning: ' : '') +
+               (rawRequest ? rawRequest + '\n' : '') +
+               (errorOrWarning ? errorOrWarning.toString() : '');
+
+    return {
+        body: body,
+        location: {
+            file: resource,
+            line: line,
+            column: column
+        }
+    };
 };
 
 WebpackNotifierPlugin.prototype.compilationDone = function(stats) {
@@ -47,7 +62,7 @@ WebpackNotifierPlugin.prototype.compilationDone = function(stats) {
 
         notifier.notify({
             title: this.options.title || 'Webpack',
-            message: msg,
+            message: msg.body,
             contentImage: contentImage,
             icon: (os.platform() === 'win32') ? contentImage : undefined
         });
