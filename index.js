@@ -80,23 +80,32 @@ WebpackNotifierPlugin.prototype.compileEndOptions = function (stats) {
 
   this.lastBuildSucceeded = false;
 
-  var message = '';
-  if (error.module && error.module.rawRequest) {
-    message = error.module.rawRequest + '\n';
+  var rawRequest, resource, line, column;
+
+  if (error.module) {
+    rawRequest = error.module.rawRequest;
+    resource = error.module.resource;
   }
 
-  if (error.error) {
-    message = (hasEmoji ? '❌ ' : '') + 'Error: ' + message + error.error.toString();
-  } else if (error.warning) {
-    message = (hasEmoji ? '⚠️ ' : '') + 'Warning: ' + message + error.warning.toString();
-  } else if (error.message) {
-    message = (hasEmoji ? '⚠️ ' : '') + 'Warning: ' + message + error.message.toString();
+  var errorOrWarning = error.error || error.warning || error.message;
+  if (errorOrWarning && errorOrWarning.loc) {
+    line = errorOrWarning.loc.line;
+    column = errorOrWarning.loc.column;
   }
+
+  var message = (error.error ? (hasEmoji ? '❌ ' : '') + 'Error: ' : (error.warning || error.message) ? (hasEmoji ? '⚠️ ' : '') + 'Warning: ' : '')
+               + (rawRequest ? rawRequest + '\n' : '')
+               + (errorOrWarning ? errorOrWarning.toString() : '');
 
   return {
     message: stripANSI(message),
     contentImage: contentImage,
-    status: status
+    status: status,
+    location: {
+      file: resource,
+      line: line,
+      column: column
+    }
   };
 };
 
