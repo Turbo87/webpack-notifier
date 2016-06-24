@@ -1,4 +1,5 @@
 var path = require('path');
+var objectAssign = require('object-assign');
 var os = require('os');
 var notifier = require('node-notifier');
 
@@ -45,12 +46,12 @@ WebpackNotifierPlugin.prototype.compilationDone = function(stats) {
         var contentImage = ('contentImage' in this.options) ?
             this.options.contentImage : DEFAULT_LOGO;
 
-        notifier.notify({
-            title: this.options.title || 'Webpack',
+        notifier.notify(objectAssign({
+            title: 'Webpack',
             message: msg,
             contentImage: contentImage,
             icon: (os.platform() === 'win32') ? contentImage : undefined
-        });
+        }, this.options));
     }
 };
 
