@@ -1,3 +1,4 @@
+var stripColorCodes = require('stripcolorcodes');
 var path = require('path');
 var objectAssign = require('object-assign');
 var os = require('os');
@@ -36,8 +37,11 @@ WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
         message = 'Error: ' + message + error.error.toString();
     else if (error.warning)
         message = 'Warning: ' + message + error.warning.toString();
+    else if (error.message) {
+        message = 'Warning: ' + message + error.message.toString();
+    }
 
-    return message;
+    return stripColorCodes(message);
 };
 
 WebpackNotifierPlugin.prototype.compilationDone = function(stats) {
