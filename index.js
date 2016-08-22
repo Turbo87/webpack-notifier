@@ -1,4 +1,4 @@
-var stripColorCodes = require('stripcolorcodes');
+var stripANSI = require('strip-ansi');
 var path = require('path');
 var objectAssign = require('object-assign');
 var os = require('os');
@@ -41,7 +41,7 @@ WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
         message = 'Warning: ' + message + error.message.toString();
     }
 
-    return stripColorCodes(message);
+    return stripANSI(message);
 };
 
 WebpackNotifierPlugin.prototype.compilationDone = function(stats) {
