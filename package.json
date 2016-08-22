@@ -7,7 +7,7 @@
     "index.js"
   ],
   "scripts": {
-    "test": "jshint index.js"
+    "test": "eslint index.js"
   },
   "keywords": [
     "webpack",
@@ -29,6 +29,6 @@
     "strip-ansi": "^3.0.1"
   },
   "devDependencies": {
-    "jshint": "^2.6.0"
+    "eslint": "^3.3.1"
   }
 }
