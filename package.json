@@ -21,7 +21,9 @@
   "author": "Tobias Bieniek <tobias.bieniek@gmx.de>",
   "license": "ISC",
   "dependencies": {
-    "node-notifier": "^4.1.0"
+    "node-notifier": "^4.1.0",
+    "object-assign": "^4.1.0",
+    "stripcolorcodes": "^0.1.0"
   },
   "devDependencies": {
     "jshint": "^2.6.0"

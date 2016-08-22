@@ -1,4 +1,6 @@
+var stripColorCodes = require('stripcolorcodes');
 var path = require('path');
+var objectAssign = require('object-assign');
 var os = require('os');
 var notifier = require('node-notifier');
 
@@ -35,8 +37,11 @@ WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
         message = 'Error: ' + message + error.error.toString();
     else if (error.warning)
         message = 'Warning: ' + message + error.warning.toString();
+    else if (error.message) {
+        message = 'Warning: ' + message + error.message.toString();
+    }
 
-    return message;
+    return stripColorCodes(message);
 };
 
 WebpackNotifierPlugin.prototype.compilationDone = function(stats) {
@@ -45,12 +50,12 @@ WebpackNotifierPlugin.prototype.compilationDone = function(stats) {
         var contentImage = ('contentImage' in this.options) ?
             this.options.contentImage : DEFAULT_LOGO;
 
-        notifier.notify({
-            title: this.options.title || 'Webpack',
+        notifier.notify(objectAssign({
+            title: 'Webpack',
             message: msg,
             contentImage: contentImage,
-            icon: (os.platform() === 'win32' || os.platform() === 'linux') ? contentImage : undefined
-        });
+          icon: (os.platform() === 'win32' || os.platform() === 'linux') ? contentImage : undefined
+        }, this.options));
     }
 };
 
