@@ -54,7 +54,7 @@ WebpackNotifierPlugin.prototype.compilationDone = function(stats) {
             title: 'Webpack',
             message: msg,
             contentImage: contentImage,
-          icon: (os.platform() === 'win32' || os.platform() === 'linux') ? contentImage : undefined
+            icon: (os.platform() === 'win32' || os.platform() === 'linux') ? contentImage : undefined
         }, this.options));
     }
 };
