@@ -2,6 +2,14 @@
 Changelog
 ===============================================================================
 
+v1.4.0
+-------------------------------------------------------------------------------
+
+- Pass all options to `node-notifier` ([@opensrcken](https://github.com/opensrcken))
+- Strip ANSI escape codes from the messages ([@opensrcken](https://github.com/opensrcken))
+- Remove unnecessary files from NPM package
+
+
 v1.3.2
 -------------------------------------------------------------------------------
 
