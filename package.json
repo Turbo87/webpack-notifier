@@ -4,7 +4,8 @@
   "description": "webpack + node-notifier = build status system notifications",
   "main": "index.js",
   "files": [
-    "index.js"
+    "index.js",
+    "logo.png"
   ],
   "scripts": {
     "test": "eslint index.js"
