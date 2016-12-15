@@ -9,9 +9,18 @@ var DEFAULT_LOGO = path.join(__dirname, 'logo.png');
 var WebpackNotifierPlugin = module.exports = function(options) {
     this.options = options || {};
     this.lastBuildSucceeded = false;
+    this.isFirstBuild = true;
 };
 
 WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
+    if (this.isFirstBuild) {
+        this.isFirstBuild = false;
+
+        if (this.options.skipFirstNotification) {
+            return;
+        }
+    }
+
     var error;
     if (stats.hasErrors()) {
         error = stats.compilation.errors[0];

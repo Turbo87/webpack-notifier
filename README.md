@@ -83,3 +83,11 @@ Trigger a notification every time.  Call it "noisy-mode".
 ```js
 new WebpackNotifierPlugin({alwaysNotify: true});
 ```
+
+### Skip Notification on the First Build
+
+Do not notify on the first build.  This allows you to receive notifications on subsequent incremental builds without being notified on the initial build.
+
+```js
+new WebpackNotifierPlugin({skipFirstNotification: true});
+```
