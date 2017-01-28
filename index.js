@@ -35,6 +35,9 @@ WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
     } else {
         return;
     }
+    if (!error) {
+      return;
+    }
 
     this.lastBuildSucceeded = false;
 
