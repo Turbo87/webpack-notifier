@@ -30,7 +30,7 @@ WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
 
     } else if (!this.lastBuildSucceeded || this.options.alwaysNotify) {
         this.lastBuildSucceeded = true;
-        return 'Build successful';
+        return this.options.successMessage || 'Build successful';
 
     } else {
         return;
