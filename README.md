@@ -91,3 +91,11 @@ Do not notify on the first build.  This allows you to receive notifications on s
 ```js
 new WebpackNotifierPlugin({skipFirstNotification: true});
 ```
+
+### Success Message
+
+Success message on build
+
+```js
+new WebpackNotifierPlugin({successMessage: 'Works on my local machine ;)'});
+```
