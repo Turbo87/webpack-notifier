@@ -21,7 +21,7 @@ WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
         }
     }
 
-    var error;
+    var error, hasError;
     if (stats.hasErrors()) {
         error = stats.compilation.errors[0];
         hasError = true;
@@ -52,7 +52,6 @@ WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
         }
     } catch (e) { // catch error 
         message = 'Unknown Fatal Error: ' + e + message;
-        console.warn(message);
     }
 
     return stripANSI(message);
