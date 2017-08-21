@@ -76,6 +76,14 @@ If set to `true`, warnings will not cause a notification.
 new WebpackNotifierPlugin({excludeWarnings: true});
 ```
 
+### Exclude Build Successful (but show Warnings)
+
+If set to `true`, successful builds will not cause a notification.
+
+```js
+new WebpackNotifierPlugin({excludeSuccess: true});
+```
+
 ### Always Notify
 
 Trigger a notification every time.  Call it "noisy-mode".
