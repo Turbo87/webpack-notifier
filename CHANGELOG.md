@@ -2,6 +2,18 @@
 Changelog
 ===============================================================================
 
+v1.5.1
+-------------------------------------------------------------------------------
+
+- Update `node-notifier` dependency ([#23](https://github.com/Turbo87/webpack-notifier/pull/23) and [#36](https://github.com/Turbo87/webpack-notifier/pull/36))
+
+
+v1.5.0
+-------------------------------------------------------------------------------
+
+- Add `skipFirstNotification` option ([#21](https://github.com/Turbo87/webpack-notifier/pull/21))
+
+
 v1.4.1
 -------------------------------------------------------------------------------
 
