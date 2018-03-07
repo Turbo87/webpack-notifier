@@ -69,5 +69,11 @@ WebpackNotifierPlugin.prototype.compilationDone = function(stats) {
 };
 
 WebpackNotifierPlugin.prototype.apply = function(compiler) {
+  if (compiler.hooks) {
+    var plugin = { name: 'Notifier' };
+
+    compiler.hooks.done.tap(plugin, this.compilationDone.bind(this));
+  } else {
     compiler.plugin('done', this.compilationDone.bind(this));
+  }
 };
