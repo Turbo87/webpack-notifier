@@ -21,10 +21,10 @@ WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
         }
     }
 
-    var error;
+    var error, hasError;
     if (stats.hasErrors()) {
         error = stats.compilation.errors[0];
-
+        hasError = true;
     } else if (stats.hasWarnings() && !this.options.excludeWarnings) {
         error = stats.compilation.warnings[0];
 
@@ -42,12 +42,16 @@ WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
     if (error.module && error.module.rawRequest)
         message = error.module.rawRequest + '\n';
 
-    if (error.error)
-        message = 'Error: ' + message + error.error.toString();
-    else if (error.warning)
-        message = 'Warning: ' + message + error.warning.toString();
-    else if (error.message) {
-        message = 'Warning: ' + message + error.message.toString();
+    try {
+        if (error.error && hasError) // don't look for error.error if we don't have errors
+            message = 'Error: ' + message + error.error.toString();
+        else if (error.warning)
+            message = 'Warning: ' + message + error.warning.toString();
+        else if (error.message) {
+            message = 'Warning: ' + message + error.message.toString();
+        }
+    } catch (e) { // catch error 
+        message = 'Unknown Fatal Error: ' + e + message;
     }
 
     return stripANSI(message);
