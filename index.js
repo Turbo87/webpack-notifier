@@ -13,6 +13,21 @@ var WebpackNotifierPlugin = module.exports = function(options) {
 };
 
 WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
+    function findFirstDFS(compilation, key) {
+        var match = compilation[key][0];
+        if (match) {
+            return match;
+        }
+
+        var children = compilation.children;
+        for (var i = 0; i < children.length; ++i) {
+            match = findFirstDFS(children[i], key);
+            if (match) {
+                return match;
+            }
+        }
+    }
+
     if (this.isFirstBuild) {
         this.isFirstBuild = false;
 
@@ -23,10 +38,10 @@ WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
 
     var error;
     if (stats.hasErrors()) {
-        error = stats.compilation.errors[0];
+        error = findFirstDFS(stats.compilation, 'errors');
 
     } else if (stats.hasWarnings() && !this.options.excludeWarnings) {
-        error = stats.compilation.warnings[0];
+        error = findFirstDFS(stats.compilation, 'warnings');
 
     } else if (!this.lastBuildSucceeded || this.options.alwaysNotify) {
         this.lastBuildSucceeded = true;
