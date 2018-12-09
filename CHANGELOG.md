@@ -5,7 +5,7 @@ Changelog
 v1.8.0
 -------------------------------------------------------------------------------
 
-- Add `onlyOnError` option
+- Add `onlyOnError` option ([#51](https://github.com/Turbo87/webpack-notifier/pull/51)
 
 
 v1.7.0
