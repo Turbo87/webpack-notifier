@@ -40,10 +40,10 @@ WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
     if (stats.hasErrors()) {
         error = findFirstDFS(stats.compilation, 'errors');
 
-    } else if (stats.hasWarnings() && !this.options.excludeWarnings) {
+    } else if (stats.hasWarnings() && !this.options.excludeWarnings && !this.options.onlyOnError) {
         error = findFirstDFS(stats.compilation, 'warnings');
 
-    } else if (!this.lastBuildSucceeded || this.options.alwaysNotify) {
+    } else if ((!this.lastBuildSucceeded || this.options.alwaysNotify) && !this.options.onlyOnError) {
         this.lastBuildSucceeded = true;
         return 'Build successful';
 
@@ -53,7 +53,7 @@ WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
 
     this.lastBuildSucceeded = false;
 
-    var message;
+    var message = '';
     if (error.module && error.module.rawRequest)
         message = error.module.rawRequest + '\n';
 
