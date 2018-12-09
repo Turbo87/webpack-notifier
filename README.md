@@ -78,10 +78,18 @@ new WebpackNotifierPlugin({excludeWarnings: true});
 
 ### Always Notify
 
-Trigger a notification every time.  Call it "noisy-mode".
+Trigger a notification every time. Call it "noisy-mode".
 
 ```js
 new WebpackNotifierPlugin({alwaysNotify: true});
+```
+
+### Notify on error
+
+Trigger a notification only on error.
+
+```js
+new WebpackNotifierPlugin({onlyOnError: true});
 ```
 
 ### Skip Notification on the First Build
