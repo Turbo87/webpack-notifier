@@ -75,12 +75,17 @@ WebpackNotifierPlugin.prototype.compilationDone = function(stats) {
         var contentImage = ('contentImage' in this.options) ?
             this.options.contentImage : DEFAULT_LOGO;
 
+        var title = this.options.title
+        if (typeof title === 'function') {
+            title = title({msg: msg})
+        }
+
         notifier.notify(objectAssign({
             title: 'Webpack',
             message: msg,
             contentImage: contentImage,
             icon: (os.platform() === 'win32' || os.platform() === 'linux') ? contentImage : undefined
-        }, this.options));
+        }, this.options, { title: title }));
     }
 };
 
