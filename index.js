@@ -45,7 +45,7 @@ WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
 
     } else if (!this.lastBuildSucceeded || this.options.alwaysNotify) {
         this.lastBuildSucceeded = true;
-        return 'Build successful';
+        return (hasEmoji ? '✅ ' : '') + 'Build successful';
 
     } else {
         return;
@@ -57,12 +57,13 @@ WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
     if (error.module && error.module.rawRequest)
         message = error.module.rawRequest + '\n';
 
+    var hasEmoji = this.options.emoji;
     if (error.error)
-        message = 'Error: ' + message + error.error.toString();
+        message = (hasEmoji ? '❌ ' : '') + 'Error: ' + message + error.error.toString();
     else if (error.warning)
-        message = 'Warning: ' + message + error.warning.toString();
+        message = (hasEmoji ? '⚠️ ' : '') + 'Warning: ' + message + error.warning.toString();
     else if (error.message) {
-        message = 'Warning: ' + message + error.message.toString();
+        message = (hasEmoji ? '⚠️ ' : '') + 'Warning: ' + message + error.message.toString();
     }
 
     return stripANSI(message);
