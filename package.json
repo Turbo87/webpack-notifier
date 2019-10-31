@@ -25,7 +25,7 @@
   "author": "Tobias Bieniek <tobias.bieniek@gmx.de>",
   "license": "ISC",
   "dependencies": {
-    "node-notifier": "^5.1.2",
+    "node-notifier": "^6.0.0",
     "object-assign": "^4.1.0",
     "strip-ansi": "^3.0.1"
   },
