@@ -46,7 +46,7 @@ var config = module.exports = {
   plugins: [
     new WebpackNotifierPlugin(),
   ]
-},
+}
 ```
 
 
@@ -57,19 +57,20 @@ var config = module.exports = {
 Title shown in the notification.
 
 ```js
-// static title
 new WebpackNotifierPlugin({title: 'Webpack'});
-// or dynamicly generated
-new WebpackNotifierPlugin({
-    title({msg}) {
-        if (msg.startsWith('Error')) return 'build error ❌';
-        if (msg.startsWith('Warning')) return 'build warning ⚠️';
-        return 'build complete ✅';
-    },
-})
 ```
 
-### Emoji
+#### Dynamic title
+
+Your own title for notify
+
+```js
+new WebpackNotifierPlugin({title: function (params) {
+  return `Build status is ${params.status} with message ${params.message}`;
+}});
+```
+
+### Emojis in message text
 
 Show status emoji icon before the message.
 
@@ -79,12 +80,26 @@ new WebpackNotifierPlugin({emoji: true});
 
 ### Content Image
 
-Image shown in the notification.
+Image shown in the notification. Can be a path string or object with paths.
 
+#### String path:
 ```js
 var path = require('path');
 
 new WebpackNotifierPlugin({contentImage: path.join(__dirname, 'logo.png')});
+```
+
+#### Object string path:
+```js
+var path = require('path');
+
+const statusesPaths = {
+  success: path.join(__dirname, 'success.png'),
+  warning: path.join(__dirname, 'warning.png'),
+  error: path.join(__dirname, 'error.png')
+}
+
+new WebpackNotifierPlugin({contentImage: statusesPaths});
 ```
 
 ### Exclude Warnings

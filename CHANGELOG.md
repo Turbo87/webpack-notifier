@@ -7,6 +7,8 @@ v1.12.0
   
 - fix(dependencies): moved the erroneous dependency to devDependencies
 
+Minimum supported Node version is 6+
+
 
 v1.11.1
 -------------------------------------------------------------------------------
