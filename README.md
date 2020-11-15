@@ -1,6 +1,6 @@
 # webpack-notifier
 
-[![Build Status](https://img.shields.io/travis/Turbo87/webpack-notifier.svg)](https://travis-ci.org/Turbo87/webpack-notifier)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Turbo87/webpack-notifier/CI)](https://github.com/Turbo87/webpack-notifier/actions?query=workflow:CI)
 [![npm Version](https://img.shields.io/npm/v/webpack-notifier.svg)](https://www.npmjs.com/package/webpack-notifier)
 
 This is a [webpack](http://webpack.github.io/) plugin that uses the
