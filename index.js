@@ -39,11 +39,11 @@ WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
     var error;
     if (stats.hasErrors()) {
         error = findFirstDFS(stats.compilation, 'errors');
-
-    } else if (stats.hasWarnings() && !this.options.excludeWarnings && !this.options.onlyOnError) {
+    } else if (this.options.onlyOnError) {
+        return;
+    } else if (stats.hasWarnings() && !this.options.excludeWarnings) {
         error = findFirstDFS(stats.compilation, 'warnings');
-
-    } else if ((!this.lastBuildSucceeded || this.options.alwaysNotify) && !this.options.onlyOnError) {
+    } else if (!this.lastBuildSucceeded || this.options.alwaysNotify) {
         this.lastBuildSucceeded = true;
         return (hasEmoji ? '✅ ' : '') + 'Build successful';
 
