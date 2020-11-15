@@ -1,6 +1,6 @@
 {
   "name": "webpack-notifier",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "description": "webpack + node-notifier = build status system notifications",
   "main": "index.js",
   "files": [
