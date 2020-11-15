@@ -36,6 +36,7 @@ WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
         }
     }
 
+    var hasEmoji = this.options.emoji;
     var error;
     if (stats.hasErrors()) {
         error = findFirstDFS(stats.compilation, 'errors');
@@ -57,7 +58,6 @@ WebpackNotifierPlugin.prototype.compileMessage = function(stats) {
     if (error.module && error.module.rawRequest)
         message = error.module.rawRequest + '\n';
 
-    var hasEmoji = this.options.emoji;
     if (error.error)
         message = (hasEmoji ? '❌ ' : '') + 'Error: ' + message + error.error.toString();
     else if (error.warning)
