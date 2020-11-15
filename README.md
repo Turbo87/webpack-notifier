@@ -58,6 +58,14 @@ Title shown in the notification.
 new WebpackNotifierPlugin({title: 'Webpack'});
 ```
 
+### Emoji
+
+Show status emoji icon before the message.
+
+```js
+new WebpackNotifierPlugin({emoji: true});
+```
+
 ### Content Image
 
 Image shown in the notification.
