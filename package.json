@@ -10,6 +10,11 @@
   "scripts": {
     "test": "eslint index.js"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test"
+    }
+  },
   "keywords": [
     "webpack",
     "notify",
@@ -30,6 +35,7 @@
     "strip-ansi": "^3.0.1"
   },
   "devDependencies": {
-    "eslint": "^3.3.1"
+    "eslint": "^3.3.1",
+    "husky": "^4.3.0"
   }
 }
