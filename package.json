@@ -8,6 +8,7 @@
     "logo.png"
   ],
   "scripts": {
+    "prepublishOnly": "npm run lint",
     "lint": "eslint index.js"
   },
   "husky": {
