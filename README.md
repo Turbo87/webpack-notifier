@@ -55,7 +55,16 @@ var config = module.exports = {
 Title shown in the notification.
 
 ```js
+// static title
 new WebpackNotifierPlugin({title: 'Webpack'});
+// or dynamicly generated
+new WebpackNotifierPlugin({
+    title({msg}) {
+        if (msg.startsWith('Error')) return 'build error ❌';
+        if (msg.startsWith('Warning')) return 'build warning ⚠️';
+        return 'build complete ✅';
+    },
+})
 ```
 
 ### Emoji
