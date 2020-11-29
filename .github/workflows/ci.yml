@@ -10,8 +10,8 @@ on:
     - cron: '0 3 * * *' # daily, at 3am
 
 jobs:
-  test:
-    name: Tests
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
 
     steps:
@@ -21,4 +21,4 @@ jobs:
           node-version: 6
 
       - run: npm install
-      - run: npm test
+      - run: npm run lint

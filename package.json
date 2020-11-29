@@ -8,11 +8,11 @@
     "logo.png"
   ],
   "scripts": {
-    "test": "eslint index.js"
+    "lint": "eslint index.js"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm test"
+      "pre-commit": "npm run lint"
     }
   },
   "keywords": [
