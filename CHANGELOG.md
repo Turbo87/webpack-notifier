@@ -12,7 +12,7 @@ v1.10.1
 v1.10.0
 -------------------------------------------------------------------------------
 
-- Add `onlyOnError` option ([#51](https://github.com/Turbo87/webpack-notifier/pull/51)
+- Add `onlyOnError` option ([#51](https://github.com/Turbo87/webpack-notifier/pull/51))
 
 
 v1.9.1
@@ -24,25 +24,25 @@ v1.9.1
 v1.9.0
 -------------------------------------------------------------------------------
 
-- Update node-notifier to v6 ([#56](https://github.com/Turbo87/webpack-notifier/pull/56)
+- Update node-notifier to v6 ([#56](https://github.com/Turbo87/webpack-notifier/pull/56))
 
 
 v1.8.0
 -------------------------------------------------------------------------------
 
-- Add `--emoji` option ([#55](https://github.com/Turbo87/webpack-notifier/pull/55)
+- Add `--emoji` option ([#55](https://github.com/Turbo87/webpack-notifier/pull/55))
 
 
 v1.7.0
 -------------------------------------------------------------------------------
 
-- Handle errors/warnings in child compilations ([#49](https://github.com/Turbo87/webpack-notifier/pull/49)
+- Handle errors/warnings in child compilations ([#49](https://github.com/Turbo87/webpack-notifier/pull/49))
 
 
 v1.6.0
 -------------------------------------------------------------------------------
 
-- Add support for webpack 4 plugin system ([#39](https://github.com/Turbo87/webpack-notifier/pull/39)
+- Add support for webpack 4 plugin system ([#39](https://github.com/Turbo87/webpack-notifier/pull/39))
 
 
 v1.5.1
