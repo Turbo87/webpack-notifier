@@ -19,3 +19,21 @@ jobs:
       - uses: actions/setup-node@v1
       - run: npm install
       - run: npm run lint
+
+  test:
+    name: Test - ${{ matrix.os }} - Node v${{ matrix.node-version }}
+
+    strategy:
+      matrix:
+        os: [ ubuntu-latest ]
+        node-version: [ 10.x, 12.x, 14.x ]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install
+      - run: npm run test
