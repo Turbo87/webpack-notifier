@@ -1,0 +1,7 @@
+
+
+describe('WebpackNotifierPlugin', () => {
+    it('example', () => {
+
+    });
+});
