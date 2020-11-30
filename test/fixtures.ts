@@ -1,7 +1,7 @@
 export default {
   simple: {
     successful: {
-      '/entry.js': '//document.write("It works.");'
+      '/entry.js': '// require.extensions[".js"];'
     },
     error: {
       '/entry.js': '(syntax error)require.extensions[".js"];'

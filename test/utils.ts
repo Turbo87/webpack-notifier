@@ -19,7 +19,8 @@ export function getCompiler() {
   return webpack(config);
 }
 
-export function compile(compiler) {
+export async function compile(compiler) {
+  await promisify(compiler.compile).call(compiler);// TODO workaround for re-compile
   return promisify(compiler.run).call(compiler);
 }
 
