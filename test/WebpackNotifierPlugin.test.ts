@@ -1,8 +1,9 @@
 import {notify} from 'node-notifier';
 import WebpackNotifierPlugin from '../';
-import {getCompiler, compile, prepareFs, contentImageSerializer} from './utils';
+import {getCompiler, compile, prepareFs, contentImageSerializer, reduceArraySerializer} from './utils';
 import fixtures from "./fixtures";
 
+expect.addSnapshotSerializer(reduceArraySerializer);
 expect.addSnapshotSerializer(contentImageSerializer);
 
 describe('WebpackNotifierPlugin', () => {

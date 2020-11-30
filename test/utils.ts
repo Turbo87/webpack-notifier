@@ -34,6 +34,19 @@ export function prepareFs(json) {
   return {vol, fs};
 }
 
+export const reduceArraySerializer = {
+  test(val) {
+    return Array.isArray(val) &&
+      val.length === 1 &&
+      Array.isArray(val[0]) &&
+      val[0].length === 1 &&
+      typeof val[0][0] === 'object' &&
+      val[0][0].hasOwnProperty('title');
+  },
+  serialize(val, config, indentation, depth, refs, printer) {
+    return printer(val[0][0], config, indentation, depth, refs);
+  },
+};
 export const contentImageSerializer = {
   test(val) {
     return typeof val === 'object' &&

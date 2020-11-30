@@ -1,39 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`WebpackNotifierPlugin one compilation ["error"] {} 1`] = `
-Array [
-  Array [
-    Object {
-      "contentImage": "__dirname/logo.png",
-      "message": "Error: /entry.js
+Object {
+  "contentImage": "__dirname/logo.png",
+  "message": "Error: /entry.js
 SyntaxError: Unexpected token (1:8)",
-      "title": undefined,
-    },
-  ],
-]
+  "title": undefined,
+}
 `;
 
 exports[`WebpackNotifierPlugin one compilation ["successful"] {} 1`] = `
-Array [
-  Array [
-    Object {
-      "contentImage": "__dirname/logo.png",
-      "message": "Build successful",
-      "title": undefined,
-    },
-  ],
-]
+Object {
+  "contentImage": "__dirname/logo.png",
+  "message": "Build successful",
+  "title": undefined,
+}
 `;
 
 exports[`WebpackNotifierPlugin one compilation ["warning"] {} 1`] = `
-Array [
-  Array [
-    Object {
-      "contentImage": "__dirname/logo.png",
-      "message": "Warning: /entry.js
+Object {
+  "contentImage": "__dirname/logo.png",
+  "message": "Warning: /entry.js
 require.extensions is not supported by webpack. Use a loader instead.",
-      "title": undefined,
-    },
-  ],
-]
+  "title": undefined,
+}
 `;
