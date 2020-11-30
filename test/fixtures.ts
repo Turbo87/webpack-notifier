@@ -1,13 +1,13 @@
 export default {
   simple: {
     successful: {
-      '/entry.js': 'document.write("It works.");'
+      '/entry.js': '//document.write("It works.");'
     },
     error: {
-      '/entry.js': 'foo bar;'
+      '/entry.js': '(syntax error)require.extensions[".js"];'
     },
     warning: {
-      '/entry.js': 'require.extensions[".js"]'
+      '/entry.js': 'require.extensions[".js"];'
     }
   }
 };
