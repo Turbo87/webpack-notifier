@@ -1,4 +1,5 @@
 import {join} from 'path';
+import {platform} from 'os';
 import {notify} from 'node-notifier';
 import WebpackNotifierPlugin from '../';
 import {getCompiler, compile, prepareFs} from './utils';
@@ -22,7 +23,7 @@ describe('WebpackNotifierPlugin', () => {
       expect(notify.mock.calls[0][0]).toEqual({
         title: undefined,
         contentImage: join(__dirname, '../logo.png'),
-        icon: join(__dirname, '../logo.png'),
+        icon: ['win32', 'linux'].includes(platform()) ? join(__dirname, '../logo.png') : undefined,
         message,
       });
     });
