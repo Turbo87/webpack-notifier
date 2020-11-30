@@ -1,16 +1,21 @@
 import {promisify} from 'util';
 import webpack from 'webpack';
+import {version as webpackVersion} from 'webpack/package.json';
+import semver from 'semver';
 jest.mock('fs');
 
 export function getCompiler({fs}) {
-  const compiler = webpack({
-    mode: 'development',
+  const config = {
     entry: '/entry.js',
     output: {
       path: '/',
       filename: 'bundle.js'
     }
-  });
+  };
+  if (semver.gte(webpackVersion, '4.0.0')) {
+    config['mode'] = 'development';
+  }
+  const compiler = webpack(config);
 
   return compiler;
 }
