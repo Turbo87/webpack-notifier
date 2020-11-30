@@ -1,4 +1,5 @@
 import {promisify} from 'util';
+import {join} from 'path';
 import webpack from 'webpack';
 import {version as webpackVersion} from 'webpack/package.json';
 import semver from 'semver';
@@ -32,3 +33,19 @@ export function prepareFs(json) {
 
   return {vol, fs};
 }
+
+export const contentImageSerializer = {
+  test(val) {
+    return typeof val === 'object' &&
+      val.contentImage &&
+      !val.contentImage.startsWith('__dirname');
+  },
+  serialize(val, config, indentation, depth, refs, printer) {
+    var modifiedVal = {
+      ...val,
+      contentImage: val.contentImage.replace(join(__dirname, '../'), '__dirname/')
+    }
+    delete modifiedVal.icon;
+    return printer(modifiedVal, config, indentation, depth, refs);
+  },
+};

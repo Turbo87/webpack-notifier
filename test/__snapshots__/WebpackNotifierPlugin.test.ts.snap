@@ -4,8 +4,7 @@ exports[`WebpackNotifierPlugin one compilation ["error"] {} 1`] = `
 Array [
   Array [
     Object {
-      "contentImage": "C:\\\\Projects\\\\github.com\\\\collaboration\\\\webpack-notifier\\\\logo.png",
-      "icon": "C:\\\\Projects\\\\github.com\\\\collaboration\\\\webpack-notifier\\\\logo.png",
+      "contentImage": "__dirname/logo.png",
       "message": "Error: /entry.js
 SyntaxError: Unexpected token (1:8)",
       "title": undefined,
@@ -18,8 +17,7 @@ exports[`WebpackNotifierPlugin one compilation ["successful"] {} 1`] = `
 Array [
   Array [
     Object {
-      "contentImage": "C:\\\\Projects\\\\github.com\\\\collaboration\\\\webpack-notifier\\\\logo.png",
-      "icon": "C:\\\\Projects\\\\github.com\\\\collaboration\\\\webpack-notifier\\\\logo.png",
+      "contentImage": "__dirname/logo.png",
       "message": "Build successful",
       "title": undefined,
     },
@@ -31,8 +29,7 @@ exports[`WebpackNotifierPlugin one compilation ["warning"] {} 1`] = `
 Array [
   Array [
     Object {
-      "contentImage": "C:\\\\Projects\\\\github.com\\\\collaboration\\\\webpack-notifier\\\\logo.png",
-      "icon": "C:\\\\Projects\\\\github.com\\\\collaboration\\\\webpack-notifier\\\\logo.png",
+      "contentImage": "__dirname/logo.png",
       "message": "Warning: /entry.js
 require.extensions is not supported by webpack. Use a loader instead.",
       "title": undefined,
