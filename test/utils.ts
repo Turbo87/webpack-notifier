@@ -24,7 +24,10 @@ function getCompiler() {
 }
 
 async function compile(compiler) {
-  await promisify(compiler.compile).call(compiler);// TODO workaround for re-compile
+  // TODO workaround for re-compile
+  await promisify(compiler.compile).call(compiler);
+  await new Promise(resolve => setTimeout(resolve));
+
   return promisify(compiler.run).call(compiler);
 }
 
