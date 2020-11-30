@@ -13,11 +13,11 @@ describe('WebpackNotifierPlugin', () => {
       ['error', 'Error: /entry.js\nSyntaxError: Unexpected token (1:8)'],
       ['warning', 'Warning: /entry.js\nrequire.extensions is not supported by webpack. Use a loader instead.'],
     ])('%s', async (name, message) => {
-      const {fs} = prepareFs(fixtures.simple[name]);
-      const compiler = getCompiler({fs});
+      const compiler = getCompiler();
       const plugin = new WebpackNotifierPlugin();
       plugin.apply(compiler);
 
+      prepareFs(fixtures.simple[name]);
       await compile(compiler);
 
       expect(notify.mock.calls.length).toBe(1);

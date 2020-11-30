@@ -4,7 +4,7 @@ import {version as webpackVersion} from 'webpack/package.json';
 import semver from 'semver';
 jest.mock('fs');
 
-export function getCompiler({fs}) {
+export function getCompiler() {
   const config = {
     entry: '/entry.js',
     output: {
@@ -15,9 +15,8 @@ export function getCompiler({fs}) {
   if (semver.gte(webpackVersion, '4.0.0')) {
     config['mode'] = 'development';
   }
-  const compiler = webpack(config);
 
-  return compiler;
+  return webpack(config);
 }
 
 export function compile(compiler) {
