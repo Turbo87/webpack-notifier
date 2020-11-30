@@ -11,6 +11,7 @@ describe('WebpackNotifierPlugin', () => {
     test.each([
       ['successful', 'Build successful'],
       ['error', 'Error: /entry.js\nSyntaxError: Unexpected token (1:4)'],
+      ['warning', 'Warning: /entry.js\nrequire.extensions is not supported by webpack. Use a loader instead.'],
     ])('%s', async (name, message) => {
       const {fs} = prepareFs(fixtures.simple[name]);
       const compiler = getCompiler({fs});

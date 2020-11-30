@@ -5,6 +5,9 @@ export default {
     },
     error: {
       '/entry.js': 'foo bar;'
+    },
+    warning: {
+      '/entry.js': 'require.extensions[".js"]'
     }
   }
 };
