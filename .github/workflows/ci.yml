@@ -21,13 +21,14 @@ jobs:
       - run: npm run lint
 
   test:
-    name: Test - ${{ matrix.os }} - Node v${{ matrix.node-version }}
+    name: Test - ${{ matrix.os }} - Node v${{ matrix.node-version }}, Webpack ${{ matrix.webpack-version }}
 
     strategy:
       fail-fast: false
       matrix:
         os: [ ubuntu-latest ]
         node-version: [ 10.x, 12.x, 14.x ]
+        webpack-version: [ ^2, ^3, ^4, latest, next ]
 
     runs-on: ${{ matrix.os }}
 
@@ -37,4 +38,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install
+      - name: Install webpack ${{ matrix.webpack-version }}
+        run: npm i webpack@${{ matrix.webpack-version }}
       - run: npm run test
