@@ -25,6 +25,6 @@ async function testChangesFlow(sources, opts)  {
     notify.mockClear();
     prepareFs(fixtures.simple[name]);
     await compile(compiler);
-    expect(notify.mock.calls).toMatchSnapshot();
+    expect(notify.mock.calls).toMatchSnapshot(`after "${name}" build`);
   }
 }

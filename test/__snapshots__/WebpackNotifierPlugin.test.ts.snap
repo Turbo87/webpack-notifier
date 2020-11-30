@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`WebpackNotifierPlugin one compilation ["error"] {} 1`] = `
+exports[`WebpackNotifierPlugin one compilation ["error"] {}: after "error" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Error: /entry.js
@@ -9,7 +9,7 @@ SyntaxError: Unexpected token (1:8)",
 }
 `;
 
-exports[`WebpackNotifierPlugin one compilation ["successful"] {} 1`] = `
+exports[`WebpackNotifierPlugin one compilation ["successful"] {}: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
@@ -17,7 +17,7 @@ Object {
 }
 `;
 
-exports[`WebpackNotifierPlugin one compilation ["warning"] {} 1`] = `
+exports[`WebpackNotifierPlugin one compilation ["warning"] {}: after "warning" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Warning: /entry.js
