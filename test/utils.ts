@@ -1,9 +1,6 @@
-import path from 'path';
 import {promisify} from 'util';
 import webpack from 'webpack';
-import {version as webpackVersion} from 'webpack/package.json';
-import semver from 'semver';
-import {createFsFromVolume, Volume} from 'memfs';
+jest.mock('fs');
 
 export function getCompiler({fs}) {
   const compiler = webpack({
@@ -14,13 +11,6 @@ export function getCompiler({fs}) {
       filename: 'bundle.js'
     }
   });
-  Object.assign(
-    compiler,
-    {
-      inputFileSystem: fs,
-      outputFileSystem: fs
-    }
-  );
 
   return compiler;
 }
@@ -30,12 +20,10 @@ export function compile(compiler) {
 }
 
 export function prepareFs(json) {
-  const vol = Volume.fromJSON(json, '/');
-  const fs = createFsFromVolume(vol);
-
-  if(semver.lt(webpackVersion, '5.0.0')) {
-    fs['join'] = path.join.bind(path);
-  }
+  const fs = require('fs');
+  const vol = fs[Symbol.for('Volume')];
+  vol.reset();
+  vol.fromJSON(json, '/');
 
   return {vol, fs};
 }
