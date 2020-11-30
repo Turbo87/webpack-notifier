@@ -2,10 +2,13 @@ import {promisify} from 'util';
 import {join} from 'path';
 import webpack from 'webpack';
 import {version as webpackVersion} from 'webpack/package.json';
+import {notify} from 'node-notifier';
 import semver from 'semver';
+import fixtures from './fixtures';
+import WebpackNotifierPlugin from '../';
 jest.mock('fs');
 
-export function getCompiler() {
+function getCompiler() {
   const config = {
     entry: '/entry.js',
     output: {
@@ -20,12 +23,12 @@ export function getCompiler() {
   return webpack(config);
 }
 
-export async function compile(compiler) {
+async function compile(compiler) {
   await promisify(compiler.compile).call(compiler);// TODO workaround for re-compile
   return promisify(compiler.run).call(compiler);
 }
 
-export function prepareFs(json) {
+function prepareFs(json) {
   const fs = require('fs');
   const vol = fs[Symbol.for('Volume')];
   vol.reset();
@@ -61,4 +64,17 @@ export const contentImageSerializer = {
     delete modifiedVal.icon;
     return printer(modifiedVal, config, indentation, depth, refs);
   },
+};
+
+export async function testChangesFlow(sources, opts)  {
+  const compiler = getCompiler();
+  const plugin = new WebpackNotifierPlugin(opts);
+  plugin.apply(compiler);
+
+  for (const name of sources) {
+    notify.mockClear();
+    prepareFs(fixtures.simple[name]);
+    await compile(compiler);
+    expect(notify.mock.calls).toMatchSnapshot(`after "${name}" build`);
+  }
 };
