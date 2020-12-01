@@ -20,14 +20,13 @@ function getCompiler() {
     config['mode'] = 'development';
   }
 
-  return webpack(config);
+  const compiler = webpack(config);
+  compiler.inputFileSystem = require('fs');
+
+  return compiler;
 }
 
 async function compile(compiler) {
-  // TODO workaround for re-compile
-  await promisify(compiler.compile).call(compiler);
-  await new Promise(resolve => setTimeout(resolve));
-
   return promisify(compiler.run).call(compiler);
 }
 
