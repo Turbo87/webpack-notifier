@@ -1,11 +1,11 @@
 import {join} from 'path';
 import webpack from 'webpack';
 import {version as webpackVersion} from 'webpack/package.json';
+import {createFsFromVolume, Volume} from 'memfs';
 import {notify} from 'node-notifier';
-import semver from 'semver';
+import {satisfies} from 'semver';
 import fixtures from './fixtures';
 import WebpackNotifierPlugin from '../';
-jest.mock('fs');
 
 function getCompiler() {
   const config = {
@@ -15,16 +15,23 @@ function getCompiler() {
       filename: 'bundle.js'
     }
   };
-  if (semver.gte(webpackVersion, '4.0.0')) {
+  if (satisfies(webpackVersion, '>=4', {includePrerelease: true})) {
     config['mode'] = 'development';
   }
 
-  const compiler = webpack(config);
-  compiler.inputFileSystem = require('fs');
-
-  return compiler;
+  return webpack(config);
 }
+function patchCompiler(compiler, fs) {
+  compiler.inputFileSystem = fs;
+  compiler.outputFileSystem = fs;
+  // compiler.watchFileSystem = fs;
 
+  if (satisfies(webpackVersion, '<5')) {
+    compiler['resolvers'].normal.fileSystem = fs;
+    // compiler['resolvers'].loader.fileSystem = fs;
+    // compiler['resolvers'].context.fileSystem = fs;
+  }
+}
 async function compile(compiler) {
   return new Promise((resolve, reject) => {
     compiler.run((err, res) => {
@@ -36,13 +43,20 @@ async function compile(compiler) {
   });
 }
 
-function prepareFs(json) {
-  const fs = require('fs');
-  const vol = fs[Symbol.for('Volume')];
+function prepareFs() {
+  const vol = new Volume();
+  const fs = createFsFromVolume(vol);
+
+  if (satisfies(webpackVersion, '<5')) {
+    fs['join'] = join;
+  }
+
+  return {fs, vol};
+}
+
+function updateFs(vol, json) {
   vol.reset();
   vol.fromJSON(json, '/');
-
-  return {vol, fs};
 }
 
 export const reduceArraySerializer = {
@@ -76,12 +90,14 @@ export const contentImageSerializer = {
 
 export async function testChangesFlow(sources, opts)  {
   const compiler = getCompiler();
+  const {fs, vol} = prepareFs();
   const plugin = new WebpackNotifierPlugin(opts);
   plugin.apply(compiler);
+  patchCompiler(compiler, fs);
 
   for (const name of sources) {
     notify.mockClear();
-    prepareFs(fixtures.simple[name]);
+    updateFs(vol, fixtures.simple[name]);
     await compile(compiler);
     expect(notify.mock.calls).toMatchSnapshot(`after "${name}" build`);
   }
