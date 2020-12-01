@@ -10,7 +10,8 @@
   "scripts": {
     "prepublishOnly": "npm run lint",
     "lint": "eslint index.js",
-    "test": "jest"
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   },
   "husky": {
     "hooks": {
