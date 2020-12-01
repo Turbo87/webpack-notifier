@@ -1,4 +1,3 @@
-import {promisify} from 'util';
 import {join} from 'path';
 import webpack from 'webpack';
 import {version as webpackVersion} from 'webpack/package.json';
@@ -27,7 +26,14 @@ function getCompiler() {
 }
 
 async function compile(compiler) {
-  return promisify(compiler.run).call(compiler);
+  return new Promise((resolve, reject) => {
+    compiler.run((err, res) => {
+      if (err) {
+        return reject(err);
+      }
+      resolve(res);
+    });
+  });
 }
 
 function prepareFs(json) {

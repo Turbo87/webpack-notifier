@@ -30,8 +30,14 @@ jobs:
         node-version: [ 10.x ]
         webpack-version: [ ^1, ^2, ^3, ^4, latest, next ]
         include:
+          # different platforms
           - {os: windows-latest, node-version: 10.x, webpack-version: latest}
           - {os: macos-latest, node-version: 10.x, webpack-version: latest}
+          # TODO different Node.js
+          - { os: ubuntu-latest, node-version: 6.x, webpack-version: ^1 }
+          - { os: ubuntu-latest, node-version: 7.x, webpack-version: ^1 }
+          - { os: ubuntu-latest, node-version: 8.x, webpack-version: ^1 }
+          - { os: ubuntu-latest, node-version: 9.x, webpack-version: ^1 }
 
     runs-on: ${{ matrix.os }}
 
