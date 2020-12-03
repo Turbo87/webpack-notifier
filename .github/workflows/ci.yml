@@ -40,6 +40,8 @@ jobs:
           - { os: ubuntu-latest, node-version: 9.x, webpack-version: ^1 }
 
     runs-on: ${{ matrix.os }}
+    env:
+      coverage-filename: ./coverage-final.${{ matrix.os }}_${{ matrix.node-version }}_${{ matrix.webpack-version }}.json
 
     steps:
       - uses: actions/checkout@v2
@@ -50,3 +52,49 @@ jobs:
       - name: Install webpack ${{ matrix.webpack-version }}
         run: npm i webpack@${{ matrix.webpack-version }}
       - run: npm run test:coverage
+      - name: Unify different platfrom paths in coverage file
+        shell: bash
+        run: |
+          node -e "
+            const cwdForReplace = process.cwd().replace(/\\\\/g, '\\\\\\\\');
+            const file = fs.readFileSync('./coverage/coverage-final.json', {encoding: 'utf8'});
+            const replaceBase = file.split(cwdForReplace).join('.cwd').replace(/\\\\\\\\/g, '/');
+            fs.writeFileSync(process.env['coverage-filename'], replaceBase);
+          "
+      - name: Save current coverage to artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverages
+          path: ${{ env.coverage-filename }}
+          retention-days: 1
+
+  coverage:
+    name: Coverage
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - name: Download all coverage files from previous job
+        uses: actions/download-artifact@v2
+        with:
+          name: coverages
+          path: ./coverages
+      - run: ls -laR ./coverages
+      - name: Normalize paths to absolute form
+        run: replace '.cwd' '${{ github.workspace }}' -- *
+        working-directory: ./coverages
+      - run: npx nyc merge ./coverages ./merged-output/coverage-final.json
+      - run: >-
+          npx nyc report
+          -x="[]"
+          -t ./merged-output
+          --report-dir ./merged-report
+          --reporter=html
+      - uses: actions/upload-artifact@v2
+        with:
+          name: coverages
+          path: |
+                  ./merged-output
+                  ./merged-report
+          retention-days: 1
