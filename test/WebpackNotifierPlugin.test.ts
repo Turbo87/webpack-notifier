@@ -6,16 +6,16 @@ expect.addSnapshotSerializer(contentImageSerializer);
 describe('WebpackNotifierPlugin', () => {
   describe('one compilation', () => {
     test.each([
-      [['successful'], {}],
-      [['error'], {}],
-      [['warning'], {}],
+      [['successful'], undefined],
+      [['error'], undefined],
+      [['warning'], undefined],
     ])('%j %j', testChangesFlow);
   });
   describe('verbosity level configuration', () => {
     describe('Default', () => {
       test.each([
-        [['successful', 'successful', 'successful'], {}],
-        [['error', 'error', 'successful'], {}],
+        [['successful', 'successful', 'successful'], undefined],
+        [['error', 'error', 'successful'], undefined],
       ])('%j %j', testChangesFlow);
     });
     describe('Exclude Warnings', () => {
