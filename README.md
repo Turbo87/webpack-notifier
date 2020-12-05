@@ -2,6 +2,7 @@
 
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Turbo87/webpack-notifier/CI)](https://github.com/Turbo87/webpack-notifier/actions?query=workflow:CI)
 [![npm Version](https://img.shields.io/npm/v/webpack-notifier.svg)](https://www.npmjs.com/package/webpack-notifier)
+[![Code Style](https://badgen.net/badge/code%20style/Airbnb/007ec6?icon=airbnb)](https://github.com/airbnb/javascript)
 
 This is a [webpack](http://webpack.github.io/) plugin that uses the
 [node-notifier](https://github.com/mikaelbr/node-notifier) package to
