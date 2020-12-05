@@ -87,7 +87,7 @@ jobs:
       - name: Normalize paths to absolute form
         run: replace '.cwd' '${{ github.workspace }}' -- *
         working-directory: ./coverages
-      - run: npx nyc merge ./coverages ./merged-output/coverage-final.json
+      - run: npx nyc merge ./coverages ./coverage/coverage-final.json
       - run: >-
           npx nyc report
           -x="[]"
@@ -96,13 +96,11 @@ jobs:
           --branches 78.2
           --functions 100
           --lines 92.4
-          -t ./merged-output
-          --report-dir ./merged-report
-          --reporter=html
+          -t ./coverage
+          --report-dir ./coverage
+          --reporter=html --reporter=lcov
       - uses: actions/upload-artifact@v2
         if: ${{ always() }}
         with:
           name: coverages
-          path: |
-                  ./merged-output
-                  ./merged-report
+          path: ./**/coverage/
