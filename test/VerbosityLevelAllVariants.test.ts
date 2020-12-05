@@ -1,4 +1,4 @@
-import {contentImageSerializer, reduceArraySerializer, testChangesFlow} from './utils';
+import {contentImageSerializer, reduceArraySerializer, testChangesFlow} from './helpers/utils';
 
 expect.addSnapshotSerializer(reduceArraySerializer);
 expect.addSnapshotSerializer(contentImageSerializer);

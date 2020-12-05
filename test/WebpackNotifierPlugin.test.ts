@@ -1,5 +1,6 @@
 import {join} from 'path';
-import {contentImageSerializer, reduceArraySerializer, testChangesFlow} from './utils';
+import {contentImageSerializer, reduceArraySerializer, testChangesFlow, TestArguments} from './helpers/utils';
+import CustomWarningPlugin from './helpers/CustomWarningPlugin';
 
 expect.addSnapshotSerializer(reduceArraySerializer);
 expect.addSnapshotSerializer(contentImageSerializer);
@@ -26,11 +27,12 @@ describe('WebpackNotifierPlugin', () => {
     }
   });
   describe('emoji message', () => {
-    test.each([
+    test.each<TestArguments>([
       [['successful'], {emoji: true}],
       [['error'], {emoji: true}],
       [['warning'], {emoji: true}],
-    ])('%j %j', testChangesFlow);
+      [['successful'], {emoji: true}, {plugins: [new CustomWarningPlugin()]}],
+    ])('%j %j %j', testChangesFlow);
   });
   describe('contentImage', () => {
     test.each([
@@ -66,5 +68,11 @@ describe('WebpackNotifierPlugin', () => {
         [['successful', 'successful'], {skipFirstNotification: true}],
       ])('%j %j', testChangesFlow);
     });
+  });
+
+  describe('custom warning', () => {// TODO maybe deprecated
+    test.each([
+      [['successful'], undefined, {plugins: [new CustomWarningPlugin()]}],
+    ])('%j %j', testChangesFlow);
   });
 });

@@ -8,7 +8,15 @@ Object {
 }
 `;
 
-exports[`WebpackNotifierPlugin emoji message ["error"] {"emoji":true}: after "error" build 1`] = `
+exports[`WebpackNotifierPlugin custom warning ["successful"] undefined: after "successful" build 1`] = `
+Object {
+  "contentImage": "__dirname/logo.png",
+  "message": "Warning: Custom Warning message",
+  "title": undefined,
+}
+`;
+
+exports[`WebpackNotifierPlugin emoji message ["error"] {"emoji":true} %j: after "error" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "emoji": true,
@@ -18,7 +26,7 @@ SyntaxError: Unexpected token (1:8)",
 }
 `;
 
-exports[`WebpackNotifierPlugin emoji message ["successful"] {"emoji":true}: after "successful" build 1`] = `
+exports[`WebpackNotifierPlugin emoji message ["successful"] {"emoji":true} %j: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "emoji": true,
@@ -27,7 +35,16 @@ Object {
 }
 `;
 
-exports[`WebpackNotifierPlugin emoji message ["warning"] {"emoji":true}: after "warning" build 1`] = `
+exports[`WebpackNotifierPlugin emoji message ["successful"] {"emoji":true} {"plugins":[{}]}: after "successful" build 1`] = `
+Object {
+  "contentImage": "__dirname/logo.png",
+  "emoji": true,
+  "message": "⚠️ Warning: Custom Warning message",
+  "title": undefined,
+}
+`;
+
+exports[`WebpackNotifierPlugin emoji message ["warning"] {"emoji":true} %j: after "warning" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "emoji": true,

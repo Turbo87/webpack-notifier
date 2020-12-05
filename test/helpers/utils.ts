@@ -5,15 +5,16 @@ import {createFsFromVolume, Volume} from 'memfs';
 import {notify} from 'node-notifier';
 import {satisfies} from 'semver';
 import fixtures from './fixtures';
-import WebpackNotifierPlugin from '../';
+import WebpackNotifierPlugin from '../../';
 
-function getCompiler() {
+function getCompiler(compilerOpts) {
   const config = {
     entry: '/entry.js',
     output: {
       path: '/',
       filename: 'bundle.js'
-    }
+    },
+    ...compilerOpts
   };
   if (satisfies(webpackVersion, '>=4', {includePrerelease: true})) {
     config['mode'] = 'development';
@@ -81,7 +82,7 @@ export const contentImageSerializer = {
   serialize(val, config, indentation, depth, refs, printer) {
     var modifiedVal = {
       ...val,
-      contentImage: val.contentImage.replace(join(__dirname, '../'), '__dirname/')
+      contentImage: val.contentImage.replace(join(__dirname, '../../'), '__dirname/')
     }
     delete modifiedVal.icon;
     return printer(modifiedVal, config, indentation, depth, refs);
@@ -90,14 +91,16 @@ export const contentImageSerializer = {
 
 export type Sources = string[];
 export type PluginOptions = {} | undefined;
+export type CompilerOptions = {};
+export type TestArguments = [Sources, PluginOptions, CompilerOptions?];
 
 // intermediate, so that the jest does not pass done-callback, in case of last optional argument
-export function testChangesFlow(...args: [Sources, PluginOptions])  {
+export function testChangesFlow(...args: TestArguments)  {
   return runTest(...args);
 };
 
-async function runTest(sources, opts)  {
-  const compiler = getCompiler();
+async function runTest(sources, opts, compilerOpts = {})  {
+  const compiler = getCompiler(compilerOpts);
   const {fs, vol} = prepareFs();
   const plugin = new WebpackNotifierPlugin(opts);
   plugin.apply(compiler);
