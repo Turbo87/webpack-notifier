@@ -26,6 +26,40 @@ require.extensions is not supported by webpack. Use a loader instead.",
 }
 `;
 
+exports[`WebpackNotifierPlugin title ["error"] {}: after "error" build 1`] = `
+Object {
+  "contentImage": "__dirname/logo.png",
+  "message": "Error: /entry.js
+SyntaxError: Unexpected token (1:8)",
+  "title": "build error ❌",
+}
+`;
+
+exports[`WebpackNotifierPlugin title ["successful"] {"title":"Webpack"}: after "successful" build 1`] = `
+Object {
+  "contentImage": "__dirname/logo.png",
+  "message": "Build successful",
+  "title": "Webpack",
+}
+`;
+
+exports[`WebpackNotifierPlugin title ["successful"] {}: after "successful" build 1`] = `
+Object {
+  "contentImage": "__dirname/logo.png",
+  "message": "Build successful",
+  "title": "build complete ✅",
+}
+`;
+
+exports[`WebpackNotifierPlugin title ["warning"] {}: after "warning" build 1`] = `
+Object {
+  "contentImage": "__dirname/logo.png",
+  "message": "Warning: /entry.js
+require.extensions is not supported by webpack. Use a loader instead.",
+  "title": "build warning ⚠️",
+}
+`;
+
 exports[`WebpackNotifierPlugin verbosity level configuration Always Notify ["successful","successful"] {"alwaysNotify":true}: after "successful" build 1`] = `
 Object {
   "alwaysNotify": true,

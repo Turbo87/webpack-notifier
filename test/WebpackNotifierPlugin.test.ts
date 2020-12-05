@@ -11,6 +11,19 @@ describe('WebpackNotifierPlugin', () => {
       [['warning'], undefined],
     ])('%j %j', testChangesFlow);
   });
+  describe('title', () => {
+    test.each([
+      [['successful'], {title: 'Webpack'}],
+      [['successful'], {title}],
+      [['error'], {title}],
+      [['warning'], {title}],
+    ])('%j %j', testChangesFlow);
+    function title({msg}) {
+      if (msg.startsWith('Error')) return 'build error ❌';
+      if (msg.startsWith('Warning')) return 'build warning ⚠️';
+      return 'build complete ✅';
+    }
+  });
   describe('verbosity level configuration', () => {
     describe('Default', () => {
       test.each([
