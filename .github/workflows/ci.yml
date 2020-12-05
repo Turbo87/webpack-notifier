@@ -104,3 +104,7 @@ jobs:
         with:
           name: coverages
           path: ./**/coverage/
+      - uses: coverallsapp/github-action@v1.1.2
+        if: ${{ always() }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
