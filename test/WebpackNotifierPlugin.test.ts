@@ -1,3 +1,4 @@
+import {join} from 'path';
 import {contentImageSerializer, reduceArraySerializer, testChangesFlow} from './utils';
 
 expect.addSnapshotSerializer(reduceArraySerializer);
@@ -30,6 +31,13 @@ describe('WebpackNotifierPlugin', () => {
       [['error'], {emoji: true}],
       [['warning'], {emoji: true}],
     ])('%j %j', testChangesFlow);
+  });
+  describe('contentImage', () => {
+    test.each([
+      [['successful'], {
+        contentImage: join(__dirname, '../another-logo.png')
+      }],
+    ])('%j {contentImage: "../another-logo.png"}', testChangesFlow);
   });
   describe('verbosity level configuration', () => {
     describe('Default', () => {

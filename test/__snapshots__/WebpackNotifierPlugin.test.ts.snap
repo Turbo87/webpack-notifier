@@ -1,5 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`WebpackNotifierPlugin contentImage ["successful"] {contentImage: "../another-logo.png"}: after "successful" build 1`] = `
+Object {
+  "contentImage": "__dirname/another-logo.png",
+  "message": "Build successful",
+  "title": undefined,
+}
+`;
+
 exports[`WebpackNotifierPlugin emoji message ["error"] {"emoji":true}: after "error" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
