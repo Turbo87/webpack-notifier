@@ -53,6 +53,7 @@ jobs:
         run: npm i webpack@${{ matrix.webpack-version }}
       - run: npm run test:coverage
       - name: Unify different platfrom paths in coverage file
+        if: ${{ always() }}
         shell: bash
         run: |
           node -e "
@@ -62,6 +63,7 @@ jobs:
             fs.writeFileSync(process.env['coverage-filename'], replaceBase);
           "
       - name: Save current coverage to artifacts
+        if: ${{ always() }}
         uses: actions/upload-artifact@v2
         with:
           name: coverages
@@ -71,6 +73,7 @@ jobs:
   coverage:
     name: Coverage
     needs: test
+    if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -92,6 +95,7 @@ jobs:
           --report-dir ./merged-report
           --reporter=html
       - uses: actions/upload-artifact@v2
+        if: ${{ always() }}
         with:
           name: coverages
           path: |
