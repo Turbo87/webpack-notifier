@@ -90,12 +90,11 @@ jobs:
       - run: npx nyc merge ./coverages ./coverage/coverage-final.json
       - run: >-
           npx nyc report
-          -x="[]"
           --check-coverage true
-          --statements 91.6
-          --branches 78.2
+          --statements 88.1
+          --branches 84.6
           --functions 100
-          --lines 92.4
+          --lines 89.6
           -t ./coverage
           --report-dir ./coverage
           --reporter=html --reporter=lcov
