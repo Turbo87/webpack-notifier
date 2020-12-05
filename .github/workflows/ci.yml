@@ -33,7 +33,7 @@ jobs:
           # different platforms
           - {os: windows-latest, node-version: 10.x, webpack-version: latest}
           - {os: macos-latest, node-version: 10.x, webpack-version: latest}
-          # TODO different Node.js
+          # different Node.js
           - { os: ubuntu-latest, node-version: 6.x, webpack-version: ^1 }
           - { os: ubuntu-latest, node-version: 7.x, webpack-version: ^1 }
           - { os: ubuntu-latest, node-version: 8.x, webpack-version: ^1 }
