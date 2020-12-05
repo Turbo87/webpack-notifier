@@ -24,6 +24,13 @@ describe('WebpackNotifierPlugin', () => {
       return 'build complete ✅';
     }
   });
+  describe('emoji message', () => {
+    test.each([
+      [['successful'], {emoji: true}],
+      [['error'], {emoji: true}],
+      [['warning'], {emoji: true}],
+    ])('%j %j', testChangesFlow);
+  });
   describe('verbosity level configuration', () => {
     describe('Default', () => {
       test.each([

@@ -1,5 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`WebpackNotifierPlugin emoji message ["error"] {"emoji":true}: after "error" build 1`] = `
+Object {
+  "contentImage": "__dirname/logo.png",
+  "emoji": true,
+  "message": "❌ Error: /entry.js
+SyntaxError: Unexpected token (1:8)",
+  "title": undefined,
+}
+`;
+
+exports[`WebpackNotifierPlugin emoji message ["successful"] {"emoji":true}: after "successful" build 1`] = `
+Object {
+  "contentImage": "__dirname/logo.png",
+  "emoji": true,
+  "message": "✅ Build successful",
+  "title": undefined,
+}
+`;
+
+exports[`WebpackNotifierPlugin emoji message ["warning"] {"emoji":true}: after "warning" build 1`] = `
+Object {
+  "contentImage": "__dirname/logo.png",
+  "emoji": true,
+  "message": "⚠️ Warning: /entry.js
+require.extensions is not supported by webpack. Use a loader instead.",
+  "title": undefined,
+}
+`;
+
 exports[`WebpackNotifierPlugin one compilation ["error"] undefined: after "error" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
