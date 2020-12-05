@@ -1,4 +1,8 @@
 module.exports = {
+  parserOptions: {
+    ecmaVersion: 2015,
+    sourceType: 'module'
+  },
   root: true,
   env: {
     node: true
@@ -8,9 +12,6 @@ module.exports = {
     'eslint-config-airbnb-base/legacy'
   ],
   rules: {
-    strict: 0,
-    'no-multi-assign': 0,
-    'no-plusplus': 0,
     'vars-on-top': 0,
     'consistent-return': 0
   }

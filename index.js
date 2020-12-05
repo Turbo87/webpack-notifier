@@ -6,11 +6,12 @@ var notifier = require('node-notifier');
 
 var DEFAULT_LOGO = path.join(__dirname, 'logo.png');
 
-var WebpackNotifierPlugin = module.exports = function (options) {
+function WebpackNotifierPlugin(options) {
   this.options = options || {};
   this.lastBuildSucceeded = false;
   this.isFirstBuild = true;
-};
+}
+module.exports = WebpackNotifierPlugin;
 
 WebpackNotifierPlugin.prototype.compileMessage = function (stats) {
   function findFirstDFS(compilation, key) {
@@ -20,7 +21,7 @@ WebpackNotifierPlugin.prototype.compileMessage = function (stats) {
     }
 
     var children = compilation.children;
-    for (var i = 0; i < children.length; ++i) {
+    for (var i = 0; i < children.length; i += 1) {
       match = findFirstDFS(children[i], key);
       if (match) {
         return match;
