@@ -106,4 +106,3 @@ jobs:
           path: |
                   ./merged-output
                   ./merged-report
-          retention-days: 1
