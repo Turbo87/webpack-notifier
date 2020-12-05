@@ -88,7 +88,15 @@ export const contentImageSerializer = {
   },
 };
 
-export async function testChangesFlow(sources, opts)  {
+export type Sources = string[];
+export type PluginOptions = {} | undefined;
+
+// intermediate, so that the jest does not pass done-callback, in case of last optional argument
+export function testChangesFlow(...args: [Sources, PluginOptions])  {
+  return runTest(...args);
+};
+
+async function runTest(sources, opts)  {
   const compiler = getCompiler();
   const {fs, vol} = prepareFs();
   const plugin = new WebpackNotifierPlugin(opts);
@@ -101,4 +109,4 @@ export async function testChangesFlow(sources, opts)  {
     await compile(compiler);
     expect(notify.mock.calls).toMatchSnapshot(`after "${name}" build`);
   }
-};
+}
