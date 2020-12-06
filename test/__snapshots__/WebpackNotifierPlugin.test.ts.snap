@@ -24,10 +24,36 @@ Object {
 }
 `;
 
+exports[`WebpackNotifierPlugin contentImage ["error"] {contentImage: {success: "../successImage.png"}, error: "../errorImage.png"}, warning: "../warningImage.png"}}: after "error" build 1`] = `
+Object {
+  "contentImage": "__dirname/errorsImage.png",
+  "message": "Error: /entry.js
+SyntaxError: Unexpected token (1:8)",
+  "title": "Webpack",
+}
+`;
+
 exports[`WebpackNotifierPlugin contentImage ["successful"] {contentImage: "../another-logo.png"}: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/another-logo.png",
   "message": "Build successful",
+  "title": "Webpack",
+}
+`;
+
+exports[`WebpackNotifierPlugin contentImage ["successful"] {contentImage: {success: "../successImage.png"}, error: "../errorImage.png"}, warning: "../warningImage.png"}}: after "successful" build 1`] = `
+Object {
+  "contentImage": "__dirname/successImage.png",
+  "message": "Build successful",
+  "title": "Webpack",
+}
+`;
+
+exports[`WebpackNotifierPlugin contentImage ["warning"] {contentImage: {success: "../successImage.png"}, error: "../errorImage.png"}, warning: "../warningImage.png"}}: after "warning" build 1`] = `
+Object {
+  "contentImage": "__dirname/warningsImage.png",
+  "message": "Warning: /entry.js
+require.extensions is not supported by webpack. Use a loader instead.",
   "title": "Webpack",
 }
 `;
