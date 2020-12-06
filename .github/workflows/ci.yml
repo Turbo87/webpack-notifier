@@ -19,3 +19,91 @@ jobs:
       - uses: actions/setup-node@v1
       - run: npm install
       - run: npm run lint
+
+  test:
+    name: Test - ${{ matrix.os }}/node@${{ matrix.node-version }}/webpack@${{ matrix.webpack-version }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest ]
+        node-version: [ 10.x ]
+        webpack-version: [ ^1, ^2, ^3, ^4, latest, next ]
+        include:
+          # different platforms
+          - {os: windows-latest, node-version: 10.x, webpack-version: latest}
+          - {os: macos-latest, node-version: 10.x, webpack-version: latest}
+          # different Node.js
+          - { os: ubuntu-latest, node-version: 6.x, webpack-version: ^1 }
+          - { os: ubuntu-latest, node-version: 7.x, webpack-version: ^1 }
+          - { os: ubuntu-latest, node-version: 8.x, webpack-version: ^1 }
+          - { os: ubuntu-latest, node-version: 9.x, webpack-version: ^1 }
+
+    runs-on: ${{ matrix.os }}
+    env:
+      coverage-filename: ./coverage-final.${{ matrix.os }}_${{ matrix.node-version }}_${{ matrix.webpack-version }}.json
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install
+      - name: Install webpack ${{ matrix.webpack-version }}
+        run: npm i webpack@${{ matrix.webpack-version }}
+      - run: npm run test:coverage
+      - name: Unify different platfrom paths in coverage file
+        if: ${{ always() }}
+        shell: bash
+        run: |
+          node -e "
+            const cwdForReplace = process.cwd().replace(/\\\\/g, '\\\\\\\\');
+            const file = fs.readFileSync('./coverage/coverage-final.json', {encoding: 'utf8'});
+            const replaceBase = file.split(cwdForReplace).join('.cwd').replace(/\\\\\\\\/g, '/');
+            fs.writeFileSync(process.env['coverage-filename'], replaceBase);
+          "
+      - name: Save current coverage to artifacts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverages
+          path: ${{ env.coverage-filename }}
+          retention-days: 1
+
+  coverage:
+    name: Coverage
+    needs: test
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - name: Download all coverage files from previous job
+        uses: actions/download-artifact@v2
+        with:
+          name: coverages
+          path: ./coverages
+      - run: ls -laR ./coverages
+      - name: Normalize paths to absolute form
+        run: replace '.cwd' '${{ github.workspace }}' -- *
+        working-directory: ./coverages
+      - run: npx nyc merge ./coverages ./coverage/coverage-final.json
+      - run: >-
+          npx nyc report
+          --check-coverage true
+          --statements 100
+          --branches 98.2
+          --functions 100
+          --lines 100
+          -t ./coverage
+          --report-dir ./coverage
+          --reporter=html --reporter=lcov
+      - uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: coverages
+          path: ./**/coverage/
+      - uses: coverallsapp/github-action@v1.1.2
+        if: ${{ always() }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}

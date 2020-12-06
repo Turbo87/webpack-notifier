@@ -9,7 +9,9 @@
   ],
   "scripts": {
     "prepublishOnly": "npm run lint",
-    "lint": "eslint index.js"
+    "lint": "eslint index.js",
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   },
   "husky": {
     "hooks": {
@@ -31,6 +33,7 @@
   "author": "Tobias Bieniek <tobias.bieniek@gmx.de>",
   "license": "ISC",
   "dependencies": {
+    "@types/jest": "^26.0.15",
     "node-notifier": "^6.0.0",
     "object-assign": "^4.1.0",
     "strip-ansi": "^3.0.1"
@@ -38,6 +41,12 @@
   "devDependencies": {
     "eslint": "^7.14.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "husky": "^4.3.0"
+    "husky": "^4.3.0",
+    "jest": "^24.9.0",
+    "memfs": "^3.2.0",
+    "semver": "^7.3.2",
+    "ts-jest": "^24.3.0",
+    "typescript": "^3.9.7",
+    "webpack": "^1.15.0"
   }
 }
