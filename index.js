@@ -32,7 +32,7 @@ WebpackNotifierPlugin.prototype.compileEndOptions = function (stats) {
     this.isFirstBuild = false;
 
     if (this.options.skipFirstNotification) {
-      return;
+      return {};
     }
   }
 
@@ -47,6 +47,10 @@ WebpackNotifierPlugin.prototype.compileEndOptions = function (stats) {
     successImage = imageFromOptions.success;
     warningsImage = imageFromOptions.warning;
     errorsImage = imageFromOptions.error;
+  } else {
+    successImage = imageFromOptions;
+    warningsImage = imageFromOptions;
+    errorsImage = imageFromOptions;
   }
 
   var hasEmoji = this.options.emoji;
@@ -58,7 +62,7 @@ WebpackNotifierPlugin.prototype.compileEndOptions = function (stats) {
     contentImage = errorsImage;
     status = 'error';
   } else if (this.options.onlyOnError) {
-    return;
+    return {};
   } else if (this.hasWarnings(stats) && !this.options.excludeWarnings) {
     error = findFirstDFS(stats.compilation, 'warnings');
     contentImage = warningsImage;
@@ -111,7 +115,11 @@ WebpackNotifierPlugin.prototype.compilationDone = function (stats) {
   if (message) {
     var title = this.options.title ? this.options.title : 'Webpack';
     if (typeof title === 'function') {
-      title = title({ message: message, status: status });
+      title = title({
+        msg: message, // compatibility with v1.11.0
+        message: message,
+        status: status
+      });
     }
 
     var icon = (os.platform() === 'win32' || os.platform() === 'linux')

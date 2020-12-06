@@ -16,10 +16,10 @@ describe('WebpackNotifierPlugin', () => {
   });
   describe('title', () => {
     test.each([
-      [['successful'], {title: 'Webpack'}],
-      [['successful'], {title}],
-      [['error'], {title}],
-      [['warning'], {title}],
+      [['successful'], {title: 'Webpack', titleIsTested: true}],
+      [['successful'], {title, titleIsTested: true}],
+      [['error'], {title, titleIsTested: true}],
+      [['warning'], {title, titleIsTested: true}],
     ])('%j %j', testChangesFlow);
     function title({msg}) {
       if (msg.startsWith('Error')) return 'build error ❌';
