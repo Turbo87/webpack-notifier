@@ -1,5 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`WebpackNotifierPlugin child compilation errors ["successful"] undefined {"plugins":[{"level":"Error","levelCollectionKey":"errors"}]}: after "successful" build 1`] = `
+Object {
+  "contentImage": "__dirname/logo.png",
+  "message": "Warning: Child Compilation Error",
+  "title": undefined,
+}
+`;
+
+exports[`WebpackNotifierPlugin child compilation errors ["successful"] undefined {"plugins":[{"level":"Warning","levelCollectionKey":"warnings"}]}: after "successful" build 1`] = `
+Object {
+  "contentImage": "__dirname/logo.png",
+  "message": "Warning: Child Compilation Warning",
+  "title": undefined,
+}
+`;
+
+exports[`WebpackNotifierPlugin child compilation errors ["successful"] undefined {"plugins":[{"level":false},{"level":"Warning","levelCollectionKey":"warnings"}]}: after "successful" build 1`] = `
+Object {
+  "contentImage": "__dirname/logo.png",
+  "message": "Warning: Child Compilation Warning",
+  "title": undefined,
+}
+`;
+
 exports[`WebpackNotifierPlugin contentImage ["successful"] {contentImage: "../another-logo.png"}: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/another-logo.png",
