@@ -39,11 +39,11 @@ WebpackNotifierPlugin.prototype.compileMessage = function (stats) {
 
   var hasEmoji = this.options.emoji;
   var error;
-  if (stats.hasErrors()) {
+  if (this.hasErrors(stats)) {
     error = findFirstDFS(stats.compilation, 'errors');
   } else if (this.options.onlyOnError) {
     return;
-  } else if (stats.hasWarnings() && !this.options.excludeWarnings) {
+  } else if (this.hasWarnings(stats) && !this.options.excludeWarnings) {
     error = findFirstDFS(stats.compilation, 'warnings');
   } else if (!this.lastBuildSucceeded || this.options.alwaysNotify) {
     this.lastBuildSucceeded = true;
@@ -68,6 +68,16 @@ WebpackNotifierPlugin.prototype.compileMessage = function (stats) {
   }
 
   return stripANSI(message);
+};
+
+WebpackNotifierPlugin.prototype.hasErrors = function (stats) {
+  return stats.hasErrors()
+      || stats.compilation.children.some(child => child.getStats().hasErrors());
+};
+
+WebpackNotifierPlugin.prototype.hasWarnings = function (stats) {
+  return stats.hasWarnings()
+      || stats.compilation.children.some(child => child.getStats().hasWarnings());
 };
 
 WebpackNotifierPlugin.prototype.compilationDone = function (stats) {

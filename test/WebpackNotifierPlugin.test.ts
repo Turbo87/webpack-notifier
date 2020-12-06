@@ -1,6 +1,4 @@
 import {join} from 'path';
-import {version as webpackVersion} from 'webpack/package.json';
-import {satisfies} from 'semver';
 import {contentImageSerializer, reduceArraySerializer, testChangesFlow, TestArguments} from './helpers/utils';
 import CustomWarningPlugin from './helpers/CustomWarningPlugin';
 import ChildCompilationPlugin from './helpers/ChildCompilationPlugin';
@@ -79,10 +77,6 @@ describe('WebpackNotifierPlugin', () => {
     ])('%j %j', testChangesFlow);
   });
   describe('child compilation errors', () => {
-    if (!satisfies(webpackVersion, '>=3.11.0')) {
-      // TODO need support child compilation errors in webpack@<3.11.0
-      return;
-    }
     test.each([
       [['successful'], undefined, {plugins: [new ChildCompilationPlugin('Warning')]}],
       [['successful'], undefined, {plugins: [new ChildCompilationPlugin('Error')]}],
