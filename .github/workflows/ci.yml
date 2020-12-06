@@ -91,10 +91,10 @@ jobs:
       - run: >-
           npx nyc report
           --check-coverage true
-          --statements 89.8
-          --branches 92.3
+          --statements 100
+          --branches 98.2
           --functions 100
-          --lines 91.3
+          --lines 100
           -t ./coverage
           --report-dir ./coverage
           --reporter=html --reporter=lcov
