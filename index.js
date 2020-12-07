@@ -126,13 +126,16 @@ WebpackNotifierPlugin.prototype.compilationDone = function (stats) {
       ? contentImage
       : undefined;
 
-    notifier.notify({
-      ...this.options,
-      title,
-      message,
-      contentImage,
-      icon
-    });
+    notifier.notify(Object.assign(
+      {},
+      this.options,
+      {
+        title,
+        message,
+        contentImage,
+        icon
+      }
+    ));
   }
 };
 
