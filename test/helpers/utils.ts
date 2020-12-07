@@ -90,11 +90,9 @@ export const contentImageSerializer = {
 };
 export const changedOptionsSerializer = {
   test(val) {
-    return typeof val === 'object' && val.hasOwnProperty('location');
+    return false;
   },
   serialize(val, config, indentation, depth, refs, printer) {
-    delete val.location;
-    delete val.wait;
     return printer(val, config, indentation, depth, refs);
   },
 };
