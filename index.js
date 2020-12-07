@@ -1,7 +1,7 @@
 var stripANSI = require('strip-ansi');
 var path = require('path');
 var os = require('os');
-var spawn = require('child_process').spawn;
+var spawn = require('cross-spawn');
 var notifier = require('node-notifier');
 var template = require('es6-template-strings');
 

@@ -33,6 +33,7 @@
   "author": "Tobias Bieniek <tobias.bieniek@gmx.de>",
   "license": "ISC",
   "dependencies": {
+    "cross-spawn": "^7.0.3",
     "es6-template-strings": "^2.0.0",
     "node-notifier": "mikaelbr/node-notifier#e55bd8fa64",
     "strip-ansi": "^6.0.0"
