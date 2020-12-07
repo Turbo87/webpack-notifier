@@ -1,9 +1,12 @@
 # webpack-notifier
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Turbo87/webpack-notifier/CI)](https://github.com/Turbo87/webpack-notifier/actions?query=workflow:CI)
 [![npm Version](https://img.shields.io/npm/v/webpack-notifier.svg)](https://www.npmjs.com/package/webpack-notifier)
-[![Coverage Status](https://coveralls.io/repos/github/Turbo87/webpack-notifier/badge.svg?branch=master)](https://coveralls.io/github/Turbo87/webpack-notifier?branch=master)
+[![GitHub Workflow Status](https://github.com/Turbo87/webpack-notifier/workflows/CI/badge.svg)](https://github.com/Turbo87/webpack-notifier/actions?query=workflow:CI)
+[![Coverage Status](https://coveralls.io/repos/github/Turbo87/webpack-notifier/badge.svg)](https://coveralls.io/github/Turbo87/webpack-notifier?branch=master)
 [![Code Style](https://badgen.net/badge/code%20style/Airbnb/007ec6?icon=airbnb)](https://github.com/airbnb/javascript)
+
+[![npm](https://img.shields.io/npm/dm/webpack-notifier)](https://www.npmjs.com/package/webpack-notifier)
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/webpack-notifier)
 
 This is a [webpack](http://webpack.github.io/) plugin that uses the
 [node-notifier](https://github.com/mikaelbr/node-notifier) package to
