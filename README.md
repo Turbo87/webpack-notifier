@@ -3,8 +3,7 @@
 [![npm Version](https://img.shields.io/npm/v/webpack-notifier.svg)](https://www.npmjs.com/package/webpack-notifier)
 [![GitHub Workflow Status](https://github.com/Turbo87/webpack-notifier/workflows/CI/badge.svg)](https://github.com/Turbo87/webpack-notifier/actions?query=workflow:CI)
 [![Coverage Status](https://coveralls.io/repos/github/Turbo87/webpack-notifier/badge.svg)](https://coveralls.io/github/Turbo87/webpack-notifier?branch=master)
-[![Code Style](https://badgen.net/badge/code%20style/Airbnb/007ec6?icon=airbnb)](https://github.com/airbnb/javascript)
-
+[![Code Style](https://badgen.net/badge/code%20style/Airbnb/007ec6?icon=airbnb)](https://github.com/airbnb/javascript)  
 [![npm](https://img.shields.io/npm/dm/webpack-notifier)](https://www.npmjs.com/package/webpack-notifier)
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/webpack-notifier)
 
