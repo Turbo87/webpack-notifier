@@ -26,6 +26,17 @@ describe('WebpackNotifierPlugin', () => {
       if (msg.startsWith('Warning')) return 'build warning ⚠️';
       return 'build complete ✅';
     }
+    describe('new title function API', () => {
+      test.each([
+        [['successful'], {title: 'Webpack'}],
+        [['successful'], {title}],
+        [['error'], {title}],
+        [['warning'], {title}],
+      ])('%j %j', testChangesFlow);
+      function title(params) {
+        return `Build status is ${params.status} with message ${params.message}`;
+      }
+    });
   });
   describe('emoji message', () => {
     test.each<TestArguments>([

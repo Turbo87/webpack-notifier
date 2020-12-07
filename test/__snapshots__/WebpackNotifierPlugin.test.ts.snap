@@ -164,6 +164,42 @@ require.extensions is not supported by webpack. Use a loader instead.",
 }
 `;
 
+exports[`WebpackNotifierPlugin title new title function API ["error"] {}: after "error" build 1`] = `
+Object {
+  "contentImage": "__dirname/logo.png",
+  "message": "Error: /entry.js
+SyntaxError: Unexpected token (1:8)",
+  "title": "Build status is error with message Error: /entry.js
+SyntaxError: Unexpected token (1:8)",
+}
+`;
+
+exports[`WebpackNotifierPlugin title new title function API ["successful"] {"title":"Webpack"}: after "successful" build 1`] = `
+Object {
+  "contentImage": "__dirname/logo.png",
+  "message": "Build successful",
+  "title": "Webpack",
+}
+`;
+
+exports[`WebpackNotifierPlugin title new title function API ["successful"] {}: after "successful" build 1`] = `
+Object {
+  "contentImage": "__dirname/logo.png",
+  "message": "Build successful",
+  "title": "Build status is success with message Build successful",
+}
+`;
+
+exports[`WebpackNotifierPlugin title new title function API ["warning"] {}: after "warning" build 1`] = `
+Object {
+  "contentImage": "__dirname/logo.png",
+  "message": "Warning: /entry.js
+require.extensions is not supported by webpack. Use a loader instead.",
+  "title": "Build status is warning with message Warning: /entry.js
+require.extensions is not supported by webpack. Use a loader instead.",
+}
+`;
+
 exports[`WebpackNotifierPlugin verbosity level configuration Always Notify ["successful","successful"] {"alwaysNotify":true}: after "successful" build 1`] = `
 Object {
   "alwaysNotify": true,
