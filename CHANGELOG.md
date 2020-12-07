@@ -6,6 +6,11 @@ v1.12.0
 -------------------------------------------------------------------------------
   
 - fix(dependencies): moved the erroneous dependency to devDependencies
+- Add support set of images for different build status
+- fix default title, when `title` option skipped
+- Update node-notifier to v8
+
+Minimum supported Node version is 6+
 
 
 v1.11.1

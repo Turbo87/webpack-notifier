@@ -4,7 +4,7 @@ exports[`WebpackNotifierPlugin child compilation errors ["successful"] undefined
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Warning: Child Compilation Error",
-  "title": undefined,
+  "title": "Webpack",
 }
 `;
 
@@ -12,7 +12,7 @@ exports[`WebpackNotifierPlugin child compilation errors ["successful"] undefined
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Warning: Child Compilation Warning",
-  "title": undefined,
+  "title": "Webpack",
 }
 `;
 
@@ -20,7 +20,16 @@ exports[`WebpackNotifierPlugin child compilation errors ["successful"] undefined
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Warning: Child Compilation Warning",
-  "title": undefined,
+  "title": "Webpack",
+}
+`;
+
+exports[`WebpackNotifierPlugin contentImage ["error"] {contentImage: {success: "../successImage.png"}, error: "../errorImage.png"}, warning: "../warningImage.png"}}: after "error" build 1`] = `
+Object {
+  "contentImage": "__dirname/errorsImage.png",
+  "message": "Error: /entry.js
+SyntaxError: Unexpected token (1:8)",
+  "title": "Webpack",
 }
 `;
 
@@ -28,7 +37,24 @@ exports[`WebpackNotifierPlugin contentImage ["successful"] {contentImage: "../an
 Object {
   "contentImage": "__dirname/another-logo.png",
   "message": "Build successful",
-  "title": undefined,
+  "title": "Webpack",
+}
+`;
+
+exports[`WebpackNotifierPlugin contentImage ["successful"] {contentImage: {success: "../successImage.png"}, error: "../errorImage.png"}, warning: "../warningImage.png"}}: after "successful" build 1`] = `
+Object {
+  "contentImage": "__dirname/successImage.png",
+  "message": "Build successful",
+  "title": "Webpack",
+}
+`;
+
+exports[`WebpackNotifierPlugin contentImage ["warning"] {contentImage: {success: "../successImage.png"}, error: "../errorImage.png"}, warning: "../warningImage.png"}}: after "warning" build 1`] = `
+Object {
+  "contentImage": "__dirname/warningsImage.png",
+  "message": "Warning: /entry.js
+require.extensions is not supported by webpack. Use a loader instead.",
+  "title": "Webpack",
 }
 `;
 
@@ -36,7 +62,7 @@ exports[`WebpackNotifierPlugin custom warning ["successful"] undefined: after "s
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Warning: Custom Warning message",
-  "title": undefined,
+  "title": "Webpack",
 }
 `;
 
@@ -46,7 +72,7 @@ Object {
   "emoji": true,
   "message": "❌ Error: /entry.js
 SyntaxError: Unexpected token (1:8)",
-  "title": undefined,
+  "title": "Webpack",
 }
 `;
 
@@ -55,7 +81,7 @@ Object {
   "contentImage": "__dirname/logo.png",
   "emoji": true,
   "message": "✅ Build successful",
-  "title": undefined,
+  "title": "Webpack",
 }
 `;
 
@@ -64,7 +90,7 @@ Object {
   "contentImage": "__dirname/logo.png",
   "emoji": true,
   "message": "⚠️ Warning: Custom Warning message",
-  "title": undefined,
+  "title": "Webpack",
 }
 `;
 
@@ -74,7 +100,7 @@ Object {
   "emoji": true,
   "message": "⚠️ Warning: /entry.js
 require.extensions is not supported by webpack. Use a loader instead.",
-  "title": undefined,
+  "title": "Webpack",
 }
 `;
 
@@ -83,7 +109,7 @@ Object {
   "contentImage": "__dirname/logo.png",
   "message": "Error: /entry.js
 SyntaxError: Unexpected token (1:8)",
-  "title": undefined,
+  "title": "Webpack",
 }
 `;
 
@@ -91,7 +117,7 @@ exports[`WebpackNotifierPlugin one compilation ["successful"] undefined: after "
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
-  "title": undefined,
+  "title": "Webpack",
 }
 `;
 
@@ -100,7 +126,7 @@ Object {
   "contentImage": "__dirname/logo.png",
   "message": "Warning: /entry.js
 require.extensions is not supported by webpack. Use a loader instead.",
-  "title": undefined,
+  "title": "Webpack",
 }
 `;
 
@@ -138,12 +164,48 @@ require.extensions is not supported by webpack. Use a loader instead.",
 }
 `;
 
+exports[`WebpackNotifierPlugin title new title function API ["error"] {}: after "error" build 1`] = `
+Object {
+  "contentImage": "__dirname/logo.png",
+  "message": "Error: /entry.js
+SyntaxError: Unexpected token (1:8)",
+  "title": "Build status is error with message Error: /entry.js
+SyntaxError: Unexpected token (1:8)",
+}
+`;
+
+exports[`WebpackNotifierPlugin title new title function API ["successful"] {"title":"Webpack"}: after "successful" build 1`] = `
+Object {
+  "contentImage": "__dirname/logo.png",
+  "message": "Build successful",
+  "title": "Webpack",
+}
+`;
+
+exports[`WebpackNotifierPlugin title new title function API ["successful"] {}: after "successful" build 1`] = `
+Object {
+  "contentImage": "__dirname/logo.png",
+  "message": "Build successful",
+  "title": "Build status is success with message Build successful",
+}
+`;
+
+exports[`WebpackNotifierPlugin title new title function API ["warning"] {}: after "warning" build 1`] = `
+Object {
+  "contentImage": "__dirname/logo.png",
+  "message": "Warning: /entry.js
+require.extensions is not supported by webpack. Use a loader instead.",
+  "title": "Build status is warning with message Warning: /entry.js
+require.extensions is not supported by webpack. Use a loader instead.",
+}
+`;
+
 exports[`WebpackNotifierPlugin verbosity level configuration Always Notify ["successful","successful"] {"alwaysNotify":true}: after "successful" build 1`] = `
 Object {
   "alwaysNotify": true,
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
-  "title": undefined,
+  "title": "Webpack",
 }
 `;
 
@@ -152,7 +214,7 @@ Object {
   "alwaysNotify": true,
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
-  "title": undefined,
+  "title": "Webpack",
 }
 `;
 
@@ -161,7 +223,7 @@ Object {
   "contentImage": "__dirname/logo.png",
   "message": "Error: /entry.js
 SyntaxError: Unexpected token (1:8)",
-  "title": undefined,
+  "title": "Webpack",
 }
 `;
 
@@ -170,7 +232,7 @@ Object {
   "contentImage": "__dirname/logo.png",
   "message": "Error: /entry.js
 SyntaxError: Unexpected token (1:8)",
-  "title": undefined,
+  "title": "Webpack",
 }
 `;
 
@@ -178,7 +240,7 @@ exports[`WebpackNotifierPlugin verbosity level configuration Default ["error","e
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
-  "title": undefined,
+  "title": "Webpack",
 }
 `;
 
@@ -186,7 +248,7 @@ exports[`WebpackNotifierPlugin verbosity level configuration Default ["successfu
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
-  "title": undefined,
+  "title": "Webpack",
 }
 `;
 
@@ -199,7 +261,7 @@ Object {
   "contentImage": "__dirname/logo.png",
   "excludeWarnings": true,
   "message": "Build successful",
-  "title": undefined,
+  "title": "Webpack",
 }
 `;
 
@@ -209,7 +271,7 @@ Object {
   "message": "Error: /entry.js
 SyntaxError: Unexpected token (1:8)",
   "onlyOnError": true,
-  "title": undefined,
+  "title": "Webpack",
 }
 `;
 
@@ -224,6 +286,6 @@ Object {
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
   "skipFirstNotification": true,
-  "title": undefined,
+  "title": "Webpack",
 }
 `;

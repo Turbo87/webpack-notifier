@@ -26,6 +26,17 @@ describe('WebpackNotifierPlugin', () => {
       if (msg.startsWith('Warning')) return 'build warning ⚠️';
       return 'build complete ✅';
     }
+    describe('new title function API', () => {
+      test.each([
+        [['successful'], {title: 'Webpack'}],
+        [['successful'], {title}],
+        [['error'], {title}],
+        [['warning'], {title}],
+      ])('%j %j', testChangesFlow);
+      function title(params) {
+        return `Build status is ${params.status} with message ${params.message}`;
+      }
+    });
   });
   describe('emoji message', () => {
     test.each<TestArguments>([
@@ -36,11 +47,21 @@ describe('WebpackNotifierPlugin', () => {
     ])('%j %j %j', testChangesFlow);
   });
   describe('contentImage', () => {
+    const contentImage = {
+      success: join(__dirname, '../successImage.png'),
+      warning: join(__dirname, '../warningsImage.png'),
+      error: join(__dirname, '../errorsImage.png')
+    };
     test.each([
       [['successful'], {
         contentImage: join(__dirname, '../another-logo.png')
       }],
     ])('%j {contentImage: "../another-logo.png"}', testChangesFlow);
+    test.each([
+      [['successful'], {contentImage}],
+      [['error'], {contentImage}],
+      [['warning'], {contentImage}],
+    ])('%j {contentImage: {success: "../successImage.png"}, error: "../errorImage.png"}, warning: "../warningImage.png"}}', testChangesFlow);
   });
   describe('verbosity level configuration', () => {
     describe('Default', () => {
