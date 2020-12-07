@@ -11,26 +11,6 @@ function WebpackNotifierPlugin(options) {
   this.options = options || {};
   this.lastBuildSucceeded = false;
   this.isFirstBuild = true;
-
-  if (this.options.editor) {
-    var editor = this.options.editor;
-    editor.args = editor.args || [];
-
-    notifier.on('click', function (notifierObject, notifierOptions) {
-      if (!notifierOptions.location) {
-        return;
-      }
-
-      var command = template(editor.command, notifierOptions.location);
-      var args = editor.args.map(function (arg) {
-        return template(arg, notifierOptions.location);
-      });
-
-      if (command) {
-        spawn(command, args);
-      }
-    });
-  }
 }
 module.exports = WebpackNotifierPlugin;
 
@@ -142,6 +122,7 @@ WebpackNotifierPlugin.prototype.hasWarnings = function (stats) {
 };
 
 WebpackNotifierPlugin.prototype.compilationDone = function (stats) {
+  var { editor } = this.options;
   var { message, contentImage, status, location } = this.compileEndOptions(stats);
   if (message) {
     var title = this.options.title ? this.options.title : 'Webpack';
@@ -168,7 +149,24 @@ WebpackNotifierPlugin.prototype.compilationDone = function (stats) {
         wait: !!this.options.editor,
         location: location
       }
-    ));
+    ), function (error, response) {
+      console.log('webpack-notifier debug info', { // TODO - WIP debug info
+        notifier: notifier.Notification.name,
+        error,
+        response,
+        metadata: Array.from(arguments).slice(2)
+      });
+
+      if (editor && response === 'activate' && location) {
+        var command = template(editor.command, location);
+        var args = (editor.args || []).map(function (arg) {
+          return template(arg, location);
+        });
+        if (command) {
+          spawn(command, args);
+        }
+      }
+    });
   }
 };
 

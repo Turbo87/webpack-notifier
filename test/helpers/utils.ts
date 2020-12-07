@@ -65,7 +65,7 @@ export const reduceArraySerializer = {
     return Array.isArray(val) &&
       val.length === 1 &&
       Array.isArray(val[0]) &&
-      val[0].length === 1 &&
+      val[0].length === 2 &&
       typeof val[0][0] === 'object' &&
       val[0][0].hasOwnProperty('title');
   },
@@ -86,6 +86,16 @@ export const contentImageSerializer = {
     }
     delete modifiedVal.icon;
     return printer(modifiedVal, config, indentation, depth, refs);
+  },
+};
+export const skipNotifierCallback = {
+  test(val) {
+    return Array.isArray(val) &&
+      val.length === 2 &&
+      true;
+  },
+  serialize(val, config, indentation, depth, refs, printer) {
+    return printer(val.slice(0, 1), config, indentation, depth, refs);
   },
 };
 export const changedOptionsSerializer = {
