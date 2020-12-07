@@ -88,6 +88,16 @@ export const contentImageSerializer = {
     return printer(modifiedVal, config, indentation, depth, refs);
   },
 };
+export const changedOptionsSerializer = {
+  test(val) {
+    return typeof val === 'object' && val.hasOwnProperty('location');
+  },
+  serialize(val, config, indentation, depth, refs, printer) {
+    delete val.location;
+    delete val.wait;
+    return printer(val, config, indentation, depth, refs);
+  },
+};
 
 export type Sources = string[];
 export type PluginOptions = {} | undefined;
