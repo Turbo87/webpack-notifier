@@ -34,7 +34,7 @@
   "license": "ISC",
   "dependencies": {
     "es6-template-strings": "^2.0.0",
-    "node-notifier": "^8.0.0",
+    "node-notifier": "mikaelbr/node-notifier#e55bd8fa64",
     "strip-ansi": "^6.0.0"
   },
   "devDependencies": {
