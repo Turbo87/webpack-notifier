@@ -1,10 +1,19 @@
 import {join} from 'path';
-import {contentImageSerializer, reduceArraySerializer, testChangesFlow, TestArguments} from './helpers/utils';
+import {
+  contentImageSerializer,
+  reduceArraySerializer,
+  changedOptionsSerializer,
+  testChangesFlow,
+  TestArguments,
+  skipNotifierCallback
+} from './helpers/utils';
 import CustomWarningPlugin from './helpers/CustomWarningPlugin';
 import ChildCompilationPlugin from './helpers/ChildCompilationPlugin';
 
 expect.addSnapshotSerializer(reduceArraySerializer);
 expect.addSnapshotSerializer(contentImageSerializer);
+expect.addSnapshotSerializer(skipNotifierCallback);
+expect.addSnapshotSerializer(changedOptionsSerializer);
 
 describe('WebpackNotifierPlugin', () => {
   describe('one compilation', () => {

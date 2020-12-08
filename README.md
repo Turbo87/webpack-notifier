@@ -131,3 +131,13 @@ Do not notify on the first build.  This allows you to receive notifications on s
 ```js
 new WebpackNotifierPlugin({skipFirstNotification: true});
 ```
+
+### Editor
+
+Opens the file in your editor when the notification is clicked.
+
+Takes a command and a list or arguments interpreted as template strings. Available options are `file`, `line` and `column`. Note that lines and columns of errors are only set when using a preprocessor like babel.
+
+```js
+new WebpackNotifierPlugin({ editor: { command: 'atom', args: ['${file}:${line}'] } });
+```

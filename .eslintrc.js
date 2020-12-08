@@ -13,6 +13,10 @@ module.exports = {
   ],
   rules: {
     'vars-on-top': 0,
-    'consistent-return': 0
+    'consistent-return': 0,
+    'no-nested-ternary': 0,
+    'one-var': 0,
+    'one-var-declaration-per-line': 0,
+    'object-curly-newline': 0
   }
 };

@@ -1,7 +1,9 @@
 var stripANSI = require('strip-ansi');
 var path = require('path');
 var os = require('os');
+var spawn = require('cross-spawn');
 var notifier = require('node-notifier');
+var template = require('es6-template-strings');
 
 var DEFAULT_LOGO = path.join(__dirname, 'logo.png');
 
@@ -80,23 +82,32 @@ WebpackNotifierPlugin.prototype.compileEndOptions = function (stats) {
 
   this.lastBuildSucceeded = false;
 
-  var message = '';
-  if (error.module && error.module.rawRequest) {
-    message = error.module.rawRequest + '\n';
+  var rawRequest, resource, line, column;
+
+  if (error.module) {
+    rawRequest = error.module.rawRequest;
+    resource = error.module.resource;
   }
 
-  if (error.error) {
-    message = (hasEmoji ? '❌ ' : '') + 'Error: ' + message + error.error.toString();
-  } else if (error.warning) {
-    message = (hasEmoji ? '⚠️ ' : '') + 'Warning: ' + message + error.warning.toString();
-  } else if (error.message) {
-    message = (hasEmoji ? '⚠️ ' : '') + 'Warning: ' + message + error.message.toString();
+  var errorOrWarning = error.error || error.warning || error.message;
+  if (errorOrWarning && errorOrWarning.loc) {
+    line = errorOrWarning.loc.line;
+    column = errorOrWarning.loc.column;
   }
+
+  var message = (error.error ? (hasEmoji ? '❌ ' : '') + 'Error: ' : (error.warning || error.message) ? (hasEmoji ? '⚠️ ' : '') + 'Warning: ' : '')
+               + (rawRequest ? rawRequest + '\n' : '')
+               + (errorOrWarning ? errorOrWarning.toString() : '');
 
   return {
     message: stripANSI(message),
     contentImage: contentImage,
-    status: status
+    status: status,
+    location: {
+      file: resource,
+      line: line,
+      column: column
+    }
   };
 };
 
@@ -111,7 +122,8 @@ WebpackNotifierPlugin.prototype.hasWarnings = function (stats) {
 };
 
 WebpackNotifierPlugin.prototype.compilationDone = function (stats) {
-  var { message, contentImage, status } = this.compileEndOptions(stats);
+  var { editor } = this.options;
+  var { message, contentImage, status, location } = this.compileEndOptions(stats);
   if (message) {
     var title = this.options.title ? this.options.title : 'Webpack';
     if (typeof title === 'function') {
@@ -133,9 +145,28 @@ WebpackNotifierPlugin.prototype.compilationDone = function (stats) {
         title,
         message,
         contentImage,
-        icon
+        icon,
+        wait: !!this.options.editor,
+        location: location
       }
-    ));
+    ), function (error, response) {
+      console.log('webpack-notifier debug info', { // TODO - WIP debug info
+        notifier: notifier.Notification.name,
+        error,
+        response,
+        metadata: Array.from(arguments).slice(2)
+      });
+
+      if (editor && response === 'activate' && location) {
+        var command = template(editor.command, location);
+        var args = (editor.args || []).map(function (arg) {
+          return template(arg, location);
+        });
+        if (command) {
+          spawn(command, args);
+        }
+      }
+    });
   }
 };
 

@@ -7,6 +7,15 @@ module.exports = {
         filename: "bundle.js"
     },
     plugins: [
-        new WebpackNotifierPlugin(),
+        new WebpackNotifierPlugin({
+            editor: {
+                command: 'C:\\Program Files\\JetBrains\\WebStorm 2019.2.4\\bin\\webstorm.bat',
+                args: [
+                  '--line', '${line}',
+                  '--column', '${column}',
+                  '${file}',
+                ]
+            }
+        }),
     ]
 };

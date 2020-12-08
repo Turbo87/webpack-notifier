@@ -1,7 +1,15 @@
-import {contentImageSerializer, reduceArraySerializer, testChangesFlow} from './helpers/utils';
+import {
+  changedOptionsSerializer,
+  contentImageSerializer,
+  reduceArraySerializer,
+  skipNotifierCallback,
+  testChangesFlow
+} from './helpers/utils';
 
 expect.addSnapshotSerializer(reduceArraySerializer);
 expect.addSnapshotSerializer(contentImageSerializer);
+expect.addSnapshotSerializer(skipNotifierCallback);
+expect.addSnapshotSerializer(changedOptionsSerializer);
 
 describe('VerbosityLevelAllVariants', () => {
   describe.each([...generateOptions()])('%j', (opts) => {
