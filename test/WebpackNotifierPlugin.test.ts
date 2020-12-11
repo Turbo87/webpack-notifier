@@ -113,5 +113,10 @@ describe.each([
         [['successful'], undefined, {plugins: [new ChildCompilationPlugin(), new ChildCompilationPlugin('Warning')]}],
       ])('%j %j %j', testChangesFlow, 10e3);
     });
+    describe('passing node-notifier options directly', () => {
+      test.each([
+        [['successful'], {appID: 'com.squirrel.your.app'} as unknown as PartialTestArguments[1]], // TODO mark as deprecate at v2.x
+      ])('%j %j', testChangesFlow, 10e3);
+    });
   });
 });

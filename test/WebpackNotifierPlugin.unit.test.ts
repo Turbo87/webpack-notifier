@@ -43,6 +43,18 @@ function createErrorStats(errorMessage: string): FakeStats {
   };
 }
 
+function createSuccessStats(): FakeStats {
+  return {
+    hasErrors: () => false,
+    hasWarnings: () => false,
+    compilation: {
+      errors: [],
+      warnings: [],
+      children: [],
+    },
+  };
+}
+
 const LOREM_IPSUM_SENTENCE =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ';
 
@@ -112,5 +124,14 @@ describe('WebpackNotifierPlugin (unit, no webpack)', () => {
     expect(notifyOptions().title.length).toBe(1000);
     expect(notifyOptions().message.length).toBe(5000);
     expect(notifyOptions().message.includes('truncated')).toBe(false);
+  });
+
+  test('forwards node-notifier options from the plugin root to notify()', () => {
+    // TODO mark as deprecate at v2.x
+    const plugin = createPlugin({appID: 'com.squirrel.your.app'} as Options & {appID: string});
+    plugin.compilationDone(createSuccessStats());
+
+    expect(notify).toHaveBeenCalledTimes(1);
+    expect(notifyOptions().appID).toBe('com.squirrel.your.app');
   });
 });

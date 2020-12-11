@@ -130,6 +130,15 @@ require.extensions is not supported by webpack. Use a loader instead.",
 }
 `;
 
+exports[`webpack@1 WebpackNotifierPlugin passing node-notifier options directly ["successful"] {"appID":"com.squirrel.your.app"}: after "successful" build 1`] = `
+Object {
+  "appID": "com.squirrel.your.app",
+  "contentImage": "__dirname/logo.png",
+  "message": "Build successful",
+  "title": "Webpack",
+}
+`;
+
 exports[`webpack@1 WebpackNotifierPlugin title ["error"] {}: after "error" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
@@ -416,6 +425,15 @@ Object {
   "contentImage": "__dirname/logo.png",
   "message": "Warning: /entry.js
 require.extensions is not supported by webpack. Use a loader instead.",
+  "title": "Webpack",
+}
+`;
+
+exports[`webpack@2 WebpackNotifierPlugin passing node-notifier options directly ["successful"] {"appID":"com.squirrel.your.app"}: after "successful" build 1`] = `
+Object {
+  "appID": "com.squirrel.your.app",
+  "contentImage": "__dirname/logo.png",
+  "message": "Build successful",
   "title": "Webpack",
 }
 `;
@@ -710,6 +728,15 @@ require.extensions is not supported by webpack. Use a loader instead.",
 }
 `;
 
+exports[`webpack@3 WebpackNotifierPlugin passing node-notifier options directly ["successful"] {"appID":"com.squirrel.your.app"}: after "successful" build 1`] = `
+Object {
+  "appID": "com.squirrel.your.app",
+  "contentImage": "__dirname/logo.png",
+  "message": "Build successful",
+  "title": "Webpack",
+}
+`;
+
 exports[`webpack@3 WebpackNotifierPlugin title ["error"] {}: after "error" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
@@ -996,6 +1023,15 @@ Object {
   "contentImage": "__dirname/logo.png",
   "message": "Warning: /entry.js
 require.extensions is not supported by webpack. Use a loader instead.",
+  "title": "Webpack",
+}
+`;
+
+exports[`webpack@4 WebpackNotifierPlugin passing node-notifier options directly ["successful"] {"appID":"com.squirrel.your.app"}: after "successful" build 1`] = `
+Object {
+  "appID": "com.squirrel.your.app",
+  "contentImage": "__dirname/logo.png",
+  "message": "Build successful",
   "title": "Webpack",
 }
 `;
@@ -1290,6 +1326,15 @@ require.extensions is not supported by webpack. Use a loader instead.",
 }
 `;
 
+exports[`webpack@5 WebpackNotifierPlugin passing node-notifier options directly ["successful"] {"appID":"com.squirrel.your.app"}: after "successful" build 1`] = `
+Object {
+  "appID": "com.squirrel.your.app",
+  "contentImage": "__dirname/logo.png",
+  "message": "Build successful",
+  "title": "Webpack",
+}
+`;
+
 exports[`webpack@5 WebpackNotifierPlugin title ["error"] {}: after "error" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
@@ -1576,6 +1621,15 @@ Object {
   "contentImage": "__dirname/logo.png",
   "message": "Warning: /entry.js
 require.extensions is not supported by webpack. Use a loader instead.",
+  "title": "Webpack",
+}
+`;
+
+exports[`webpack@latest WebpackNotifierPlugin passing node-notifier options directly ["successful"] {"appID":"com.squirrel.your.app"}: after "successful" build 1`] = `
+Object {
+  "appID": "com.squirrel.your.app",
+  "contentImage": "__dirname/logo.png",
+  "message": "Build successful",
   "title": "Webpack",
 }
 `;
