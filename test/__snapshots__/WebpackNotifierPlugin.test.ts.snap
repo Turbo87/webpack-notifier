@@ -1,5 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`WebpackNotifierPlugin child compilation errors ["successful"] {"appId":"com.squirrel.your.app"} %j: after "successful" build 1`] = `
+Object {
+  "appId": "com.squirrel.your.app",
+  "contentImage": "__dirname/logo.png",
+  "message": "Build successful",
+  "title": "Webpack",
+}
+`;
+
 exports[`WebpackNotifierPlugin child compilation errors ["successful"] undefined {"plugins":[{"level":"Error","levelCollectionKey":"errors"}]}: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
