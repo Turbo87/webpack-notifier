@@ -27,7 +27,7 @@ function findFirstDFS(compilation, key) {
   }
 }
 
-WebpackNotifierPlugin.prototype.compileEndOptions = function (stats) {
+WebpackNotifierPlugin.prototype.compileEndOptions = function compileEndOptions(stats) {
   if (this.isFirstBuild) {
     this.isFirstBuild = false;
 
@@ -100,17 +100,17 @@ WebpackNotifierPlugin.prototype.compileEndOptions = function (stats) {
   };
 };
 
-WebpackNotifierPlugin.prototype.hasErrors = function (stats) {
+WebpackNotifierPlugin.prototype.hasErrors = function hasErrors(stats) {
   return stats.hasErrors()
       || stats.compilation.children.some(child => child.getStats().hasErrors());
 };
 
-WebpackNotifierPlugin.prototype.hasWarnings = function (stats) {
+WebpackNotifierPlugin.prototype.hasWarnings = function hasWarnings(stats) {
   return stats.hasWarnings()
       || stats.compilation.children.some(child => child.getStats().hasWarnings());
 };
 
-WebpackNotifierPlugin.prototype.compilationDone = function (stats) {
+WebpackNotifierPlugin.prototype.compilationDone = function compilationDone(stats) {
   var { message, contentImage, status } = this.compileEndOptions(stats);
   if (message) {
     var title = this.options.title ? this.options.title : 'Webpack';
@@ -139,7 +139,7 @@ WebpackNotifierPlugin.prototype.compilationDone = function (stats) {
   }
 };
 
-WebpackNotifierPlugin.prototype.apply = function (compiler) {
+WebpackNotifierPlugin.prototype.apply = function apply(compiler) {
   if (compiler.hooks) {
     var plugin = { name: 'Notifier' };
 
