@@ -33,7 +33,7 @@
   "author": "Tobias Bieniek <tobias.bieniek@gmx.de>",
   "license": "ISC",
   "dependencies": {
-    "node-notifier": "^8.0.0",
+    "node-notifier": "^9.0.0",
     "strip-ansi": "^6.0.0"
   },
   "devDependencies": {
