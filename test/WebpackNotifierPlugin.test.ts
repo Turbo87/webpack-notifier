@@ -104,4 +104,9 @@ describe('WebpackNotifierPlugin', () => {
       [['successful'], undefined, {plugins: [new ChildCompilationPlugin(), new ChildCompilationPlugin('Warning')]}],
     ])('%j %j %j', testChangesFlow, 10e3);
   });
+  describe('child compilation errors', () => {
+    test.each([
+      [['successful'], {appId: 'com.squirrel.your.app'}],// TODO mark as deprecate at v2.x
+    ])('%j %j %j', testChangesFlow, 10e3);
+  });
 });
