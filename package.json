@@ -3,6 +3,7 @@
   "version": "1.13.0",
   "description": "webpack + node-notifier = build status system notifications",
   "main": "index.js",
+  "types": "./index.d.ts",
   "files": [
     "index.js",
     "logo.png"
