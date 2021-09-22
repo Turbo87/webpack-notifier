@@ -3,7 +3,7 @@
   "version": "1.13.0",
   "description": "webpack + node-notifier = build status system notifications",
   "main": "index.js",
-  "types": "./index.d.ts",
+  "types": "./types/index.d.ts",
   "files": [
     "index.js",
     "logo.png"
@@ -12,7 +12,8 @@
     "prepublishOnly": "npm run lint",
     "lint": "eslint index.js",
     "test": "jest",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "dtslint": "dtslint types"
   },
   "husky": {
     "hooks": {
@@ -39,6 +40,8 @@
   },
   "devDependencies": {
     "@types/jest": "^26.0.15",
+    "@types/webpack": ">1.12.36",
+    "dtslint": "^4.1.6",
     "eslint": "^7.14.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "husky": "^4.3.0",
@@ -47,6 +50,15 @@
     "semver": "^7.3.2",
     "ts-jest": "^24.3.0",
     "typescript": "^3.9.7",
-    "webpack": "^1.15.0"
+    "webpack": "^1.15.0",
+    "webpack-notifier": "file:./"
+  },
+  "peerDependencies": {
+    "@types/webpack": ">1.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@types/webpack": {
+      "optional": true
+    }
   }
 }
