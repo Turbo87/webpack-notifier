@@ -9,7 +9,7 @@ on:
 jobs:
   lint:
     name: Lint
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
 
     steps:
       - uses: actions/checkout@v2
@@ -24,7 +24,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu-latest ]
+        os: [ ubuntu-18.04 ]
         node-version: [ 10.x ]
         webpack-version: [ ^1, ^2, ^3, ^4, latest, next ]
         include:
@@ -32,10 +32,10 @@ jobs:
           - {os: windows-latest, node-version: 10.x, webpack-version: latest}
           - {os: macos-latest, node-version: 10.x, webpack-version: latest}
           # different Node.js
-          - { os: ubuntu-latest, node-version: 6.x, webpack-version: ^1 }
-          - { os: ubuntu-latest, node-version: 7.x, webpack-version: ^1 }
-          - { os: ubuntu-latest, node-version: 8.x, webpack-version: ^1 }
-          - { os: ubuntu-latest, node-version: 9.x, webpack-version: ^1 }
+          - { os: ubuntu-18.04, node-version: 6.x, webpack-version: ^1 }
+          - { os: ubuntu-18.04, node-version: 7.x, webpack-version: ^1 }
+          - { os: ubuntu-18.04, node-version: 8.x, webpack-version: ^1 }
+          - { os: ubuntu-18.04, node-version: 9.x, webpack-version: ^1 }
 
     runs-on: ${{ matrix.os }}
     env:
@@ -72,7 +72,7 @@ jobs:
     name: Coverage
     needs: test
     if: ${{ always() }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
