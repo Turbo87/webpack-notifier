@@ -10,6 +10,9 @@ const optionsArray: WebpackNotifierPlugin.Options[] = [
 		skipFirstNotification: true,
 		emoji: true,
 	},
+	{
+		title: (data: {msg: string,message: string,status: string}) => 'Webpack',
+	},
 ];
 
 const plugins: Plugin[] = optionsArray.map(options => new WebpackNotifierPlugin(options));

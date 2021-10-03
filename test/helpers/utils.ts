@@ -5,10 +5,10 @@ import {createFsFromVolume, Volume} from 'memfs';
 import {notify} from 'node-notifier';
 import {satisfies} from 'semver';
 import fixtures from './fixtures';
-import WebpackNotifierPlugin from '../../';
+import WebpackNotifierPlugin, {Options} from '../../';
 
-function getCompiler(compilerOpts) {
-  const config = {
+function getCompiler(compilerOpts: webpack.Configuration): webpack.Compiler {
+  const config: webpack.Configuration = {
     entry: '/entry.js',
     output: {
       path: '/',
@@ -22,20 +22,20 @@ function getCompiler(compilerOpts) {
 
   return webpack(config);
 }
-function patchCompiler(compiler, fs) {
+function patchCompiler(compiler: webpack.Compiler, fs: any) {
   compiler.inputFileSystem = fs;
   compiler.outputFileSystem = fs;
   // compiler.watchFileSystem = fs;
 
   if (satisfies(webpackVersion, '<5')) {
-    compiler['resolvers'].normal.fileSystem = fs;
+    (compiler as any)['resolvers'].normal.fileSystem = fs;
     // compiler['resolvers'].loader.fileSystem = fs;
     // compiler['resolvers'].context.fileSystem = fs;
   }
 }
-async function compile(compiler) {
+async function compile(compiler: webpack.Compiler): Promise<webpack.Stats> {
   return new Promise((resolve, reject) => {
-    compiler.run((err, res) => {
+    compiler.run((err?: Error, res?: webpack.Stats) => {
       if (err) {
         return reject(err);
       }
@@ -49,18 +49,18 @@ function prepareFs() {
   const fs = createFsFromVolume(vol);
 
   if (satisfies(webpackVersion, '<5')) {
-    fs['join'] = join;
+    (fs as any)['join'] = join;
   }
 
   return {fs, vol};
 }
 
-function updateFs(vol, json) {
+function updateFs(vol: any, json: any) {
   vol.reset();
   vol.fromJSON(json, '/');
 }
 
-export const reduceArraySerializer = {
+export const reduceArraySerializer: jest.SnapshotSerializerPlugin = {
   test(val) {
     return Array.isArray(val) &&
       val.length === 1 &&
@@ -73,7 +73,7 @@ export const reduceArraySerializer = {
     return printer(val[0][0], config, indentation, depth, refs);
   },
 };
-export const contentImageSerializer = {
+export const contentImageSerializer: jest.SnapshotSerializerPlugin = {
   test(val) {
     return typeof val === 'object' &&
       val.contentImage &&
@@ -90,7 +90,7 @@ export const contentImageSerializer = {
 };
 
 export type Sources = string[];
-export type PluginOptions = {} | undefined;
+export type PluginOptions = Options | undefined;
 export type CompilerOptions = {};
 export type TestArguments = [Sources, PluginOptions, CompilerOptions?];
 
@@ -99,7 +99,7 @@ export function testChangesFlow(...args: TestArguments)  {
   return runTest(...args);
 };
 
-async function runTest(sources, opts, compilerOpts = {})  {
+async function runTest(sources: Sources, opts: PluginOptions, compilerOpts = {})  {
   const compiler = getCompiler(compilerOpts);
   const {fs, vol} = prepareFs();
   const plugin = new WebpackNotifierPlugin(opts);
@@ -107,9 +107,9 @@ async function runTest(sources, opts, compilerOpts = {})  {
   patchCompiler(compiler, fs);
 
   for (const name of sources) {
-    notify.mockClear();
-    updateFs(vol, fixtures.simple[name]);
+    (notify as jest.Mock).mockClear();
+    updateFs(vol, (fixtures.simple as any)[name]);
     await compile(compiler);
-    expect(notify.mock.calls).toMatchSnapshot(`after "${name}" build`);
+    expect((notify as jest.Mock).mock.calls).toMatchSnapshot(`after "${name}" build`);
   }
 }

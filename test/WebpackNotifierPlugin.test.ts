@@ -21,7 +21,7 @@ describe('WebpackNotifierPlugin', () => {
       [['error'], {title}],
       [['warning'], {title}],
     ])('%j %j', testChangesFlow);
-    function title({msg}) {
+    function title({msg}: {msg: string}) {
       if (msg.startsWith('Error')) return 'build error ❌';
       if (msg.startsWith('Warning')) return 'build warning ⚠️';
       return 'build complete ✅';
@@ -33,7 +33,7 @@ describe('WebpackNotifierPlugin', () => {
         [['error'], {title}],
         [['warning'], {title}],
       ])('%j %j', testChangesFlow);
-      function title(params) {
+      function title(params: {status: string, message: string}) {
         return `Build status is ${params.status} with message ${params.message}`;
       }
     });

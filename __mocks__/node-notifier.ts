@@ -1,1 +1,1 @@
-export const notify = jest.fn(() => void 0);
+export const notify: jest.Mock = jest.fn(() => void 0);

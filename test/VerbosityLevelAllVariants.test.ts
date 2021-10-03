@@ -1,3 +1,4 @@
+import WebpackNotifierPlugin from '../';
 import {contentImageSerializer, reduceArraySerializer, testChangesFlow} from './helpers/utils';
 
 expect.addSnapshotSerializer(reduceArraySerializer);
@@ -8,7 +9,7 @@ describe('VerbosityLevelAllVariants', () => {
     test.each([...generateSteps(opts)])('%j', testChangesFlow);
   });
 
-  function* generateOptions() {
+  function* generateOptions(): Generator<WebpackNotifierPlugin.Options> {
     for (const excludeWarnings of [false, true]) {
       for (const alwaysNotify of [false, true]) {
         for (const onlyOnError of [false, true]) {
@@ -19,7 +20,7 @@ describe('VerbosityLevelAllVariants', () => {
       }
     }
   }
-  function* generateSteps(opts) {
+  function* generateSteps(opts: WebpackNotifierPlugin.Options): Generator<[string[], WebpackNotifierPlugin.Options]> {
     for (const firsStep of ['successful', 'warning', 'error']) {
       yield [[firsStep], opts];
       for (const secondStep of ['successful', 'warning', 'error']) {

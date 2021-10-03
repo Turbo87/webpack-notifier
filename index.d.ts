@@ -3,6 +3,7 @@
 // Definitions by: Benjamin Lim <https://github.com/bumbleblym>
 //                 Piotr Błażejewicz <https://github.com/peterblazejewicz>
 //                 Alexandre Germain <https://github.com/gerkindev>
+//                 Gvozdev Viktor <https://github.com/Gvozd>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 // TypeScript Version: 3.9
 
@@ -14,18 +15,20 @@ declare const WebpackNotifierPlugin: {new (options?: WebpackNotifierPlugin.Optio
 
 declare namespace WebpackNotifierPlugin {
     interface Options {
-        alwaysNotify?: boolean | undefined;
-        contentImage?: {[key in 'success' | 'warning' | 'error']: string} | string | undefined;
-        excludeWarnings?: boolean | undefined;
-        onlyOnError?: boolean | undefined;
-        skipFirstNotification?: boolean | undefined;
-        title?: string | undefined;
+        alwaysNotify?: boolean;
+        contentImage?: {[key in 'success' | 'warning' | 'error']: string} | string;
+        excludeWarnings?: boolean;
+        onlyOnError?: boolean;
+        skipFirstNotification?: boolean;
+        title?: string | TitleGetter;
         /**
          * Use emoji in notifications
          */
-        emoji?: boolean | undefined;
+        emoji?: boolean;
     }
 
     /** @deprecated use Options */
     type Config = Options;
+
+    type TitleGetter = (data: {msg: string,message: string,status: string}) => string;
 }

@@ -1,3 +1,4 @@
+import {Compiler} from 'webpack';
 export default class ChildCompilationPlugin {
   private levelCollectionKey: string;
 
@@ -7,19 +8,19 @@ export default class ChildCompilationPlugin {
     }
   }
 
-  apply(compiler) {
+  apply(compiler: Compiler) {
     if ('hooks' in compiler) {
       compiler.hooks.thisCompilation.tap('ChildCompilationPlugin', this.handleHook.bind(this));
     } else {
-      compiler.plugin('this-compilation', this.handleHook.bind(this));
+      (compiler as any).plugin('this-compilation', this.handleHook.bind(this));
     }
   }
 
-  handleHook(compilation) {
-    const childCompiler = compilation.createChildCompiler(`CHILD COMPILATION`);
-    childCompiler.runAsChild((err, entries, compilation) => {
+  handleHook(compilation: any) {
+    const childCompiler = (compilation as any).createChildCompiler(`CHILD COMPILATION`);
+    childCompiler.runAsChild((err: Error, entries: any, compilation: any) => {
       if (this.level) {
-        compilation[this.levelCollectionKey]
+        (compilation as any)[this.levelCollectionKey]
           .push(new Error(`Child Compilation ${this.level}`));
       }
     });
