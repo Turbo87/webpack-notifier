@@ -25,16 +25,17 @@ jobs:
       fail-fast: false
       matrix:
         os: [ ubuntu-18.04 ]
-        node-version: [ 10.x ]
+        node-version: [ 14.x ]
         include:
           # different platforms
-          - {os: windows-latest, node-version: 10.x}
-          - {os: macos-latest, node-version: 10.x}
+          - { os: ubuntu-18.04, node-version: 14.x }
+          - { os: windows-latest, node-version: 14.x }
+          - { os: macos-latest, node-version: 14.x }
           # different Node.js
-          - { os: ubuntu-18.04, node-version: 6.x}
-          - { os: ubuntu-18.04, node-version: 7.x}
-          - { os: ubuntu-18.04, node-version: 8.x}
-          - { os: ubuntu-18.04, node-version: 9.x}
+          - { os: ubuntu-18.04, node-version: 10.x }
+          - { os: ubuntu-18.04, node-version: 12.x }
+          - { os: ubuntu-18.04, node-version: 14.x }
+          - { os: ubuntu-18.04, node-version: 16.x }
 
     runs-on: ${{ matrix.os }}
     env:
@@ -45,7 +46,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install -g npm@6.9.0 && npm -v
       - run: npm install
       - run: npm run test:coverage
       - name: Unify different platfrom paths in coverage file
