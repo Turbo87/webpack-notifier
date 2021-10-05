@@ -5,7 +5,11 @@ expect.addSnapshotSerializer(reduceArraySerializer);
 expect.addSnapshotSerializer(contentImageSerializer);
 
 describe.each([
-  [require('webpack/package.json').version, require('webpack')],
+  [require('webpack-1/package.json').version, require('webpack-1')],
+  [require('webpack-2/package.json').version, require('webpack-2')],
+  [require('webpack-3/package.json').version, require('webpack-3')],
+  [require('webpack-4/package.json').version, require('webpack-4')],
+  [require('webpack-latest/package.json').version, require('webpack-latest')],
 ])('Webpack %s', (webpackVersion, webpack) => {
   const testChangesFlow = (...args: PartialTestArguments) => _testChangesFlow(webpackVersion, webpack, ...args);
   describe('VerbosityLevelAllVariants', () => {
