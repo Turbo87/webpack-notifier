@@ -46,6 +46,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - run: npm install -g npm@6.9.0 && npm -v
       - run: npm install
       - name: Install webpack ${{ matrix.webpack-version }}
         run: npm i webpack@${{ matrix.webpack-version }}
