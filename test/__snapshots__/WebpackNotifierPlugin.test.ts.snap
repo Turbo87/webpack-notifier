@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`WebpackNotifierPlugin child compilation errors ["successful"] undefined {"plugins":[{"level":"Error","levelCollectionKey":"errors"}]}: after "successful" build 1`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin child compilation errors ["successful"] undefined {"plugins":[{"level":"Error","levelCollectionKey":"errors"}]}: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Warning: Child Compilation Error",
@@ -8,7 +8,7 @@ Object {
 }
 `;
 
-exports[`WebpackNotifierPlugin child compilation errors ["successful"] undefined {"plugins":[{"level":"Warning","levelCollectionKey":"warnings"}]}: after "successful" build 1`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin child compilation errors ["successful"] undefined {"plugins":[{"level":"Warning","levelCollectionKey":"warnings"}]}: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Warning: Child Compilation Warning",
@@ -16,7 +16,7 @@ Object {
 }
 `;
 
-exports[`WebpackNotifierPlugin child compilation errors ["successful"] undefined {"plugins":[{"level":false},{"level":"Warning","levelCollectionKey":"warnings"}]}: after "successful" build 1`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin child compilation errors ["successful"] undefined {"plugins":[{"level":false},{"level":"Warning","levelCollectionKey":"warnings"}]}: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Warning: Child Compilation Warning",
@@ -24,7 +24,7 @@ Object {
 }
 `;
 
-exports[`WebpackNotifierPlugin contentImage ["error"] {contentImage: {success: "../successImage.png"}, error: "../errorImage.png"}, warning: "../warningImage.png"}}: after "error" build 1`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin contentImage ["error"] {contentImage: {success: "../successImage.png"}, error: "../errorImage.png"}, warning: "../warningImage.png"}}: after "error" build 1`] = `
 Object {
   "contentImage": "__dirname/errorsImage.png",
   "message": "Error: /entry.js
@@ -33,7 +33,7 @@ SyntaxError: Unexpected token (1:8)",
 }
 `;
 
-exports[`WebpackNotifierPlugin contentImage ["successful"] {contentImage: "../another-logo.png"}: after "successful" build 1`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin contentImage ["successful"] {contentImage: "../another-logo.png"}: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/another-logo.png",
   "message": "Build successful",
@@ -41,7 +41,7 @@ Object {
 }
 `;
 
-exports[`WebpackNotifierPlugin contentImage ["successful"] {contentImage: {success: "../successImage.png"}, error: "../errorImage.png"}, warning: "../warningImage.png"}}: after "successful" build 1`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin contentImage ["successful"] {contentImage: {success: "../successImage.png"}, error: "../errorImage.png"}, warning: "../warningImage.png"}}: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/successImage.png",
   "message": "Build successful",
@@ -49,7 +49,7 @@ Object {
 }
 `;
 
-exports[`WebpackNotifierPlugin contentImage ["warning"] {contentImage: {success: "../successImage.png"}, error: "../errorImage.png"}, warning: "../warningImage.png"}}: after "warning" build 1`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin contentImage ["warning"] {contentImage: {success: "../successImage.png"}, error: "../errorImage.png"}, warning: "../warningImage.png"}}: after "warning" build 1`] = `
 Object {
   "contentImage": "__dirname/warningsImage.png",
   "message": "Warning: /entry.js
@@ -58,7 +58,7 @@ require.extensions is not supported by webpack. Use a loader instead.",
 }
 `;
 
-exports[`WebpackNotifierPlugin custom warning ["successful"] undefined: after "successful" build 1`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin custom warning ["successful"] undefined: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Warning: Custom Warning message",
@@ -66,7 +66,7 @@ Object {
 }
 `;
 
-exports[`WebpackNotifierPlugin emoji message ["error"] {"emoji":true} %j: after "error" build 1`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin emoji message ["error"] {"emoji":true} %j: after "error" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "emoji": true,
@@ -76,7 +76,7 @@ SyntaxError: Unexpected token (1:8)",
 }
 `;
 
-exports[`WebpackNotifierPlugin emoji message ["successful"] {"emoji":true} %j: after "successful" build 1`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin emoji message ["successful"] {"emoji":true} %j: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "emoji": true,
@@ -85,7 +85,7 @@ Object {
 }
 `;
 
-exports[`WebpackNotifierPlugin emoji message ["successful"] {"emoji":true} {"plugins":[{}]}: after "successful" build 1`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin emoji message ["successful"] {"emoji":true} {"plugins":[{}]}: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "emoji": true,
@@ -94,7 +94,7 @@ Object {
 }
 `;
 
-exports[`WebpackNotifierPlugin emoji message ["warning"] {"emoji":true} %j: after "warning" build 1`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin emoji message ["warning"] {"emoji":true} %j: after "warning" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "emoji": true,
@@ -104,7 +104,7 @@ require.extensions is not supported by webpack. Use a loader instead.",
 }
 `;
 
-exports[`WebpackNotifierPlugin one compilation ["error"] undefined: after "error" build 1`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin one compilation ["error"] undefined: after "error" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Error: /entry.js
@@ -113,7 +113,7 @@ SyntaxError: Unexpected token (1:8)",
 }
 `;
 
-exports[`WebpackNotifierPlugin one compilation ["successful"] undefined: after "successful" build 1`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin one compilation ["successful"] undefined: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
@@ -121,7 +121,7 @@ Object {
 }
 `;
 
-exports[`WebpackNotifierPlugin one compilation ["warning"] undefined: after "warning" build 1`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin one compilation ["warning"] undefined: after "warning" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Warning: /entry.js
@@ -130,7 +130,7 @@ require.extensions is not supported by webpack. Use a loader instead.",
 }
 `;
 
-exports[`WebpackNotifierPlugin title ["error"] {}: after "error" build 1`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin title ["error"] {}: after "error" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Error: /entry.js
@@ -139,7 +139,7 @@ SyntaxError: Unexpected token (1:8)",
 }
 `;
 
-exports[`WebpackNotifierPlugin title ["successful"] {"title":"Webpack"}: after "successful" build 1`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin title ["successful"] {"title":"Webpack"}: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
@@ -147,7 +147,7 @@ Object {
 }
 `;
 
-exports[`WebpackNotifierPlugin title ["successful"] {}: after "successful" build 1`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin title ["successful"] {}: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
@@ -155,7 +155,7 @@ Object {
 }
 `;
 
-exports[`WebpackNotifierPlugin title ["warning"] {}: after "warning" build 1`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin title ["warning"] {}: after "warning" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Warning: /entry.js
@@ -164,7 +164,7 @@ require.extensions is not supported by webpack. Use a loader instead.",
 }
 `;
 
-exports[`WebpackNotifierPlugin title new title function API ["error"] {}: after "error" build 1`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin title new title function API ["error"] {}: after "error" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Error: /entry.js
@@ -174,7 +174,7 @@ SyntaxError: Unexpected token (1:8)",
 }
 `;
 
-exports[`WebpackNotifierPlugin title new title function API ["successful"] {"title":"Webpack"}: after "successful" build 1`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin title new title function API ["successful"] {"title":"Webpack"}: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
@@ -182,7 +182,7 @@ Object {
 }
 `;
 
-exports[`WebpackNotifierPlugin title new title function API ["successful"] {}: after "successful" build 1`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin title new title function API ["successful"] {}: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
@@ -190,7 +190,7 @@ Object {
 }
 `;
 
-exports[`WebpackNotifierPlugin title new title function API ["warning"] {}: after "warning" build 1`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin title new title function API ["warning"] {}: after "warning" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Warning: /entry.js
@@ -200,7 +200,7 @@ require.extensions is not supported by webpack. Use a loader instead.",
 }
 `;
 
-exports[`WebpackNotifierPlugin verbosity level configuration Always Notify ["successful","successful"] {"alwaysNotify":true}: after "successful" build 1`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin verbosity level configuration Always Notify ["successful","successful"] {"alwaysNotify":true}: after "successful" build 1`] = `
 Object {
   "alwaysNotify": true,
   "contentImage": "__dirname/logo.png",
@@ -209,7 +209,7 @@ Object {
 }
 `;
 
-exports[`WebpackNotifierPlugin verbosity level configuration Always Notify ["successful","successful"] {"alwaysNotify":true}: after "successful" build 2`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin verbosity level configuration Always Notify ["successful","successful"] {"alwaysNotify":true}: after "successful" build 2`] = `
 Object {
   "alwaysNotify": true,
   "contentImage": "__dirname/logo.png",
@@ -218,7 +218,7 @@ Object {
 }
 `;
 
-exports[`WebpackNotifierPlugin verbosity level configuration Default ["error","error","successful"] undefined: after "error" build 1`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin verbosity level configuration Default ["error","error","successful"] undefined: after "error" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Error: /entry.js
@@ -227,7 +227,7 @@ SyntaxError: Unexpected token (1:8)",
 }
 `;
 
-exports[`WebpackNotifierPlugin verbosity level configuration Default ["error","error","successful"] undefined: after "error" build 2`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin verbosity level configuration Default ["error","error","successful"] undefined: after "error" build 2`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Error: /entry.js
@@ -236,7 +236,7 @@ SyntaxError: Unexpected token (1:8)",
 }
 `;
 
-exports[`WebpackNotifierPlugin verbosity level configuration Default ["error","error","successful"] undefined: after "successful" build 1`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin verbosity level configuration Default ["error","error","successful"] undefined: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
@@ -244,7 +244,7 @@ Object {
 }
 `;
 
-exports[`WebpackNotifierPlugin verbosity level configuration Default ["successful","successful","successful"] undefined: after "successful" build 1`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin verbosity level configuration Default ["successful","successful","successful"] undefined: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
@@ -252,11 +252,11 @@ Object {
 }
 `;
 
-exports[`WebpackNotifierPlugin verbosity level configuration Default ["successful","successful","successful"] undefined: after "successful" build 2`] = `Array []`;
+exports[`Webpack 1.15.0 WebpackNotifierPlugin verbosity level configuration Default ["successful","successful","successful"] undefined: after "successful" build 2`] = `Array []`;
 
-exports[`WebpackNotifierPlugin verbosity level configuration Default ["successful","successful","successful"] undefined: after "successful" build 3`] = `Array []`;
+exports[`Webpack 1.15.0 WebpackNotifierPlugin verbosity level configuration Default ["successful","successful","successful"] undefined: after "successful" build 3`] = `Array []`;
 
-exports[`WebpackNotifierPlugin verbosity level configuration Exclude Warnings ["warning"] {"excludeWarnings":true}: after "warning" build 1`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin verbosity level configuration Exclude Warnings ["warning"] {"excludeWarnings":true}: after "warning" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "excludeWarnings": true,
@@ -265,7 +265,7 @@ Object {
 }
 `;
 
-exports[`WebpackNotifierPlugin verbosity level configuration Notify on error ["successful","warning","error"] {"onlyOnError":true}: after "error" build 1`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin verbosity level configuration Notify on error ["successful","warning","error"] {"onlyOnError":true}: after "error" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Error: /entry.js
@@ -275,13 +275,13 @@ SyntaxError: Unexpected token (1:8)",
 }
 `;
 
-exports[`WebpackNotifierPlugin verbosity level configuration Notify on error ["successful","warning","error"] {"onlyOnError":true}: after "successful" build 1`] = `Array []`;
+exports[`Webpack 1.15.0 WebpackNotifierPlugin verbosity level configuration Notify on error ["successful","warning","error"] {"onlyOnError":true}: after "successful" build 1`] = `Array []`;
 
-exports[`WebpackNotifierPlugin verbosity level configuration Notify on error ["successful","warning","error"] {"onlyOnError":true}: after "warning" build 1`] = `Array []`;
+exports[`Webpack 1.15.0 WebpackNotifierPlugin verbosity level configuration Notify on error ["successful","warning","error"] {"onlyOnError":true}: after "warning" build 1`] = `Array []`;
 
-exports[`WebpackNotifierPlugin verbosity level configuration Skip Notification on the First Build ["successful","successful"] {"skipFirstNotification":true}: after "successful" build 1`] = `Array []`;
+exports[`Webpack 1.15.0 WebpackNotifierPlugin verbosity level configuration Skip Notification on the First Build ["successful","successful"] {"skipFirstNotification":true}: after "successful" build 1`] = `Array []`;
 
-exports[`WebpackNotifierPlugin verbosity level configuration Skip Notification on the First Build ["successful","successful"] {"skipFirstNotification":true}: after "successful" build 2`] = `
+exports[`Webpack 1.15.0 WebpackNotifierPlugin verbosity level configuration Skip Notification on the First Build ["successful","successful"] {"skipFirstNotification":true}: after "successful" build 2`] = `
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",

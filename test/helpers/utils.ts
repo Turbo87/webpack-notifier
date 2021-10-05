@@ -1,14 +1,13 @@
 import {join} from 'path';
-import webpack from 'webpack';
-import {version as webpackVersion} from 'webpack/package.json';
+import {Compiler, Configuration, Stats} from 'webpack';
 import {createFsFromVolume, Volume} from 'memfs';
 import {notify} from 'node-notifier';
 import {satisfies} from 'semver';
 import fixtures from './fixtures';
 import WebpackNotifierPlugin, {Options} from '../../';
 
-function getCompiler(compilerOpts: webpack.Configuration): webpack.Compiler {
-  const config: webpack.Configuration = {
+function getCompiler(webpackVersion: string, webpack: (...args: any[]) => any, compilerOpts: Configuration): Compiler {
+  const config: Configuration = {
     entry: '/entry.js',
     output: {
       path: '/',
@@ -22,7 +21,7 @@ function getCompiler(compilerOpts: webpack.Configuration): webpack.Compiler {
 
   return webpack(config);
 }
-function patchCompiler(compiler: webpack.Compiler, fs: any) {
+function patchCompiler(compiler: Compiler, fs: any, webpackVersion: string) {
   compiler.inputFileSystem = fs;
   compiler.outputFileSystem = fs;
   // compiler.watchFileSystem = fs;
@@ -33,9 +32,9 @@ function patchCompiler(compiler: webpack.Compiler, fs: any) {
     // compiler['resolvers'].context.fileSystem = fs;
   }
 }
-async function compile(compiler: webpack.Compiler): Promise<webpack.Stats> {
+async function compile(compiler: Compiler): Promise<Stats> {
   return new Promise((resolve, reject) => {
-    compiler.run((err?: Error, res?: webpack.Stats) => {
+    compiler.run((err?: Error, res?: Stats) => {
       if (err) {
         return reject(err);
       }
@@ -44,7 +43,7 @@ async function compile(compiler: webpack.Compiler): Promise<webpack.Stats> {
   });
 }
 
-function prepareFs() {
+function prepareFs(webpackVersion: string) {
   const vol = new Volume();
   const fs = createFsFromVolume(vol);
 
@@ -92,19 +91,20 @@ export const contentImageSerializer: jest.SnapshotSerializerPlugin = {
 export type Sources = string[];
 export type PluginOptions = Options | undefined;
 export type CompilerOptions = {};
-export type TestArguments = [Sources, PluginOptions, CompilerOptions?];
+export type PartialTestArguments = [Sources, PluginOptions, CompilerOptions?];
+export type TestArguments = [string, (...args: any[]) => any, Sources, PluginOptions, CompilerOptions?];
 
 // intermediate, so that the jest does not pass done-callback, in case of last optional argument
 export function testChangesFlow(...args: TestArguments)  {
   return runTest(...args);
 };
 
-async function runTest(sources: Sources, opts: PluginOptions, compilerOpts = {})  {
-  const compiler = getCompiler(compilerOpts);
-  const {fs, vol} = prepareFs();
+async function runTest(...[webpackVersion, webpack, sources, opts, compilerOpts = {}]: TestArguments)  {
+  const compiler = getCompiler(webpackVersion, webpack, compilerOpts);
+  const {fs, vol} = prepareFs(webpackVersion);
   const plugin = new WebpackNotifierPlugin(opts);
   plugin.apply(compiler);
-  patchCompiler(compiler, fs);
+  patchCompiler(compiler, fs, webpackVersion);
 
   for (const name of sources) {
     (notify as jest.Mock).mockClear();
