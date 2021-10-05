@@ -19,27 +19,27 @@ jobs:
       - run: npm run tsd
 
   test:
-    name: Test - ${{ matrix.os }}/node@${{ matrix.node-version }}/webpack@${{ matrix.webpack-version }}
+    name: Test - ${{ matrix.os }}/node@${{ matrix.node-version }}
 
     strategy:
       fail-fast: false
       matrix:
         os: [ ubuntu-18.04 ]
-        node-version: [ 10.x ]
-        webpack-version: [ ^1, ^2, ^3, ^4, latest, next ]
+        node-version: [ 14.x ]
         include:
           # different platforms
-          - {os: windows-latest, node-version: 10.x, webpack-version: latest}
-          - {os: macos-latest, node-version: 10.x, webpack-version: latest}
+          - { os: ubuntu-18.04, node-version: 14.x }
+          - { os: windows-latest, node-version: 14.x }
+          - { os: macos-latest, node-version: 14.x }
           # different Node.js
-          - { os: ubuntu-18.04, node-version: 6.x, webpack-version: ^1 }
-          - { os: ubuntu-18.04, node-version: 7.x, webpack-version: ^1 }
-          - { os: ubuntu-18.04, node-version: 8.x, webpack-version: ^1 }
-          - { os: ubuntu-18.04, node-version: 9.x, webpack-version: ^1 }
+          - { os: ubuntu-18.04, node-version: 10.x }
+          - { os: ubuntu-18.04, node-version: 12.x }
+          - { os: ubuntu-18.04, node-version: 14.x }
+          - { os: ubuntu-18.04, node-version: 16.x }
 
     runs-on: ${{ matrix.os }}
     env:
-      coverage-filename: ./coverage-final.${{ matrix.os }}_${{ matrix.node-version }}_${{ matrix.webpack-version }}.json
+      coverage-filename: ./coverage-final.${{ matrix.os }}_${{ matrix.node-version }}.json
 
     steps:
       - uses: actions/checkout@v2
@@ -47,8 +47,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install
-      - name: Install webpack ${{ matrix.webpack-version }}
-        run: npm i webpack@${{ matrix.webpack-version }}
       - run: npm run test:coverage
       - name: Unify different platfrom paths in coverage file
         if: ${{ always() }}
