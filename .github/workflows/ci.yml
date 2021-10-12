@@ -14,9 +14,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
-      - run: npm install
-      - run: npm run lint
-      - run: npm run tsd
+        with:
+          node-version: 14.x
+      - run: yarn
+      - run: yarn lint
+      - run: yarn tsd
 
   test:
     name: Test - ${{ matrix.os }}/node@${{ matrix.node-version }}
@@ -46,8 +48,8 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install
-      - run: npm run test:coverage
+      - run: yarn --ignore-engines
+      - run: yarn test:coverage
       - name: Unify different platfrom paths in coverage file
         if: ${{ always() }}
         shell: bash

@@ -10,6 +10,7 @@ describe.each([
   ['3', require('webpack-3/package.json').version, require('webpack-3')],
   ['4', require('webpack-4/package.json').version, require('webpack-4')],
   ['5', require('webpack-5/package.json').version, require('webpack-5')],
+  ['latest', require('webpack-latest/package.json').version, require('webpack-latest')],
 ])('webpack@%s', (name, webpackVersion, webpack) => {
   const testChangesFlow = (...args: PartialTestArguments) => _testChangesFlow(webpackVersion, webpack, ...args);
   describe('VerbosityLevelAllVariants', () => {
