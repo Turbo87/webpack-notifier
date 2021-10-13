@@ -5,12 +5,13 @@ expect.addSnapshotSerializer(reduceArraySerializer);
 expect.addSnapshotSerializer(contentImageSerializer);
 
 describe.each([
-  [require('webpack-1/package.json').version, require('webpack-1')],
-  [require('webpack-2/package.json').version, require('webpack-2')],
-  [require('webpack-3/package.json').version, require('webpack-3')],
-  [require('webpack-4/package.json').version, require('webpack-4')],
-  [require('webpack-latest/package.json').version, require('webpack-latest')],
-])('Webpack %s', (webpackVersion, webpack) => {
+  ['1', require('webpack-1/package.json').version, require('webpack-1')],
+  ['2', require('webpack-2/package.json').version, require('webpack-2')],
+  ['3', require('webpack-3/package.json').version, require('webpack-3')],
+  ['4', require('webpack-4/package.json').version, require('webpack-4')],
+  ['5', require('webpack-5/package.json').version, require('webpack-5')],
+  ['latest', require('webpack-latest/package.json').version, require('webpack-latest')],
+])('webpack@%s', (name, webpackVersion, webpack) => {
   const testChangesFlow = (...args: PartialTestArguments) => _testChangesFlow(webpackVersion, webpack, ...args);
   describe('VerbosityLevelAllVariants', () => {
     describe.each([...generateOptions()])('%j', (opts) => {
