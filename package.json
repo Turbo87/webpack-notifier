@@ -43,7 +43,7 @@
     "@types/jest": "^26.0.15",
     "@types/node-notifier": "^8.0.1",
     "@types/semver": "^7.3.8",
-    "@types/webpack": "^4.41.31",
+    "@types/webpack": ">4.41.31",
     "eslint": "^7.14.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "husky": "^4.3.0",
@@ -61,7 +61,7 @@
     "webpack-latest": "npm:webpack@latest"
   },
   "peerDependencies": {
-    "@types/webpack": "^4.41.31"
+    "@types/webpack": ">4.41.31"
   },
   "peerDependenciesMeta": {
     "@types/webpack": {
