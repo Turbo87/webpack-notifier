@@ -7,11 +7,14 @@
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 // TypeScript Version: 3.9
 
-import { Plugin } from 'webpack';
+import { Compiler } from 'webpack';
 
 export = WebpackNotifierPlugin;
 
-declare const WebpackNotifierPlugin: {new (options?: WebpackNotifierPlugin.Options): Plugin};
+declare class WebpackNotifierPlugin {
+    constructor(options?: WebpackNotifierPlugin.Options);
+    apply(compiler: Compiler): void;
+}
 
 declare namespace WebpackNotifierPlugin {
     interface Options {
