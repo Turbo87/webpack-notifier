@@ -1,4 +1,3 @@
-import { Plugin } from 'webpack';
 import WebpackNotifierPlugin = require('../');
 
 const optionsArray: WebpackNotifierPlugin.Options[] = [
@@ -15,4 +14,4 @@ const optionsArray: WebpackNotifierPlugin.Options[] = [
 	},
 ];
 
-const plugins: Plugin[] = optionsArray.map(options => new WebpackNotifierPlugin(options));
+const plugins: WebpackNotifierPlugin[] = optionsArray.map(options => new WebpackNotifierPlugin(options));
