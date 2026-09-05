@@ -50,7 +50,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: yarn --ignore-engines
       - run: yarn test:coverage
-      - name: Unify different platfrom paths in coverage file
+      - name: Unify different platform paths in coverage file
         if: ${{ always() }}
         shell: bash
         run: |
