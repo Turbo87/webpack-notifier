@@ -67,6 +67,7 @@ jobs:
           name: coverages-${{ matrix.os }}-${{ matrix.node-version }}
           path: ${{ env.coverage-filename }}
           retention-days: 1
+          if-no-files-found: warn
 
   coverage:
     name: Coverage
@@ -104,6 +105,7 @@ jobs:
         with:
           name: coverages
           path: ./**/coverage/
+          if-no-files-found: warn
       - uses: coverallsapp/github-action@v2
         if: ${{ always() }}
         with:
