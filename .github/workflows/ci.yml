@@ -38,6 +38,11 @@ jobs:
           - { os: ubuntu-latest, node-version: 12.x }
           - { os: ubuntu-latest, node-version: 14.x }
           - { os: ubuntu-latest, node-version: 16.x }
+          - { os: ubuntu-latest, node-version: 18.x }
+          - { os: ubuntu-latest, node-version: 20.x }
+          - { os: ubuntu-latest, node-version: 22.x }
+          - { os: ubuntu-latest, node-version: 24.x }
+          - { os: ubuntu-latest, node-version: 26.x }
 
     runs-on: ${{ matrix.os }}
     env:
@@ -49,7 +54,15 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: yarn --ignore-engines
-      - run: yarn test:coverage
+      - name: Test
+        shell: bash
+        run: |
+          # webpack <= 4 uses the md4 hash, which OpenSSL 3 (Node.js >= 17) forbids by default
+          if [ "$(node -p "Number(process.version.slice(1).split('.')[0]) >= 17")" = "true" ]; then
+            echo "Node.js >= 17 detected: enabling --openssl-legacy-provider"
+            export NODE_OPTIONS=--openssl-legacy-provider
+          fi
+          yarn test:coverage
       - name: Unify different platform paths in coverage file
         if: ${{ always() }}
         shell: bash
