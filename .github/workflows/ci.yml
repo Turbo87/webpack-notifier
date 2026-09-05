@@ -9,11 +9,11 @@ on:
 jobs:
   lint:
     name: Lint
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: 14.x
       - run: yarn
@@ -26,26 +26,26 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu-18.04 ]
+        os: [ ubuntu-latest ]
         node-version: [ 14.x ]
         include:
           # different platforms
-          - { os: ubuntu-18.04, node-version: 14.x }
-          - { os: windows-latest, node-version: 14.x }
-          - { os: macos-latest, node-version: 14.x }
+          - { os: ubuntu-latest, node-version: 14.x }
+          - { os: windows-latest, node-version: 16.x }
+          - { os: macos-latest, node-version: 16.x }
           # different Node.js
-          - { os: ubuntu-18.04, node-version: 10.x }
-          - { os: ubuntu-18.04, node-version: 12.x }
-          - { os: ubuntu-18.04, node-version: 14.x }
-          - { os: ubuntu-18.04, node-version: 16.x }
+          - { os: ubuntu-latest, node-version: 10.x }
+          - { os: ubuntu-latest, node-version: 12.x }
+          - { os: ubuntu-latest, node-version: 14.x }
+          - { os: ubuntu-latest, node-version: 16.x }
 
     runs-on: ${{ matrix.os }}
     env:
       coverage-filename: ./coverage-final.${{ matrix.os }}_${{ matrix.node-version }}.json
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
       - run: yarn --ignore-engines
@@ -62,9 +62,9 @@ jobs:
           "
       - name: Save current coverage to artifacts
         if: ${{ always() }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v7
         with:
-          name: coverages
+          name: coverages-${{ matrix.os }}-${{ matrix.node-version }}
           path: ${{ env.coverage-filename }}
           retention-days: 1
 
@@ -72,18 +72,21 @@ jobs:
     name: Coverage
     needs: test
     if: ${{ always() }}
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-      - name: Download all coverage files from previous job
-        uses: actions/download-artifact@v2
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          name: coverages
+          node-version: 16.x
+      - name: Download all coverage files from previous job
+        uses: actions/download-artifact@v8
+        with:
+          pattern: coverages-*
           path: ./coverages
+          merge-multiple: true
       - run: ls -laR ./coverages
       - name: Normalize paths to absolute form
-        run: replace '.cwd' '${{ github.workspace }}' -- *
+        run: sed -i "s|\.cwd|${{ github.workspace }}|g" *
         working-directory: ./coverages
       - run: npx nyc merge ./coverages ./coverage/coverage-final.json
       - run: >-
@@ -96,12 +99,12 @@ jobs:
           -t ./coverage
           --report-dir ./coverage
           --reporter=html --reporter=lcov
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v7
         if: ${{ always() }}
         with:
           name: coverages
           path: ./**/coverage/
-      - uses: coverallsapp/github-action@v1.1.2
+      - uses: coverallsapp/github-action@v2
         if: ${{ always() }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
