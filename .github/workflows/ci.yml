@@ -9,14 +9,14 @@ on:
 jobs:
   lint:
     name: Lint
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: 14.x
-      - run: yarn
+      - run: yarn --ignore-engines
       - run: yarn lint
       - run: yarn tsd
 
@@ -26,31 +26,34 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu-18.04 ]
-        node-version: [ 14.x ]
+        # different Node.js versions (os defaults to ubuntu-latest)
+        os: [ ubuntu-latest ]
+        node-version: [ 10.x, 12.x, 14.x, 16.x, 18.x, 20.x, 22.x, 24.x, 26.x ]
         include:
-          # different platforms
-          - { os: ubuntu-18.04, node-version: 14.x }
-          - { os: windows-latest, node-version: 14.x }
-          - { os: macos-latest, node-version: 14.x }
-          # different Node.js
-          - { os: ubuntu-18.04, node-version: 10.x }
-          - { os: ubuntu-18.04, node-version: 12.x }
-          - { os: ubuntu-18.04, node-version: 14.x }
-          - { os: ubuntu-18.04, node-version: 16.x }
+          # different platforms, always the latest Node.js release
+          - { os: windows-latest, node-version: latest }
+          - { os: macos-latest, node-version: latest }
 
     runs-on: ${{ matrix.os }}
     env:
       coverage-filename: ./coverage-final.${{ matrix.os }}_${{ matrix.node-version }}.json
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
       - run: yarn --ignore-engines
-      - run: yarn test:coverage
-      - name: Unify different platfrom paths in coverage file
+      - name: Test
+        shell: bash
+        run: |
+          # webpack <= 4 uses the md4 hash, which OpenSSL 3 (Node.js >= 17) forbids by default
+          if [ "$(node -p "Number(process.version.slice(1).split('.')[0]) >= 17")" = "true" ]; then
+            echo "Node.js >= 17 detected: enabling --openssl-legacy-provider"
+            export NODE_OPTIONS=--openssl-legacy-provider
+          fi
+          yarn test:coverage
+      - name: Unify different platform paths in coverage file
         if: ${{ always() }}
         shell: bash
         run: |
@@ -62,28 +65,32 @@ jobs:
           "
       - name: Save current coverage to artifacts
         if: ${{ always() }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v7
         with:
-          name: coverages
+          name: coverages-${{ matrix.os }}-${{ matrix.node-version }}
           path: ${{ env.coverage-filename }}
           retention-days: 1
+          if-no-files-found: warn
 
   coverage:
     name: Coverage
     needs: test
     if: ${{ always() }}
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-      - name: Download all coverage files from previous job
-        uses: actions/download-artifact@v2
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          name: coverages
+          node-version: 16.x
+      - name: Download all coverage files from previous job
+        uses: actions/download-artifact@v8
+        with:
+          pattern: coverages-*
           path: ./coverages
+          merge-multiple: true
       - run: ls -laR ./coverages
       - name: Normalize paths to absolute form
-        run: replace '.cwd' '${{ github.workspace }}' -- *
+        run: sed -i "s|\.cwd|${{ github.workspace }}|g" *
         working-directory: ./coverages
       - run: npx nyc merge ./coverages ./coverage/coverage-final.json
       - run: >-
@@ -96,12 +103,13 @@ jobs:
           -t ./coverage
           --report-dir ./coverage
           --reporter=html --reporter=lcov
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v7
         if: ${{ always() }}
         with:
           name: coverages
           path: ./**/coverage/
-      - uses: coverallsapp/github-action@v1.1.2
+          if-no-files-found: warn
+      - uses: coverallsapp/github-action@v2
         if: ${{ always() }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
