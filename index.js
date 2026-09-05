@@ -4,6 +4,8 @@ var os = require('os');
 var notifier = require('node-notifier');
 
 var DEFAULT_LOGO = path.join(__dirname, 'logo.png');
+var MAX_NOTIFICATION_MESSAGE_LENGTH = 5000;
+var MAX_NOTIFICATION_TITLE_LENGTH = 1000;
 
 function WebpackNotifierPlugin(options) {
   this.options = options || {};
@@ -25,6 +27,26 @@ function findFirstDFS(compilation, key) {
       return match;
     }
   }
+}
+
+// Notification messages are passed to the OS notification daemon as command
+// line arguments. Windows rejects command lines longer than 32767 characters,
+// and the SnoreToast binary hangs for messages above ~12000 characters.
+// Truncating notifications keeps them working on all platforms.
+function truncateMessage(message) {
+  if (message.length > MAX_NOTIFICATION_MESSAGE_LENGTH) {
+    var truncatedCount = message.length - MAX_NOTIFICATION_MESSAGE_LENGTH;
+    return message.slice(0, MAX_NOTIFICATION_MESSAGE_LENGTH)
+      + '\n(message truncated: ' + truncatedCount + ' characters)';
+  }
+  return message;
+}
+
+function truncateTitle(title) {
+  if (typeof title === 'string' && title.length > MAX_NOTIFICATION_TITLE_LENGTH) {
+    return title.slice(0, MAX_NOTIFICATION_TITLE_LENGTH);
+  }
+  return title;
 }
 
 WebpackNotifierPlugin.prototype.compileEndOptions = function compileEndOptions(stats) {
@@ -130,8 +152,8 @@ WebpackNotifierPlugin.prototype.compilationDone = function compilationDone(stats
       {},
       this.options,
       {
-        title,
-        message,
+        title: truncateTitle(title),
+        message: truncateMessage(message),
         contentImage,
         icon
       }
