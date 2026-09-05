@@ -2,6 +2,32 @@
 Changelog
 ===============================================================================
 
+v1.16.0
+-------------------------------------------------------------------------------
+  
+- Truncate notification messages to prevent Windows spawn errors (ENAMETOOLONG) on long builds  ([#81](https://github.com/Turbo87/webpack-notifier/pull/81), [Closes #20](https://github.com/Turbo87/webpack-notifier/issues/20))
+- Document all `node-notifier` options
+
+
+v1.15.0
+-------------------------------------------------------------------------------
+  
+- Allow TypeScript typings to work with webpack@5  ([#75](https://github.com/Turbo87/webpack-notifier/pull/75))
+
+
+v1.14.1
+-------------------------------------------------------------------------------
+  
+- fix(publish): fix `files` in package.json to include the type definitions  ([#72](https://github.com/Turbo87/webpack-notifier/pull/72), [Closes #70](https://github.com/Turbo87/webpack-notifier/issues/70))
+
+
+v1.14.0
+-------------------------------------------------------------------------------
+  
+- Add TypeScript definition file  ([#67](https://github.com/Turbo87/webpack-notifier/pull/67))
+- Use `tsd` instead of `dtslint` for type tests
+
+
 v1.13.0
 -------------------------------------------------------------------------------
   
