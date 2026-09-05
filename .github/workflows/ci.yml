@@ -26,23 +26,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        # different Node.js versions (os defaults to ubuntu-latest)
         os: [ ubuntu-latest ]
-        node-version: [ 14.x ]
+        node-version: [ 10.x, 12.x, 14.x, 16.x, 18.x, 20.x, 22.x, 24.x, 26.x ]
         include:
-          # different platforms
-          - { os: ubuntu-latest, node-version: 14.x }
-          - { os: windows-latest, node-version: 16.x }
-          - { os: macos-latest, node-version: 16.x }
-          # different Node.js
-          - { os: ubuntu-latest, node-version: 10.x }
-          - { os: ubuntu-latest, node-version: 12.x }
-          - { os: ubuntu-latest, node-version: 14.x }
-          - { os: ubuntu-latest, node-version: 16.x }
-          - { os: ubuntu-latest, node-version: 18.x }
-          - { os: ubuntu-latest, node-version: 20.x }
-          - { os: ubuntu-latest, node-version: 22.x }
-          - { os: ubuntu-latest, node-version: 24.x }
-          - { os: ubuntu-latest, node-version: 26.x }
+          # different platforms, always the latest Node.js release
+          - { os: windows-latest, node-version: latest }
+          - { os: macos-latest, node-version: latest }
 
     runs-on: ${{ matrix.os }}
     env:
