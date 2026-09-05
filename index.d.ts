@@ -28,6 +28,12 @@ declare namespace WebpackNotifierPlugin {
          * Use emoji in notifications
          */
         emoji?: boolean;
+        /**
+         * Additional options passed to `node-notifier` on every notification
+         *
+         * @since v1.17.0
+         */
+        notifyOptions?: {[key: string]: unknown};
     }
 
     /** @deprecated use Options */

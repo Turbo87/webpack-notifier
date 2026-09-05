@@ -134,4 +134,12 @@ describe('WebpackNotifierPlugin (unit, no webpack)', () => {
     expect(notify).toHaveBeenCalledTimes(1);
     expect(notifyOptions().appID).toBe('com.squirrel.your.app');
   });
+
+  test('forwards notifyOptions to node-notifier without the container itself', () => {
+    const plugin = createPlugin({notifyOptions: {appID: 'com.squirrel.your.app'}});
+    plugin.compilationDone(createSuccessStats());
+
+    expect(notifyOptions().appID).toBe('com.squirrel.your.app');
+    expect(notifyOptions()).not.toHaveProperty('notifyOptions');
+  });
 });

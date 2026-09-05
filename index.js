@@ -148,9 +148,14 @@ WebpackNotifierPlugin.prototype.compilationDone = function compilationDone(stats
       ? contentImage
       : undefined;
 
+    // `notifyOptions` is a plugin option, its contents are merged into the
+    // notification options below and the option itself is not forwarded
+    var options = Object.assign({}, this.options);
+    delete options.notifyOptions;
+    Object.assign(options, this.options.notifyOptions);
+
     notifier.notify(Object.assign(
-      {},
-      this.options,
+      options,
       {
         title: truncateTitle(title),
         message: truncateMessage(message),

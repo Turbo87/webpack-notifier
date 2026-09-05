@@ -118,5 +118,10 @@ describe.each([
         [['successful'], {appID: 'com.squirrel.your.app'} as unknown as PartialTestArguments[1]], // TODO mark as deprecate at v2.x
       ])('%j %j', testChangesFlow, 10e3);
     });
+    describe('notifyOptions', () => {
+      test.each([
+        [['successful'], {notifyOptions: {appID: 'com.squirrel.your.app'}}],
+      ])('%j %j', testChangesFlow, 10e3);
+    });
   });
 });
