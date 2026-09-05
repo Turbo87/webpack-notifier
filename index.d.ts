@@ -34,7 +34,25 @@ declare namespace WebpackNotifierPlugin {
          * @since v1.17.0
          */
         notifyOptions?: {[key: string]: unknown};
+        /**
+         * `node-notifier` notifier to use: the name of one of its exported
+         * notifier classes ('NotificationCenter', 'WindowsToaster',
+         * 'WindowsBalloon', 'Growl', 'NotifySend') or the class itself
+         *
+         * @since v1.17.0
+         */
+        notifier?: string | NotifierConstructor;
+        /**
+         * Options passed to the notifier constructor (see `notifier`)
+         *
+         * @since v1.17.0
+         */
+        notifierOptions?: {[key: string]: unknown};
     }
+
+    type NotifierConstructor = new (options?: object) => {
+        notify(options: object, callback?: (...args: unknown[]) => void): unknown;
+    };
 
     /** @deprecated use Options */
     type Config = Options;

@@ -86,6 +86,31 @@ new WebpackNotifierPlugin({
 * `contentImage` - it can be an object with images for different statuses
 * `icon` - matches with `contentImage`
 
+### notifier / notifierOptions
+
+> Since v1.17.
+
+By default the plugin notifies through the `node-notifier` notifier selected for your OS.
+Use `notifier` to pick another notifier and `notifierOptions` to configure its constructor:
+
+```js
+var nodeNotifier = require('node-notifier');
+
+new WebpackNotifierPlugin({
+  notifier: nodeNotifier.WindowsToaster, // or just 'WindowsToaster'
+  notifierOptions: {
+    withFallback: false, // do not fall back to balloon notifications
+  },
+});
+```
+
+`notifier` accepts the name of one of the notifiers exported by
+[node-notifier](https://www.npmjs.com/package/node-notifier)
+(`NotificationCenter`, `WindowsToaster`, `WindowsBalloon`, `Growl`, `NotifySend`)
+or the constructor itself. `notifierOptions` are passed to the notifier
+constructor — see the `node-notifier` documentation for the options supported
+by each notifier (e.g. `withFallback`, `customPath`).
+
 ### Title
 
 Title shown in the notification.

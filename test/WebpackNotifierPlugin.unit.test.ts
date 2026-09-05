@@ -142,4 +142,30 @@ describe('WebpackNotifierPlugin (unit, no webpack)', () => {
     expect(notifyOptions().appID).toBe('com.squirrel.your.app');
     expect(notifyOptions()).not.toHaveProperty('notifyOptions');
   });
+
+  test('uses the custom notifier with notifierOptions', () => {
+    let constructorOptions: unknown;
+    class FakeNotifier {
+      constructor(options: unknown) {
+        constructorOptions = options;
+      }
+      notify(options: unknown) {
+        (notify as jest.Mock)(options);
+      }
+    }
+
+    const plugin = createPlugin({
+      notifier: FakeNotifier,
+      notifierOptions: {withFallback: false},
+    });
+    plugin.compilationDone(createSuccessStats());
+
+    expect(constructorOptions).toEqual({withFallback: false});
+    expect(notify).toHaveBeenCalledTimes(1);
+    expect(notifyOptions().message).toBe('Build successful');
+  });
+
+  test('throws on an unknown notifier name', () => {
+    expect(() => createPlugin({notifier: 'UnknownNotifier'})).toThrow(/unknown notifier/);
+  });
 });
