@@ -170,11 +170,18 @@ WebpackNotifierPlugin.prototype.compilationDone = function compilationDone(stats
       ? contentImage
       : undefined;
 
-    // plugin-level options are not node-notifier options and are not forwarded
+    // plugin-owned options must never reach node-notifier
     var options = Object.assign({}, this.options);
     delete options.notifyOptions;
     delete options.notifier;
     delete options.notifierOptions;
+    delete options.alwaysNotify;
+    delete options.emoji;
+    delete options.excludeWarnings;
+    delete options.onlyOnError;
+    delete options.skipFirstNotification;
+    // deprecated root passthrough: node-notifier options (e.g. appID) keep
+    // being spread from the root until v2
     Object.assign(options, this.options.notifyOptions);
     // node-notifier maps these aliases onto `message`/`icon`/`appID` only after
     // this plugin truncates its own fields, which would reopen the Windows

@@ -145,12 +145,14 @@ describe('WebpackNotifierPlugin (unit, no webpack)', () => {
 
   test('drops node-notifier message/icon aliases from notifyOptions', () => {
     const plugin = createPlugin({
+      // aliases are not modelled by @types/node-notifier; a JS caller can still
+      // pass them, so they are cast here
       notifyOptions: {
         text: 'x'.repeat(40000),
         appIcon: 'icon.png',
         appName: 'MyApp',
         i: 'icon2.png',
-      },
+      } as unknown as Options['notifyOptions'],
     });
     plugin.compilationDone(createSuccessStats());
 
@@ -168,6 +170,22 @@ describe('WebpackNotifierPlugin (unit, no webpack)', () => {
 
     expect(notifyOptions().appID).toBe('com.squirrel.your.app');
     expect(notifyOptions()).not.toHaveProperty('notifyOptions');
+  });
+
+  test('strips plugin-owned root options but keeps node-notifier ones (until v2)', () => {
+    const plugin = createPlugin({
+      alwaysNotify: true,
+      emoji: true,
+      excludeWarnings: true,
+      appID: 'com.squirrel.your.app', // TODO mark as deprecate at v2.x
+    } as unknown as Options);
+    plugin.compilationDone(createSuccessStats());
+
+    expect(notify).toHaveBeenCalledTimes(1);
+    expect(notifyOptions().appID).toBe('com.squirrel.your.app');
+    expect(notifyOptions()).not.toHaveProperty('alwaysNotify');
+    expect(notifyOptions()).not.toHaveProperty('emoji');
+    expect(notifyOptions()).not.toHaveProperty('excludeWarnings');
   });
 
   test('uses the custom notifier with notifierOptions', () => {
