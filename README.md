@@ -91,7 +91,9 @@ new WebpackNotifierPlugin({
 > Since v1.17.
 
 By default the plugin notifies through the `node-notifier` notifier selected for your OS.
-Use `notifier` to pick another notifier and `notifierOptions` to configure its constructor:
+Use `notifier` to pick another notifier and `notifierOptions` to configure its
+constructor. `notifierOptions` without `notifier` configure the constructor of
+the notifier selected for your OS:
 
 ```js
 var nodeNotifier = require('node-notifier');

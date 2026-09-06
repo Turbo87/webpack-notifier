@@ -8,7 +8,12 @@ var MAX_NOTIFICATION_MESSAGE_LENGTH = 5000;
 var MAX_NOTIFICATION_TITLE_LENGTH = 1000;
 
 function WebpackNotifierPlugin(options) {
-  this.options = options || {};
+  // defaults mirror the notifier instance node-notifier creates for the OS
+  this.options = Object.assign(
+    {},
+    { notifier: nodeNotifier.Notification, notifierOptions: { withFallback: true } },
+    options
+  );
   this.notifier = this.createNotifier();
   this.lastBuildSucceeded = false;
   this.isFirstBuild = true;
@@ -31,10 +36,6 @@ function findFirstDFS(compilation, key) {
 }
 
 WebpackNotifierPlugin.prototype.createNotifier = function createNotifier() {
-  if (!this.options.notifier) {
-    return nodeNotifier;
-  }
-
   var Notifier = typeof this.options.notifier === 'string'
     ? nodeNotifier[this.options.notifier]
     : this.options.notifier;

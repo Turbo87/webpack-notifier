@@ -1,5 +1,12 @@
 import WebpackNotifierPlugin, {Options} from '../';
-import {notify} from 'node-notifier';
+import nodeNotifier = require('node-notifier');
+
+const notify = nodeNotifier.notify;
+// `notificationConstructorOptions` is exported by __mocks__/node-notifier.ts
+// and is absent from the @types/node-notifier declarations
+const notificationConstructorOptions = (nodeNotifier as unknown as {
+  notificationConstructorOptions: unknown[];
+}).notificationConstructorOptions;
 
 // index.d.ts only declares `apply()`, but `compilationDone()` exists at
 // runtime — the intersection type below models that.
@@ -71,6 +78,7 @@ function notifyOptions() {
 
 beforeEach(() => {
   (notify as jest.Mock).mockReset();
+  notificationConstructorOptions.length = 0;
 });
 
 describe('WebpackNotifierPlugin (unit, no webpack)', () => {
@@ -167,5 +175,21 @@ describe('WebpackNotifierPlugin (unit, no webpack)', () => {
 
   test('throws on an unknown notifier name', () => {
     expect(() => createPlugin({notifier: 'UnknownNotifier'})).toThrow(/unknown notifier/);
+  });
+
+  test('uses notifierOptions without notifier to create the platform default notifier', () => {
+    createPlugin();
+
+    expect(notificationConstructorOptions).toEqual([{withFallback: true}]);
+
+    const plugin = createPlugin({notifierOptions: {customPath: 'C:/custom/my.exe'}});
+    plugin.compilationDone(createSuccessStats());
+
+    expect(notificationConstructorOptions).toEqual([
+      {withFallback: true},
+      {customPath: 'C:/custom/my.exe'},
+    ]);
+    expect(notify).toHaveBeenCalledTimes(1);
+    expect(notifyOptions().message).toBe('Build successful');
   });
 });
