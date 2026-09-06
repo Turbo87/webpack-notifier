@@ -143,6 +143,25 @@ describe('WebpackNotifierPlugin (unit, no webpack)', () => {
     expect(notifyOptions().appID).toBe('com.squirrel.your.app');
   });
 
+  test('drops node-notifier message/icon aliases from notifyOptions', () => {
+    const plugin = createPlugin({
+      notifyOptions: {
+        text: 'x'.repeat(40000),
+        appIcon: 'icon.png',
+        appName: 'MyApp',
+        i: 'icon2.png',
+      },
+    });
+    plugin.compilationDone(createSuccessStats());
+
+    expect(notify).toHaveBeenCalledTimes(1);
+    expect(notifyOptions().message).toBe('Build successful');
+    expect(notifyOptions()).not.toHaveProperty('text');
+    expect(notifyOptions()).not.toHaveProperty('appIcon');
+    expect(notifyOptions()).not.toHaveProperty('appName');
+    expect(notifyOptions()).not.toHaveProperty('i');
+  });
+
   test('forwards notifyOptions to node-notifier without the container itself', () => {
     const plugin = createPlugin({notifyOptions: {appID: 'com.squirrel.your.app'}});
     plugin.compilationDone(createSuccessStats());

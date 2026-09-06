@@ -176,6 +176,13 @@ WebpackNotifierPlugin.prototype.compilationDone = function compilationDone(stats
     delete options.notifier;
     delete options.notifierOptions;
     Object.assign(options, this.options.notifyOptions);
+    // node-notifier maps these aliases onto `message`/`icon`/`appID` only after
+    // this plugin truncates its own fields, which would reopen the Windows
+    // ENAMETOOLONG crash - so they are dropped, use the canonical keys instead
+    delete options.text;
+    delete options.appIcon;
+    delete options.i;
+    delete options.appName;
 
     this.notifier.notify(Object.assign(
       options,
