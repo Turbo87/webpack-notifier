@@ -8,6 +8,7 @@
 // TypeScript Version: 3.9
 
 import { Compiler } from 'webpack';
+import nodeNotifier = require('node-notifier');
 
 export = WebpackNotifierPlugin;
 
@@ -33,7 +34,7 @@ declare namespace WebpackNotifierPlugin {
          *
          * @since v1.17.0
          */
-        notifyOptions?: {[key: string]: unknown};
+        notifyOptions?: NotifyOptions;
         /**
          * `node-notifier` notifier to use: the name of one of its exported
          * notifier classes ('NotificationCenter', 'WindowsToaster',
@@ -47,9 +48,44 @@ declare namespace WebpackNotifierPlugin {
          *
          * @since v1.17.0
          */
-        notifierOptions?: {[key: string]: unknown};
+        notifierOptions?: NotifierConstructorOptions;
     }
 
+    type NotificationCenter = typeof nodeNotifier.NotificationCenter;
+    type WindowsToaster = typeof nodeNotifier.WindowsToaster;
+    type WindowsBalloon = typeof nodeNotifier.WindowsBalloon;
+    type NotifySend = typeof nodeNotifier.NotifySend;
+    type Growl = typeof nodeNotifier.Growl;
+
+    type NotifyOptionsOf<C extends new (...args: any[]) => any> =
+        NonNullable<Parameters<InstanceType<C>['notify']>[0]>;
+    type ConstructorOptionsOf<C extends new (...args: any[]) => any> =
+        NonNullable<ConstructorParameters<C>[0]>;
+
+    /**
+     * Options accepted by the `notify` method of any node-notifier notifier.
+     * When no `notifier` is set, all of these are available.
+     */
+    type NotifyOptions =
+        | NotifyOptionsOf<NotificationCenter>
+        | NotifyOptionsOf<WindowsToaster>
+        | NotifyOptionsOf<WindowsBalloon>
+        | NotifyOptionsOf<NotifySend>
+        | NotifyOptionsOf<Growl>;
+
+    /**
+     * Options accepted by the constructor of any node-notifier notifier.
+     */
+    type NotifierConstructorOptions =
+        | ConstructorOptionsOf<NotificationCenter>
+        | ConstructorOptionsOf<WindowsToaster>
+        | ConstructorOptionsOf<WindowsBalloon>
+        | ConstructorOptionsOf<NotifySend>
+        | ConstructorOptionsOf<Growl>;
+
+    /**
+     * A node-notifier notifier class, e.g. `require('node-notifier').WindowsToaster`.
+     */
     type NotifierConstructor = new (options?: object) => {
         notify(options: object, callback?: (...args: unknown[]) => void): unknown;
     };
