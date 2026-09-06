@@ -69,7 +69,6 @@ Object {
 exports[`webpack@1 WebpackNotifierPlugin emoji message ["error"] {"emoji":true} %j: after "error" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
-  "emoji": true,
   "message": "❌ Error: /entry.js
 SyntaxError: Unexpected token (1:8)",
   "title": "Webpack",
@@ -79,7 +78,6 @@ SyntaxError: Unexpected token (1:8)",
 exports[`webpack@1 WebpackNotifierPlugin emoji message ["successful"] {"emoji":true} %j: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
-  "emoji": true,
   "message": "✅ Build successful",
   "title": "Webpack",
 }
@@ -88,7 +86,6 @@ Object {
 exports[`webpack@1 WebpackNotifierPlugin emoji message ["successful"] {"emoji":true} {"plugins":[{}]}: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
-  "emoji": true,
   "message": "⚠️ Warning: Custom Warning message",
   "title": "Webpack",
 }
@@ -97,9 +94,17 @@ Object {
 exports[`webpack@1 WebpackNotifierPlugin emoji message ["warning"] {"emoji":true} %j: after "warning" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
-  "emoji": true,
   "message": "⚠️ Warning: /entry.js
 require.extensions is not supported by webpack. Use a loader instead.",
+  "title": "Webpack",
+}
+`;
+
+exports[`webpack@1 WebpackNotifierPlugin notifyOptions ["successful"] {"notifyOptions":{"appID":"com.squirrel.your.app"}}: after "successful" build 1`] = `
+Object {
+  "appID": "com.squirrel.your.app",
+  "contentImage": "__dirname/logo.png",
+  "message": "Build successful",
   "title": "Webpack",
 }
 `;
@@ -126,6 +131,15 @@ Object {
   "contentImage": "__dirname/logo.png",
   "message": "Warning: /entry.js
 require.extensions is not supported by webpack. Use a loader instead.",
+  "title": "Webpack",
+}
+`;
+
+exports[`webpack@1 WebpackNotifierPlugin passing node-notifier options directly ["successful"] {"appID":"com.squirrel.your.app"}: after "successful" build 1`] = `
+Object {
+  "appID": "com.squirrel.your.app",
+  "contentImage": "__dirname/logo.png",
+  "message": "Build successful",
   "title": "Webpack",
 }
 `;
@@ -202,7 +216,6 @@ require.extensions is not supported by webpack. Use a loader instead.",
 
 exports[`webpack@1 WebpackNotifierPlugin verbosity level configuration Always Notify ["successful","successful"] {"alwaysNotify":true}: after "successful" build 1`] = `
 Object {
-  "alwaysNotify": true,
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
   "title": "Webpack",
@@ -211,7 +224,6 @@ Object {
 
 exports[`webpack@1 WebpackNotifierPlugin verbosity level configuration Always Notify ["successful","successful"] {"alwaysNotify":true}: after "successful" build 2`] = `
 Object {
-  "alwaysNotify": true,
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
   "title": "Webpack",
@@ -259,7 +271,6 @@ exports[`webpack@1 WebpackNotifierPlugin verbosity level configuration Default [
 exports[`webpack@1 WebpackNotifierPlugin verbosity level configuration Exclude Warnings ["warning"] {"excludeWarnings":true}: after "warning" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
-  "excludeWarnings": true,
   "message": "Build successful",
   "title": "Webpack",
 }
@@ -270,7 +281,6 @@ Object {
   "contentImage": "__dirname/logo.png",
   "message": "Error: /entry.js
 SyntaxError: Unexpected token (1:8)",
-  "onlyOnError": true,
   "title": "Webpack",
 }
 `;
@@ -285,7 +295,6 @@ exports[`webpack@1 WebpackNotifierPlugin verbosity level configuration Skip Noti
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
-  "skipFirstNotification": true,
   "title": "Webpack",
 }
 `;
@@ -359,7 +368,6 @@ Object {
 exports[`webpack@2 WebpackNotifierPlugin emoji message ["error"] {"emoji":true} %j: after "error" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
-  "emoji": true,
   "message": "❌ Error: /entry.js
 SyntaxError: Unexpected token (1:8)",
   "title": "Webpack",
@@ -369,7 +377,6 @@ SyntaxError: Unexpected token (1:8)",
 exports[`webpack@2 WebpackNotifierPlugin emoji message ["successful"] {"emoji":true} %j: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
-  "emoji": true,
   "message": "✅ Build successful",
   "title": "Webpack",
 }
@@ -378,7 +385,6 @@ Object {
 exports[`webpack@2 WebpackNotifierPlugin emoji message ["successful"] {"emoji":true} {"plugins":[{}]}: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
-  "emoji": true,
   "message": "⚠️ Warning: Custom Warning message",
   "title": "Webpack",
 }
@@ -387,9 +393,17 @@ Object {
 exports[`webpack@2 WebpackNotifierPlugin emoji message ["warning"] {"emoji":true} %j: after "warning" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
-  "emoji": true,
   "message": "⚠️ Warning: /entry.js
 require.extensions is not supported by webpack. Use a loader instead.",
+  "title": "Webpack",
+}
+`;
+
+exports[`webpack@2 WebpackNotifierPlugin notifyOptions ["successful"] {"notifyOptions":{"appID":"com.squirrel.your.app"}}: after "successful" build 1`] = `
+Object {
+  "appID": "com.squirrel.your.app",
+  "contentImage": "__dirname/logo.png",
+  "message": "Build successful",
   "title": "Webpack",
 }
 `;
@@ -416,6 +430,15 @@ Object {
   "contentImage": "__dirname/logo.png",
   "message": "Warning: /entry.js
 require.extensions is not supported by webpack. Use a loader instead.",
+  "title": "Webpack",
+}
+`;
+
+exports[`webpack@2 WebpackNotifierPlugin passing node-notifier options directly ["successful"] {"appID":"com.squirrel.your.app"}: after "successful" build 1`] = `
+Object {
+  "appID": "com.squirrel.your.app",
+  "contentImage": "__dirname/logo.png",
+  "message": "Build successful",
   "title": "Webpack",
 }
 `;
@@ -492,7 +515,6 @@ require.extensions is not supported by webpack. Use a loader instead.",
 
 exports[`webpack@2 WebpackNotifierPlugin verbosity level configuration Always Notify ["successful","successful"] {"alwaysNotify":true}: after "successful" build 1`] = `
 Object {
-  "alwaysNotify": true,
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
   "title": "Webpack",
@@ -501,7 +523,6 @@ Object {
 
 exports[`webpack@2 WebpackNotifierPlugin verbosity level configuration Always Notify ["successful","successful"] {"alwaysNotify":true}: after "successful" build 2`] = `
 Object {
-  "alwaysNotify": true,
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
   "title": "Webpack",
@@ -549,7 +570,6 @@ exports[`webpack@2 WebpackNotifierPlugin verbosity level configuration Default [
 exports[`webpack@2 WebpackNotifierPlugin verbosity level configuration Exclude Warnings ["warning"] {"excludeWarnings":true}: after "warning" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
-  "excludeWarnings": true,
   "message": "Build successful",
   "title": "Webpack",
 }
@@ -560,7 +580,6 @@ Object {
   "contentImage": "__dirname/logo.png",
   "message": "Error: /entry.js
 SyntaxError: Unexpected token (1:8)",
-  "onlyOnError": true,
   "title": "Webpack",
 }
 `;
@@ -575,7 +594,6 @@ exports[`webpack@2 WebpackNotifierPlugin verbosity level configuration Skip Noti
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
-  "skipFirstNotification": true,
   "title": "Webpack",
 }
 `;
@@ -649,7 +667,6 @@ Object {
 exports[`webpack@3 WebpackNotifierPlugin emoji message ["error"] {"emoji":true} %j: after "error" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
-  "emoji": true,
   "message": "❌ Error: /entry.js
 SyntaxError: Unexpected token (1:8)",
   "title": "Webpack",
@@ -659,7 +676,6 @@ SyntaxError: Unexpected token (1:8)",
 exports[`webpack@3 WebpackNotifierPlugin emoji message ["successful"] {"emoji":true} %j: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
-  "emoji": true,
   "message": "✅ Build successful",
   "title": "Webpack",
 }
@@ -668,7 +684,6 @@ Object {
 exports[`webpack@3 WebpackNotifierPlugin emoji message ["successful"] {"emoji":true} {"plugins":[{}]}: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
-  "emoji": true,
   "message": "⚠️ Warning: Custom Warning message",
   "title": "Webpack",
 }
@@ -677,9 +692,17 @@ Object {
 exports[`webpack@3 WebpackNotifierPlugin emoji message ["warning"] {"emoji":true} %j: after "warning" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
-  "emoji": true,
   "message": "⚠️ Warning: /entry.js
 require.extensions is not supported by webpack. Use a loader instead.",
+  "title": "Webpack",
+}
+`;
+
+exports[`webpack@3 WebpackNotifierPlugin notifyOptions ["successful"] {"notifyOptions":{"appID":"com.squirrel.your.app"}}: after "successful" build 1`] = `
+Object {
+  "appID": "com.squirrel.your.app",
+  "contentImage": "__dirname/logo.png",
+  "message": "Build successful",
   "title": "Webpack",
 }
 `;
@@ -706,6 +729,15 @@ Object {
   "contentImage": "__dirname/logo.png",
   "message": "Warning: /entry.js
 require.extensions is not supported by webpack. Use a loader instead.",
+  "title": "Webpack",
+}
+`;
+
+exports[`webpack@3 WebpackNotifierPlugin passing node-notifier options directly ["successful"] {"appID":"com.squirrel.your.app"}: after "successful" build 1`] = `
+Object {
+  "appID": "com.squirrel.your.app",
+  "contentImage": "__dirname/logo.png",
+  "message": "Build successful",
   "title": "Webpack",
 }
 `;
@@ -782,7 +814,6 @@ require.extensions is not supported by webpack. Use a loader instead.",
 
 exports[`webpack@3 WebpackNotifierPlugin verbosity level configuration Always Notify ["successful","successful"] {"alwaysNotify":true}: after "successful" build 1`] = `
 Object {
-  "alwaysNotify": true,
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
   "title": "Webpack",
@@ -791,7 +822,6 @@ Object {
 
 exports[`webpack@3 WebpackNotifierPlugin verbosity level configuration Always Notify ["successful","successful"] {"alwaysNotify":true}: after "successful" build 2`] = `
 Object {
-  "alwaysNotify": true,
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
   "title": "Webpack",
@@ -839,7 +869,6 @@ exports[`webpack@3 WebpackNotifierPlugin verbosity level configuration Default [
 exports[`webpack@3 WebpackNotifierPlugin verbosity level configuration Exclude Warnings ["warning"] {"excludeWarnings":true}: after "warning" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
-  "excludeWarnings": true,
   "message": "Build successful",
   "title": "Webpack",
 }
@@ -850,7 +879,6 @@ Object {
   "contentImage": "__dirname/logo.png",
   "message": "Error: /entry.js
 SyntaxError: Unexpected token (1:8)",
-  "onlyOnError": true,
   "title": "Webpack",
 }
 `;
@@ -865,7 +893,6 @@ exports[`webpack@3 WebpackNotifierPlugin verbosity level configuration Skip Noti
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
-  "skipFirstNotification": true,
   "title": "Webpack",
 }
 `;
@@ -939,7 +966,6 @@ Object {
 exports[`webpack@4 WebpackNotifierPlugin emoji message ["error"] {"emoji":true} %j: after "error" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
-  "emoji": true,
   "message": "❌ Error: /entry.js
 SyntaxError: Unexpected token (1:8)",
   "title": "Webpack",
@@ -949,7 +975,6 @@ SyntaxError: Unexpected token (1:8)",
 exports[`webpack@4 WebpackNotifierPlugin emoji message ["successful"] {"emoji":true} %j: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
-  "emoji": true,
   "message": "✅ Build successful",
   "title": "Webpack",
 }
@@ -958,7 +983,6 @@ Object {
 exports[`webpack@4 WebpackNotifierPlugin emoji message ["successful"] {"emoji":true} {"plugins":[{}]}: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
-  "emoji": true,
   "message": "⚠️ Warning: Custom Warning message",
   "title": "Webpack",
 }
@@ -967,9 +991,17 @@ Object {
 exports[`webpack@4 WebpackNotifierPlugin emoji message ["warning"] {"emoji":true} %j: after "warning" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
-  "emoji": true,
   "message": "⚠️ Warning: /entry.js
 require.extensions is not supported by webpack. Use a loader instead.",
+  "title": "Webpack",
+}
+`;
+
+exports[`webpack@4 WebpackNotifierPlugin notifyOptions ["successful"] {"notifyOptions":{"appID":"com.squirrel.your.app"}}: after "successful" build 1`] = `
+Object {
+  "appID": "com.squirrel.your.app",
+  "contentImage": "__dirname/logo.png",
+  "message": "Build successful",
   "title": "Webpack",
 }
 `;
@@ -996,6 +1028,15 @@ Object {
   "contentImage": "__dirname/logo.png",
   "message": "Warning: /entry.js
 require.extensions is not supported by webpack. Use a loader instead.",
+  "title": "Webpack",
+}
+`;
+
+exports[`webpack@4 WebpackNotifierPlugin passing node-notifier options directly ["successful"] {"appID":"com.squirrel.your.app"}: after "successful" build 1`] = `
+Object {
+  "appID": "com.squirrel.your.app",
+  "contentImage": "__dirname/logo.png",
+  "message": "Build successful",
   "title": "Webpack",
 }
 `;
@@ -1072,7 +1113,6 @@ require.extensions is not supported by webpack. Use a loader instead.",
 
 exports[`webpack@4 WebpackNotifierPlugin verbosity level configuration Always Notify ["successful","successful"] {"alwaysNotify":true}: after "successful" build 1`] = `
 Object {
-  "alwaysNotify": true,
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
   "title": "Webpack",
@@ -1081,7 +1121,6 @@ Object {
 
 exports[`webpack@4 WebpackNotifierPlugin verbosity level configuration Always Notify ["successful","successful"] {"alwaysNotify":true}: after "successful" build 2`] = `
 Object {
-  "alwaysNotify": true,
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
   "title": "Webpack",
@@ -1129,7 +1168,6 @@ exports[`webpack@4 WebpackNotifierPlugin verbosity level configuration Default [
 exports[`webpack@4 WebpackNotifierPlugin verbosity level configuration Exclude Warnings ["warning"] {"excludeWarnings":true}: after "warning" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
-  "excludeWarnings": true,
   "message": "Build successful",
   "title": "Webpack",
 }
@@ -1140,7 +1178,6 @@ Object {
   "contentImage": "__dirname/logo.png",
   "message": "Error: /entry.js
 SyntaxError: Unexpected token (1:8)",
-  "onlyOnError": true,
   "title": "Webpack",
 }
 `;
@@ -1155,7 +1192,6 @@ exports[`webpack@4 WebpackNotifierPlugin verbosity level configuration Skip Noti
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
-  "skipFirstNotification": true,
   "title": "Webpack",
 }
 `;
@@ -1229,7 +1265,6 @@ Object {
 exports[`webpack@5 WebpackNotifierPlugin emoji message ["error"] {"emoji":true} %j: after "error" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
-  "emoji": true,
   "message": "❌ Error: /entry.js
 SyntaxError: Unexpected token (1:8)",
   "title": "Webpack",
@@ -1239,7 +1274,6 @@ SyntaxError: Unexpected token (1:8)",
 exports[`webpack@5 WebpackNotifierPlugin emoji message ["successful"] {"emoji":true} %j: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
-  "emoji": true,
   "message": "✅ Build successful",
   "title": "Webpack",
 }
@@ -1248,7 +1282,6 @@ Object {
 exports[`webpack@5 WebpackNotifierPlugin emoji message ["successful"] {"emoji":true} {"plugins":[{}]}: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
-  "emoji": true,
   "message": "⚠️ Warning: Custom Warning message",
   "title": "Webpack",
 }
@@ -1257,9 +1290,17 @@ Object {
 exports[`webpack@5 WebpackNotifierPlugin emoji message ["warning"] {"emoji":true} %j: after "warning" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
-  "emoji": true,
   "message": "⚠️ Warning: /entry.js
 require.extensions is not supported by webpack. Use a loader instead.",
+  "title": "Webpack",
+}
+`;
+
+exports[`webpack@5 WebpackNotifierPlugin notifyOptions ["successful"] {"notifyOptions":{"appID":"com.squirrel.your.app"}}: after "successful" build 1`] = `
+Object {
+  "appID": "com.squirrel.your.app",
+  "contentImage": "__dirname/logo.png",
+  "message": "Build successful",
   "title": "Webpack",
 }
 `;
@@ -1286,6 +1327,15 @@ Object {
   "contentImage": "__dirname/logo.png",
   "message": "Warning: /entry.js
 require.extensions is not supported by webpack. Use a loader instead.",
+  "title": "Webpack",
+}
+`;
+
+exports[`webpack@5 WebpackNotifierPlugin passing node-notifier options directly ["successful"] {"appID":"com.squirrel.your.app"}: after "successful" build 1`] = `
+Object {
+  "appID": "com.squirrel.your.app",
+  "contentImage": "__dirname/logo.png",
+  "message": "Build successful",
   "title": "Webpack",
 }
 `;
@@ -1362,7 +1412,6 @@ require.extensions is not supported by webpack. Use a loader instead.",
 
 exports[`webpack@5 WebpackNotifierPlugin verbosity level configuration Always Notify ["successful","successful"] {"alwaysNotify":true}: after "successful" build 1`] = `
 Object {
-  "alwaysNotify": true,
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
   "title": "Webpack",
@@ -1371,7 +1420,6 @@ Object {
 
 exports[`webpack@5 WebpackNotifierPlugin verbosity level configuration Always Notify ["successful","successful"] {"alwaysNotify":true}: after "successful" build 2`] = `
 Object {
-  "alwaysNotify": true,
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
   "title": "Webpack",
@@ -1419,7 +1467,6 @@ exports[`webpack@5 WebpackNotifierPlugin verbosity level configuration Default [
 exports[`webpack@5 WebpackNotifierPlugin verbosity level configuration Exclude Warnings ["warning"] {"excludeWarnings":true}: after "warning" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
-  "excludeWarnings": true,
   "message": "Build successful",
   "title": "Webpack",
 }
@@ -1430,7 +1477,6 @@ Object {
   "contentImage": "__dirname/logo.png",
   "message": "Error: /entry.js
 SyntaxError: Unexpected token (1:8)",
-  "onlyOnError": true,
   "title": "Webpack",
 }
 `;
@@ -1445,7 +1491,6 @@ exports[`webpack@5 WebpackNotifierPlugin verbosity level configuration Skip Noti
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
-  "skipFirstNotification": true,
   "title": "Webpack",
 }
 `;
@@ -1519,7 +1564,6 @@ Object {
 exports[`webpack@latest WebpackNotifierPlugin emoji message ["error"] {"emoji":true} %j: after "error" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
-  "emoji": true,
   "message": "❌ Error: /entry.js
 SyntaxError: Unexpected token (1:8)",
   "title": "Webpack",
@@ -1529,7 +1573,6 @@ SyntaxError: Unexpected token (1:8)",
 exports[`webpack@latest WebpackNotifierPlugin emoji message ["successful"] {"emoji":true} %j: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
-  "emoji": true,
   "message": "✅ Build successful",
   "title": "Webpack",
 }
@@ -1538,7 +1581,6 @@ Object {
 exports[`webpack@latest WebpackNotifierPlugin emoji message ["successful"] {"emoji":true} {"plugins":[{}]}: after "successful" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
-  "emoji": true,
   "message": "⚠️ Warning: Custom Warning message",
   "title": "Webpack",
 }
@@ -1547,9 +1589,17 @@ Object {
 exports[`webpack@latest WebpackNotifierPlugin emoji message ["warning"] {"emoji":true} %j: after "warning" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
-  "emoji": true,
   "message": "⚠️ Warning: /entry.js
 require.extensions is not supported by webpack. Use a loader instead.",
+  "title": "Webpack",
+}
+`;
+
+exports[`webpack@latest WebpackNotifierPlugin notifyOptions ["successful"] {"notifyOptions":{"appID":"com.squirrel.your.app"}}: after "successful" build 1`] = `
+Object {
+  "appID": "com.squirrel.your.app",
+  "contentImage": "__dirname/logo.png",
+  "message": "Build successful",
   "title": "Webpack",
 }
 `;
@@ -1576,6 +1626,15 @@ Object {
   "contentImage": "__dirname/logo.png",
   "message": "Warning: /entry.js
 require.extensions is not supported by webpack. Use a loader instead.",
+  "title": "Webpack",
+}
+`;
+
+exports[`webpack@latest WebpackNotifierPlugin passing node-notifier options directly ["successful"] {"appID":"com.squirrel.your.app"}: after "successful" build 1`] = `
+Object {
+  "appID": "com.squirrel.your.app",
+  "contentImage": "__dirname/logo.png",
+  "message": "Build successful",
   "title": "Webpack",
 }
 `;
@@ -1652,7 +1711,6 @@ require.extensions is not supported by webpack. Use a loader instead.",
 
 exports[`webpack@latest WebpackNotifierPlugin verbosity level configuration Always Notify ["successful","successful"] {"alwaysNotify":true}: after "successful" build 1`] = `
 Object {
-  "alwaysNotify": true,
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
   "title": "Webpack",
@@ -1661,7 +1719,6 @@ Object {
 
 exports[`webpack@latest WebpackNotifierPlugin verbosity level configuration Always Notify ["successful","successful"] {"alwaysNotify":true}: after "successful" build 2`] = `
 Object {
-  "alwaysNotify": true,
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
   "title": "Webpack",
@@ -1709,7 +1766,6 @@ exports[`webpack@latest WebpackNotifierPlugin verbosity level configuration Defa
 exports[`webpack@latest WebpackNotifierPlugin verbosity level configuration Exclude Warnings ["warning"] {"excludeWarnings":true}: after "warning" build 1`] = `
 Object {
   "contentImage": "__dirname/logo.png",
-  "excludeWarnings": true,
   "message": "Build successful",
   "title": "Webpack",
 }
@@ -1720,7 +1776,6 @@ Object {
   "contentImage": "__dirname/logo.png",
   "message": "Error: /entry.js
 SyntaxError: Unexpected token (1:8)",
-  "onlyOnError": true,
   "title": "Webpack",
 }
 `;
@@ -1735,7 +1790,6 @@ exports[`webpack@latest WebpackNotifierPlugin verbosity level configuration Skip
 Object {
   "contentImage": "__dirname/logo.png",
   "message": "Build successful",
-  "skipFirstNotification": true,
   "title": "Webpack",
 }
 `;

@@ -1,14 +1,20 @@
 var stripANSI = require('strip-ansi');
 var path = require('path');
 var os = require('os');
-var notifier = require('node-notifier');
+var nodeNotifier = require('node-notifier');
 
 var DEFAULT_LOGO = path.join(__dirname, 'logo.png');
 var MAX_NOTIFICATION_MESSAGE_LENGTH = 5000;
 var MAX_NOTIFICATION_TITLE_LENGTH = 1000;
 
 function WebpackNotifierPlugin(options) {
-  this.options = options || {};
+  // defaults mirror the notifier instance node-notifier creates for the OS
+  this.options = Object.assign(
+    {},
+    { notifier: nodeNotifier.Notification, notifierOptions: { withFallback: true } },
+    options
+  );
+  this.notifier = this.createNotifier();
   this.lastBuildSucceeded = false;
   this.isFirstBuild = true;
 }
@@ -28,6 +34,22 @@ function findFirstDFS(compilation, key) {
     }
   }
 }
+
+WebpackNotifierPlugin.prototype.createNotifier = function createNotifier() {
+  var Notifier = typeof this.options.notifier === 'string'
+    ? nodeNotifier[this.options.notifier]
+    : this.options.notifier;
+
+  if (typeof Notifier !== 'function') {
+    throw new Error(
+      'webpack-notifier: unknown notifier "' + this.options.notifier + '". '
+        + 'Expected one of node-notifier exports: NotificationCenter, '
+        + 'WindowsToaster, WindowsBalloon, Growl, NotifySend'
+    );
+  }
+
+  return new Notifier(this.options.notifierOptions);
+};
 
 // Notification messages are passed to the OS notification daemon as command
 // line arguments. Windows rejects command lines longer than 32767 characters,
@@ -148,9 +170,29 @@ WebpackNotifierPlugin.prototype.compilationDone = function compilationDone(stats
       ? contentImage
       : undefined;
 
-    notifier.notify(Object.assign(
-      {},
-      this.options,
+    // plugin-owned options must never reach node-notifier
+    var options = Object.assign({}, this.options);
+    delete options.notifyOptions;
+    delete options.notifier;
+    delete options.notifierOptions;
+    delete options.alwaysNotify;
+    delete options.emoji;
+    delete options.excludeWarnings;
+    delete options.onlyOnError;
+    delete options.skipFirstNotification;
+    // deprecated root passthrough: node-notifier options (e.g. appID) keep
+    // being spread from the root until v2
+    Object.assign(options, this.options.notifyOptions);
+    // node-notifier maps these aliases onto `message`/`icon`/`appID` only after
+    // this plugin truncates its own fields, which would reopen the Windows
+    // ENAMETOOLONG crash - so they are dropped, use the canonical keys instead
+    delete options.text;
+    delete options.appIcon;
+    delete options.i;
+    delete options.appName;
+
+    this.notifier.notify(Object.assign(
+      options,
       {
         title: truncateTitle(title),
         message: truncateMessage(message),

@@ -1,5 +1,12 @@
 import WebpackNotifierPlugin, {Options} from '../';
-import {notify} from 'node-notifier';
+import nodeNotifier = require('node-notifier');
+
+const notify = nodeNotifier.notify;
+// `notificationConstructorOptions` is exported by __mocks__/node-notifier.ts
+// and is absent from the @types/node-notifier declarations
+const notificationConstructorOptions = (nodeNotifier as unknown as {
+  notificationConstructorOptions: unknown[];
+}).notificationConstructorOptions;
 
 // index.d.ts only declares `apply()`, but `compilationDone()` exists at
 // runtime — the intersection type below models that.
@@ -43,6 +50,18 @@ function createErrorStats(errorMessage: string): FakeStats {
   };
 }
 
+function createSuccessStats(): FakeStats {
+  return {
+    hasErrors: () => false,
+    hasWarnings: () => false,
+    compilation: {
+      errors: [],
+      warnings: [],
+      children: [],
+    },
+  };
+}
+
 const LOREM_IPSUM_SENTENCE =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ';
 
@@ -59,6 +78,7 @@ function notifyOptions() {
 
 beforeEach(() => {
   (notify as jest.Mock).mockReset();
+  notificationConstructorOptions.length = 0;
 });
 
 describe('WebpackNotifierPlugin (unit, no webpack)', () => {
@@ -112,5 +132,113 @@ describe('WebpackNotifierPlugin (unit, no webpack)', () => {
     expect(notifyOptions().title.length).toBe(1000);
     expect(notifyOptions().message.length).toBe(5000);
     expect(notifyOptions().message.includes('truncated')).toBe(false);
+  });
+
+  test('forwards node-notifier options from the plugin root to notify()', () => {
+    // TODO mark as deprecate at v2.x
+    const plugin = createPlugin({appID: 'com.squirrel.your.app'} as Options & {appID: string});
+    plugin.compilationDone(createSuccessStats());
+
+    expect(notify).toHaveBeenCalledTimes(1);
+    expect(notifyOptions().appID).toBe('com.squirrel.your.app');
+  });
+
+  test('drops node-notifier message/icon aliases from notifyOptions', () => {
+    const plugin = createPlugin({
+      // aliases are not modelled by @types/node-notifier; a JS caller can still
+      // pass them, so they are cast here
+      notifyOptions: {
+        text: 'x'.repeat(40000),
+        appIcon: 'icon.png',
+        appName: 'MyApp',
+        i: 'icon2.png',
+      } as unknown as Options['notifyOptions'],
+    });
+    plugin.compilationDone(createSuccessStats());
+
+    expect(notify).toHaveBeenCalledTimes(1);
+    expect(notifyOptions().message).toBe('Build successful');
+    expect(notifyOptions()).not.toHaveProperty('text');
+    expect(notifyOptions()).not.toHaveProperty('appIcon');
+    expect(notifyOptions()).not.toHaveProperty('appName');
+    expect(notifyOptions()).not.toHaveProperty('i');
+  });
+
+  test('forwards notifyOptions to node-notifier without the container itself', () => {
+    const plugin = createPlugin({notifyOptions: {appID: 'com.squirrel.your.app'}});
+    plugin.compilationDone(createSuccessStats());
+
+    expect(notifyOptions().appID).toBe('com.squirrel.your.app');
+    expect(notifyOptions()).not.toHaveProperty('notifyOptions');
+  });
+
+  test('strips plugin-owned root options but keeps node-notifier ones (until v2)', () => {
+    const plugin = createPlugin({
+      alwaysNotify: true,
+      emoji: true,
+      excludeWarnings: true,
+      appID: 'com.squirrel.your.app', // TODO mark as deprecate at v2.x
+    } as unknown as Options);
+    plugin.compilationDone(createSuccessStats());
+
+    expect(notify).toHaveBeenCalledTimes(1);
+    expect(notifyOptions().appID).toBe('com.squirrel.your.app');
+    expect(notifyOptions()).not.toHaveProperty('alwaysNotify');
+    expect(notifyOptions()).not.toHaveProperty('emoji');
+    expect(notifyOptions()).not.toHaveProperty('excludeWarnings');
+  });
+
+  test('uses the custom notifier with notifierOptions', () => {
+    let constructorOptions: unknown;
+    class FakeNotifier {
+      constructor(options: unknown) {
+        constructorOptions = options;
+      }
+      notify(options: unknown) {
+        (notify as jest.Mock)(options);
+      }
+    }
+
+    const plugin = createPlugin({
+      notifier: FakeNotifier,
+      notifierOptions: {withFallback: false},
+    });
+    plugin.compilationDone(createSuccessStats());
+
+    expect(constructorOptions).toEqual({withFallback: false});
+    expect(notify).toHaveBeenCalledTimes(1);
+    expect(notifyOptions().message).toBe('Build successful');
+  });
+
+  test('throws on an unknown notifier name', () => {
+    const real = jest.requireActual('node-notifier') as Record<string, unknown>;
+    expect(real['UnknownNotifier']).toBeUndefined();
+    expect(() => createPlugin({notifier: 'UnknownNotifier'})).toThrow(/unknown notifier/);
+  });
+
+  test('resolves real node-notifier notifier names', () => {
+    const real = jest.requireActual('node-notifier') as Record<string, unknown>;
+    const names = ['NotificationCenter', 'WindowsToaster', 'WindowsBalloon', 'Growl', 'NotifySend'];
+    for (const name of names) {
+      const Notifier = real[name] as (new () => {notify: unknown}) | undefined;
+      expect(typeof Notifier).toBe('function');
+      expect(typeof new (Notifier as new () => {notify: unknown})().notify).toBe('function');
+    }
+  });
+
+  test('uses notifierOptions without notifier to create the platform default notifier', () => {
+    createPlugin();
+
+    expect(notificationConstructorOptions).toEqual([{withFallback: true}]);
+
+    const plugin = createPlugin({notifierOptions: {customPath: 'C:/custom/my.exe'}});
+    plugin.compilationDone(createSuccessStats());
+
+    expect(notificationConstructorOptions).toEqual([
+      {withFallback: true},
+      {customPath: 'C:/custom/my.exe'},
+    ]);
+    expect(notify).toHaveBeenCalledTimes(1);
+    expect(notifyOptions().message).toBe('Build successful');
   });
 });

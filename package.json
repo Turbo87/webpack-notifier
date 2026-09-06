@@ -37,11 +37,11 @@
   "license": "ISC",
   "dependencies": {
     "node-notifier": "^9.0.0",
-    "strip-ansi": "^6.0.0"
+    "strip-ansi": "^6.0.0",
+    "@types/node-notifier": "^8.0.1"
   },
   "devDependencies": {
     "@types/jest": "^26.0.15",
-    "@types/node-notifier": "^8.0.1",
     "@types/semver": "^7.3.8",
     "@types/webpack": ">4.41.31",
     "eslint": "^7.14.0",
