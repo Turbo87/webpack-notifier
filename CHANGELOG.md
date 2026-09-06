@@ -2,6 +2,16 @@
 Changelog
 ===============================================================================
 
+v1.17.0
+-------------------------------------------------------------------------------
+  
+- Add `notifyOptions` option to pass `node-notifier` options to every notification; passing them at the plugin root is now deprecated but keeps working until v2.0  ([#65](https://github.com/Turbo87/webpack-notifier/pull/65), [Refs #64](https://github.com/Turbo87/webpack-notifier/issues/64))
+- Add `notifier` and `notifierOptions` options to pick a `node-notifier` notifier and configure its constructor
+- Stop forwarding plugin-owned options (`alwaysNotify`, `emoji`, `excludeWarnings`, `onlyOnError`, `skipFirstNotification`) to `node-notifier`
+- Drop `node-notifier` alias options (`text`, `appIcon`, `appName`, `i`) that bypassed notification truncation
+- Apply `notifierOptions` to the default notifier when no `notifier` is set
+- Derive the option typings from `@types/node-notifier`
+
 v1.16.0
 -------------------------------------------------------------------------------
   
