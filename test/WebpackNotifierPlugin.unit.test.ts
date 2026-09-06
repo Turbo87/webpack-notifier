@@ -193,7 +193,19 @@ describe('WebpackNotifierPlugin (unit, no webpack)', () => {
   });
 
   test('throws on an unknown notifier name', () => {
+    const real = jest.requireActual('node-notifier') as Record<string, unknown>;
+    expect(real['UnknownNotifier']).toBeUndefined();
     expect(() => createPlugin({notifier: 'UnknownNotifier'})).toThrow(/unknown notifier/);
+  });
+
+  test('resolves real node-notifier notifier names', () => {
+    const real = jest.requireActual('node-notifier') as Record<string, unknown>;
+    const names = ['NotificationCenter', 'WindowsToaster', 'WindowsBalloon', 'Growl', 'NotifySend'];
+    for (const name of names) {
+      const Notifier = real[name] as (new () => {notify: unknown}) | undefined;
+      expect(typeof Notifier).toBe('function');
+      expect(typeof new (Notifier as new () => {notify: unknown})().notify).toBe('function');
+    }
   });
 
   test('uses notifierOptions without notifier to create the platform default notifier', () => {
